@@ -193,7 +193,7 @@ spec:
                   value: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
-                image: quay.io/priyankash/cpx-cic-operator-image:redhat 
+                image: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
                 imagePullPolicy: Always
                 name: cpx-cic-operator
                 resources: {}
