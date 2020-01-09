@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpx-cic-operator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: cpx-cic-operator
+  template:
+    metadata:
+      labels:
+        name: cpx-cic-operator
+    spec:
+      serviceAccountName: cpx-cic-operator
+      containers:
+        - name: cpx-cic-operator
+          # Replace this with the built image name
+          image: REPLACE_IMAGE
+          imagePullPolicy: Always
+          env:
+            - name: WATCH_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: OPERATOR_NAME
+              value: "cpx-cic-operator"

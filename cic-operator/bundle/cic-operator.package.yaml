@@ -1,0 +1,4 @@
+packageName: cic-operator
+channels:
+  - name: alpha
+    currentCSV: cic-operator.v1.6.1

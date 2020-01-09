@@ -1,0 +1,5 @@
+channels:
+- currentCSV: cpx-cic-operator.v130.47.102
+  name: alpha
+defaultChannel: alpha
+packageName: cpx-cic-operator
