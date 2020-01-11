@@ -44,8 +44,8 @@ metadata:
     capabilities: Basic Install
     categories: Networking
     certified: "false"
-    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest 
-    createdAt: "2020-01-06"
+    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
+    createdAt: "2020-01-11"
     description: Citrix ADC CPX is a container-based application delivery controller
       that can be provisioned on a Docker host. Citrix ADC CPX enables customers to
       leverage Docker engine capabilities and use NetScaler load balancing and traffic

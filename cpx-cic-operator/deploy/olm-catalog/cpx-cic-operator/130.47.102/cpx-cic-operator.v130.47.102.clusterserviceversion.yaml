@@ -13,12 +13,12 @@ metadata:
           "spec": {
             "cic": {
               "image": "quay.io/citrix/citrix-k8s-ingress-controller:1.6.1",
-              "pullPolicy": "Always",
+              "pullPolicy": "IfNotPresent",
               "required": true
             },
             "cpx": {
               "image": "quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102",
-              "pullPolicy": "Always"
+              "pullPolicy": "IfNotPresent"
             },
             "defaultSSLCert": null,
             "exporter": {
@@ -26,12 +26,12 @@ metadata:
               "ports": {
                 "containerPort": 8888
               },
-              "pullPolicy": "Always",
+              "pullPolicy": "IfNotPresent",
               "required": false
             },
             "ingressClass": null,
             "license": {
-              "accept": false
+              "accept": "no"
             },
             "lsIP": null,
             "lsPort": null,
@@ -44,8 +44,8 @@ metadata:
     capabilities: Basic Install
     categories: Networking
     certified: "false"
-    containerImage: quay.io/priyankash/cpx-cic-operator-image:130.47.102
-    createdAt: "2019-08-1"
+    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
+    createdAt: "2020-01-11"
     description: Citrix ADC CPX is a container-based application delivery controller
       that can be provisioned on a Docker host. Citrix ADC CPX enables customers to
       leverage Docker engine capabilities and use NetScaler load balancing and traffic
@@ -66,7 +66,7 @@ spec:
       name: citrixcpxingresscontrollers.charts.helm.k8s.io
       version: v1alpha1
       displayName: Citrix-CPX-with-Ingress-Controller
-      description: This is CRD for Citrix-CPX-with-Ingress-Controller Operator.
+      description: Deploys Citrix-CPX-with-Ingress-Controller in the Cluster.
   description: Citrix ADC CPX is a container-based application delivery controller
     that can be provisioned on a Docker host. Citrix ADC CPX enables customers to
     leverage Docker engine capabilities and use NetScaler load balancing and traffic
@@ -187,7 +187,13 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: cpx-cic-operator
-                image: quay.io/priyankash/cpx-cic-operator-image:130.47.102
+                - name: RELATED_IMAGE_CIC
+                  value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+                - name: RELATED_IMAGE_CPX
+                  value: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102
+                - name: RELATED_IMAGE_EXPORTER
+                  value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+                image: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
                 imagePullPolicy: Always
                 name: cpx-cic-operator
                 resources: {}

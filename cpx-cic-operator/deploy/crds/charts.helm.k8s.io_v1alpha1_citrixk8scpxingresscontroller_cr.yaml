@@ -12,11 +12,11 @@ spec:
   # cpximage contains information needed to fetch CPX image
   cpx:
     image: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
   # cicimage contains information needed to fetch CIC image
   cic:
     image: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     required: true
   # openshift is set to true if charts are being deployed in OpenShift environment.
   openshift: true
@@ -38,7 +38,7 @@ spec:
   exporter:
     required: false
     image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     ports:
       containerPort: 8888
   

@@ -16,7 +16,7 @@ spec:
       containers:
         - name: cpx-cic-operator
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
           imagePullPolicy: Always
           env:
             - name: WATCH_NAMESPACE
@@ -29,3 +29,9 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "cpx-cic-operator"
+            - name: RELATED_IMAGE_CIC
+              value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+            - name: RELATED_IMAGE_CPX
+              value: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102
+            - name: RELATED_IMAGE_EXPORTER
+              value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0

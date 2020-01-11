@@ -13,7 +13,7 @@ metadata:
           "spec": {
             "cic": {
               "image": "quay.io/citrix/citrix-k8s-ingress-controller:1.6.1",
-              "pullPolicy": "Always"
+              "pullPolicy": "IfNotPresent"
             },
             "defaultSSLCert": null,
             "exporter": {
@@ -21,13 +21,13 @@ metadata:
               "ports": {
                 "containerPort": 8888
               },
-              "pullPolicy": "Always",
+              "pullPolicy": "IfNotPresent",
               "required": false
             },
             "ingressClass": null,
             "kubernetesURL": null,
             "license": {
-              "accept": false
+              "accept": "no"
             },
             "logLevel": "DEBUG",
             "loginFileName": null,
@@ -44,8 +44,8 @@ metadata:
     capabilities: Basic Install
     categories: Networking
     certified: "false"
-    containerImage: quay.io/priyankash/cic-operator-image:1.6.1
-    createdAt: "2019-08-1"
+    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest 
+    createdAt: "2020-01-11"
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware),
       Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem
       and cloud deployments. It automatically configures one or more Citrix ADC based
@@ -63,7 +63,7 @@ spec:
       name: citrixingresscontrollers.charts.helm.k8s.io
       version: v1alpha1
       displayName: Citrix-Ingress-Controller
-      description: This is CRD for Citrix-Ingress-Controller Operator.
+      description: Deploys Citrix-Ingress-Controller in the Cluster.
   description: Citrix provides an ingress controller for Citrix ADC MPX (hardware),
     Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem and
     cloud deployments. It automatically configures one or more Citrix ADC based on
@@ -181,7 +181,11 @@ spec:
                       fieldPath: metadata.name
                 - name: OPERATOR_NAME
                   value: cic-operator
-                image: REPLACE_IMAGE
+                - name: RELATED_IMAGE_CIC
+                  value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+                - name: RELATED_IMAGE_EXPORTER
+                  value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+                image: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest
                 imagePullPolicy: Always
                 name: cic-operator
                 resources: {}
@@ -207,5 +211,4 @@ spec:
   maturity: alpha
   provider:
     name: Citrix
-  replaces: cic-operator.v1.2.0
   version: 1.6.1

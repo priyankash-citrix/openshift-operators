@@ -45,7 +45,7 @@ metadata:
     categories: Networking
     certified: "false"
     containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest 
-    createdAt: "2020-01-10"
+    createdAt: "2020-01-11"
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware),
       Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem
       and cloud deployments. It automatically configures one or more Citrix ADC based
