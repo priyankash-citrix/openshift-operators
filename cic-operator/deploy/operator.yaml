@@ -30,6 +30,6 @@ spec:
             - name: OPERATOR_NAME
               value: "cic-operator"
             - name: RELATED_IMAGE_CIC
-              value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+              value: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
             - name: RELATED_IMAGE_EXPORTER
-              value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+              value: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest

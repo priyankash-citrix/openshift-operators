@@ -12,12 +12,12 @@ metadata:
           },
           "spec": {
             "cic": {
-              "image": "quay.io/citrix/citrix-k8s-ingress-controller:1.6.1",
+              "image": "registry.connect.redhat.com/citrix/citrix-ingress-controller:latest",
               "pullPolicy": "IfNotPresent"
             },
             "defaultSSLCert": null,
             "exporter": {
-              "image": "quay.io/citrix/citrix-adc-metrics-exporter:1.4.0",
+              "image": "registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest",
               "ports": {
                 "containerPort": 8888
               },
@@ -53,7 +53,7 @@ metadata:
       Ingress Controller in an Openshift environment.
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
     support: Citrix Ingress Controller
-  name: cic-operator.v1.6.1
+  name: cic-operator.v1.7.6
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -182,9 +182,9 @@ spec:
                 - name: OPERATOR_NAME
                   value: cic-operator
                 - name: RELATED_IMAGE_CIC
-                  value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+                  value: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
                 - name: RELATED_IMAGE_EXPORTER
-                  value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+                  value: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
                 image: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest
                 imagePullPolicy: Always
                 name: cic-operator
@@ -211,4 +211,4 @@ spec:
   maturity: alpha
   provider:
     name: Citrix
-  version: 1.6.1
+  version: 1.7.6

@@ -12,12 +12,12 @@ metadata:
           },
           "spec": {
             "cic": {
-              "image": "quay.io/citrix/citrix-k8s-ingress-controller:1.6.1",
+              "image": "registry.connect.redhat.com/citrix/citrix-ingress-controller:latest",
               "pullPolicy": "IfNotPresent"
             },
             "defaultSSLCert": null,
             "exporter": {
-              "image": "quay.io/citrix/citrix-adc-metrics-exporter:1.4.0",
+              "image": "registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest",
               "ports": {
                 "containerPort": 8888
               },
@@ -45,7 +45,7 @@ metadata:
     categories: Networking
     certified: "false"
     containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest 
-    createdAt: "2020-01-11"
+    createdAt: "2020-02-06"
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware),
       Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem
       and cloud deployments. It automatically configures one or more Citrix ADC based
@@ -53,7 +53,7 @@ metadata:
       Ingress Controller in an Openshift environment.
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
     support: Citrix Ingress Controller
-  name: cic-operator.v1.6.1
+  name: cic-operator.v1.7.6
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -114,8 +114,7 @@ spec:
           resources:
           - servicemonitors
           verbs:
-          - get
-          - create
+          - '*'
         - apiGroups:
           - apps
           resourceNames:
@@ -155,6 +154,12 @@ spec:
           - serviceaccounts
           verbs:
           - '*'
+        - apiGroups:
+          - ""
+          resources:
+          - services
+          verbs:
+          - '*'
         serviceAccountName: cic-operator
       deployments:
       - name: cic-operator
@@ -182,9 +187,9 @@ spec:
                 - name: OPERATOR_NAME
                   value: cic-operator
                 - name: RELATED_IMAGE_CIC
-                  value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+                  value: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
                 - name: RELATED_IMAGE_EXPORTER
-                  value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+                  value: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
                 image: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest
                 imagePullPolicy: Always
                 name: cic-operator
@@ -206,9 +211,10 @@ spec:
   - name: Citrix Ingress Controller
     url: https://github.com/citrix/citrix-k8s-ingress-controller
   maintainers:
-  - email: priyanka.sharma@citrix.com
+  - email: NSCPXOrchestration@citrite.net
     name: Citrix
   maturity: alpha
   provider:
     name: Citrix
-  version: 1.6.1
+  replaces: cic-operator.v1.2.0
+  version: 1.7.6

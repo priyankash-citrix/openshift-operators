@@ -12,17 +12,17 @@ metadata:
           },
           "spec": {
             "cic": {
-              "image": "quay.io/citrix/citrix-k8s-ingress-controller:1.6.1",
+              "image": "registry.connect.redhat.com/citrix/citrix-ingress-controller:latest",
               "pullPolicy": "IfNotPresent",
               "required": true
             },
             "cpx": {
-              "image": "quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102",
+              "image": "registry.connect.redhat.com/citrix/cpx-13-0:latest",
               "pullPolicy": "IfNotPresent"
             },
             "defaultSSLCert": null,
             "exporter": {
-              "image": "quay.io/citrix/citrix-adc-metrics-exporter:1.4.0",
+              "image": "registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest",
               "ports": {
                 "containerPort": 8888
               },
@@ -45,7 +45,7 @@ metadata:
     categories: Networking
     certified: "false"
     containerImage: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
-    createdAt: "2020-01-11"
+    createdAt: "2020-02-06"
     description: Citrix ADC CPX is a container-based application delivery controller
       that can be provisioned on a Docker host. Citrix ADC CPX enables customers to
       leverage Docker engine capabilities and use NetScaler load balancing and traffic
@@ -56,7 +56,7 @@ metadata:
       an Openshift environment.
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
     support: Citrix ADC CPX with Citrix Ingress Controller
-  name: cpx-cic-operator.v130.47.102
+  name: cpx-cic-operator.v130.47.103
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -114,8 +114,7 @@ spec:
           resources:
           - servicemonitors
           verbs:
-          - get
-          - create
+          - '*'
         - apiGroups:
           - apps
           resourceNames:
@@ -188,11 +187,11 @@ spec:
                 - name: OPERATOR_NAME
                   value: cpx-cic-operator
                 - name: RELATED_IMAGE_CIC
-                  value: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+                  value: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
                 - name: RELATED_IMAGE_CPX
-                  value: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-47.102
+                  value: registry.connect.redhat.com/citrix/cpx-13-0:latest
                 - name: RELATED_IMAGE_EXPORTER
-                  value: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+                  value: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
                 image: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
                 imagePullPolicy: Always
                 name: cpx-cic-operator
@@ -214,9 +213,10 @@ spec:
   - name: Citrix ADC CPX with Citrix Ingress Controller
     url: https://github.com/citrix/citrix-k8s-ingress-controller
   maintainers:
-  - email: priyanka.sharma@citrix.com
+  - email: NSCPXOrchestration@citrite.net
     name: Citrix
   maturity: alpha
   provider:
     name: Citrix
-  version: 130.47.102
+  replaces: cpx-cic-operator.v130.36.29
+  version: 130.47.103

@@ -11,7 +11,7 @@ spec:
   
   # image contains information needed to fetch CIC image
   cic:
-    image: quay.io/citrix/citrix-k8s-ingress-controller:1.6.1
+    image: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
     pullPolicy: IfNotPresent
   # openshift is set to true if charts are being deployed in OpenShift environment.
   openshift: true
@@ -41,7 +41,7 @@ spec:
   # exporter conatins information of prometheus-exporter
   exporter:
     required: false
-    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.0
+    image: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
     pullPolicy: IfNotPresent
     ports:
          containerPort: 8888
