@@ -37,6 +37,7 @@ metadata:
             "nsPort": 443,
             "nsProtocol": "HTTPS",
             "nsVIP": null,
+            "ipam": false,
             "openshift": true
           }
         }

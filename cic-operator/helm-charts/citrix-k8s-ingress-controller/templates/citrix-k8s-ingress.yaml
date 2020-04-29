@@ -51,6 +51,10 @@ spec:
             {{.}}
 {{- end }}
 {{- end }}
+{{- if .Values.ipam }}
+          - --ipam
+            citrix-ipam-controller
+{{- end }}
           - --feature-node-watch
             {{.Values.nodeWatch}}
         env:
@@ -125,7 +129,11 @@ spec:
      targetPort: {{ .Values.exporter.ports.containerPort }}
      name: exporter-port
    selector:
+{{- if .Values.openshift }}
+     router: cic-k8s-ingress-controller
+{{- else }}
      app: cic-k8s-ingress-controller
+{{- end }}
 
 ---
 
