@@ -18,22 +18,35 @@ rules:
   verbs:
   - '*'
 - apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+- apiGroups:
+  - apiextensions.k8s.io
+  resources:
+  - customresourcedefinitions
+  verbs:
+  - '*'
+- apiGroups:
   - rbac.authorization.k8s.io
   resources:
-  - clusterroles
   - clusterrolebindings
+  - clusterroles
   verbs:
   - '*'
 - apiGroups:
   - ""
   resources:
-  - secrets
+  - configmaps
+  - serviceaccounts
   verbs:
   - '*'
 - apiGroups:
-  - apps.openshift.io
+  - apps
   resources:
-  - deploymentconfigs
+  - deployments
   verbs:
   - '*'
 - apiGroups:
@@ -65,7 +78,7 @@ rules:
   verbs:
   - get
 - apiGroups:
-  - charts.helm.k8s.io
+  - helm.operator-sdk
   resources:
   - '*'
   verbs:
@@ -76,6 +89,12 @@ rules:
   - patch
   - update
   - watch
+- apiGroups:
+  - apps.openshift.io
+  resources:
+  - deploymentconfigs
+  verbs:
+  - '*'
 - apiGroups:
   - ""
   resources:

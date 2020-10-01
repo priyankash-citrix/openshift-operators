@@ -1,4 +1,6 @@
-packageName: cic-operator
 channels:
-  - name: alpha
-    currentCSV: cic-operator.v1.7.6
+- currentCSV: cic-operator.v1.9.2
+  name: alpha
+defaultChannel: alpha
+packageName: cic-operator
+
