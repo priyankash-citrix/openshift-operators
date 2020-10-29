@@ -1,0 +1,8 @@
+domain: com
+layout: helm.sdk.operatorframework.io/v1
+projectName: citrix-ingress-controller-operator
+resources:
+- group: citrix
+  kind: CitrixIngressController
+  version: v1alpha1
+version: 3-alpha

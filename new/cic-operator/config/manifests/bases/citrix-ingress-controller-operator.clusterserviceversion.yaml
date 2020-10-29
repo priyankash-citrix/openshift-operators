@@ -1,0 +1,46 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+    operators.operatorframework.io/builder: operator-sdk-v1.1.0
+    operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
+  name: citrix-ingress-controller-operator.vX.Y.Z
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: Citrix provides an ingress controller for Citrix ADC MPX (hardware), Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem and cloud deployments. It automatically configures one or more Citrix ADC based on the Ingress resource configuration. This operator can be used deploy Citrix Ingress Controller in an OpenShift environment.
+  displayName: Citrix Ingress Controller
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - Ingress
+  - Ingress Controller
+  - Kubernetes
+  links:
+  - name: Citrix Ingress Controller Operator
+    url: https://citrix-ingress-controller-operator.domain
+  maintainers:
+  - email: priyanka.sharma@citrix.com
+    name: Priyanka Sharma
+  maturity: alpha
+  provider:
+    name: Citrix
+    url: www.citrix.com
+  version: 0.0.0

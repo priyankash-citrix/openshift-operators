@@ -1,0 +1,20 @@
+# permissions for end users to view citrixingresscontrollers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: citrixingresscontroller-viewer-role
+rules:
+- apiGroups:
+  - citrix.com
+  resources:
+  - citrixingresscontrollers
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - citrix.com
+  resources:
+  - citrixingresscontrollers/status
+  verbs:
+  - get

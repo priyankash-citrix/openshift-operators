@@ -1,0 +1,63 @@
+apiVersion: citrix.com/v1alpha1
+kind: CitrixIngressController
+metadata:
+  name: cic
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-ingress-controller/values.yaml
+  adcCredentialSecret: ""
+  cicSettings:
+    cicConfig:
+      NS_COOKIE_VERSION: "0"
+      NS_HTTP2_SERVER_SIDE: "OFF"
+    required: false
+  coeConfig:
+    distributedTracing:
+      enable: false
+      samplingrate: 100
+    endpoint:
+      server: ""
+    required: false
+    timeseries:
+      auditlogs:
+        enable: false
+      events:
+        enable: false
+      metrics:
+        enable: false
+        mode: avro
+      port: 30002
+    transactions:
+      enable: false
+      port: 30001
+  crds:
+    install: true
+    retainOnDelete: false
+  defaultSSLCertSecret: ""
+  entityPrefix: ""
+  exporter:
+    image: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
+    ports:
+      containerPort: 8888
+    pullPolicy: Always
+    required: false
+  image: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
+  ingressClass: ""
+  ipam: false
+  kubernetesURL: ""
+  license:
+    accept: "No"
+  logLevel: INFO
+  logProxy: ""
+  nodeSelector:
+    key: ""
+    value: ""
+  nodeWatch: false
+  nsIP: x.x.x.x
+  nsPort: 443
+  nsProtocol: HTTPS
+  nsVIP: ""
+  openshift: true
+  pullPolicy: Always
+  serviceAccount:
+    create: true
+  updateIngressStatus: false
