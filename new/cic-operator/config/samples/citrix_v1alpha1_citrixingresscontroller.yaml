@@ -30,24 +30,25 @@ spec:
       enable: false
       port: 30001
   crds:
-    install: true
+    install: false
     retainOnDelete: false
   defaultSSLCertSecret: ""
   entityPrefix: ""
   exporter:
-    image: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
+    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.6
     ports:
       containerPort: 8888
-    pullPolicy: Always
+    pullPolicy: IfNotPresent
     required: false
-  image: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
+  image: quay.io/citrix/citrix-k8s-ingress-controller:1.10.2
   ingressClass: ""
   ipam: false
   kubernetesURL: ""
   license:
-    accept: "No"
+    accept: false
   logLevel: INFO
   logProxy: ""
+  namespaceLabels: ""
   nodeSelector:
     key: ""
     value: ""
@@ -56,8 +57,12 @@ spec:
   nsPort: 443
   nsProtocol: HTTPS
   nsVIP: ""
-  openshift: true
-  pullPolicy: Always
+  openshift: false
+  pullPolicy: IfNotPresent
+  routeLabels: ""
   serviceAccount:
     create: true
+  serviceClass: ""
   updateIngressStatus: false
+  
+  

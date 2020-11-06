@@ -1,5 +1,5 @@
 # Current Operator version
-VERSION ?= 1.9.20
+VERSION ?= 1.10.2
 # Default bundle image tag
 BUNDLE_IMG ?= registry.connect.redhat.com/citrix/citrix-k8s-ingress-bundle:$(VERSION)
 # Options for 'bundle-build'

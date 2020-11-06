@@ -11,35 +11,38 @@ metadata:
             "name": "cic"
           },
           "spec": {
+            "nsIP": "x.x.x.x",
             "image": "registry.connect.redhat.com/citrix/citrix-ingress-controller:latest",
-            "pullPolicy": "Always",
-            "ingressClass": "",
-            "ipam": false,
-            "kubernetesURL": "",
+            "pullPolicy": "IfNotPresent",
+            "nsPort": 443,
+            "nsProtocol": "HTTPS",
+            "adcCredentialSecret": "",
+            "nsVIP": "",
+            "openshift": true,
             "license": {
               "accept": "No"
             },
+            "routeLabels": "",
+            "defaultSSLCertSecret": "",
+            "entityPrefix": "",
+            "ingressClass": "",
+            "serviceClass": "",
+            "updateIngressStatus": false,
+            "ipam": false,
+            "kubernetesURL": "",
             "logLevel": "INFO",
             "logProxy": "",
+            "namespaceLabels": "",
             "nodeSelector": {
               "key": "",
               "value": ""
             },
             "nodeWatch": false,
-            "nsIP": "x.x.x.x",
-            "adcCredentialSecret": "",
-            "defaultSSLCertSecret": "",
-            "entityPrefix": "",
-            "nsPort": 443,
-            "nsProtocol": "HTTPS",
-            "nsVIP": "",
-            "openshift": true,
             "serviceAccount": {
               "create": true
             },
-            "updateIngressStatus": false,
             "crds": {
-              "install": true,
+              "install": false,
               "retainOnDelete": false
             },
             "cicSettings": {
@@ -54,7 +57,7 @@ metadata:
               "ports": {
                 "containerPort": 8888
               },
-              "pullPolicy": "Always",
+              "pullPolicy": "IfNotPresent",
               "required": false
             },
             "coeConfig": {
@@ -91,12 +94,12 @@ metadata:
     categories: Networking
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware), Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem and cloud deployments. It automatically configures one or more Citrix ADC based on the Ingress resource configuration. This operator can be used deploy Citrix Ingress Controller in an Openshift environment.
     containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest
-    createdAt: "2020-29-10"
+    createdAt: "2020-5-11"
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
     operators.operatorframework.io/builder: operator-sdk-v1.1.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
-  name: citrix-ingress-controller-operator.v1.9.20
+  name: citrix-ingress-controller-operator.v1.10.2
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -183,7 +186,6 @@ spec:
           - monitoring.coreos.com
           resources:
           - servicemonitors
-          - servicemonitors/finalizers
           verbs:
           - '*'
         - apiGroups:
@@ -288,5 +290,4 @@ spec:
   maturity: alpha
   provider:
     name: Citrix
-    url: www.citrix.com
-  version: 1.9.20
+  version: 1.10.2
