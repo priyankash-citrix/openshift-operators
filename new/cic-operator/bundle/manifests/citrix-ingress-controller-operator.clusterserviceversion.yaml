@@ -42,7 +42,7 @@ metadata:
               "create": true
             },
             "crds": {
-              "install": false,
+              "install": true,
               "retainOnDelete": false
             },
             "cicSettings": {
