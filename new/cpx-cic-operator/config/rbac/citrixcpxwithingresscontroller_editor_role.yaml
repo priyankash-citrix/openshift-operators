@@ -1,0 +1,24 @@
+# permissions for end users to edit citrixcpxwithingresscontrollers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: citrixcpxwithingresscontroller-editor-role
+rules:
+- apiGroups:
+  - citrix.com
+  resources:
+  - citrixcpxwithingresscontrollers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - citrix.com
+  resources:
+  - citrixcpxwithingresscontrollers/status
+  verbs:
+  - get

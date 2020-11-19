@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    control-plane: controller-manager
+  name: system
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controller-manager
+  namespace: system
+  labels:
+    control-plane: controller-manager
+spec:
+  selector:
+    matchLabels:
+      control-plane: controller-manager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        control-plane: controller-manager
+    spec:
+      containers:
+      - image: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller:latest
+        args:
+        - "--enable-leader-election"
+        - "--leader-election-id=citrix-cpx-with-ingress-controller-operator"
+        name: manager
+        resources:
+          limits:
+            cpu: 100m
+            memory: 90Mi
+          requests:
+            cpu: 100m
+            memory: 60Mi
+        env:
+          - name: RELATED_IMAGE_CPX
+            value: registry.connect.redhat.com/citrix/cpx-13-0:latest
+          - name: RELATED_IMAGE_CIC
+            value: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
+          - name: RELATED_IMAGE_EXPORTER
+            value: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
+      terminationGracePeriodSeconds: 10

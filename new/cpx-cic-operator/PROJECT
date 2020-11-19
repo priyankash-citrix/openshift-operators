@@ -1,0 +1,8 @@
+domain: com
+layout: helm.sdk.operatorframework.io/v1
+projectName: citrix-cpx-with-ingress-controller-operator
+resources:
+- group: citrix
+  kind: CitrixCpxWithIngressController
+  version: v1alpha1
+version: 3-alpha

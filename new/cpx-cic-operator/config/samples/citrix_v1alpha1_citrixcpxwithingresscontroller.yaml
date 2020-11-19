@@ -1,0 +1,107 @@
+apiVersion: citrix.com/v1alpha1
+kind: CitrixCpxWithIngressController
+metadata:
+  name: citrixcpxwithingresscontroller-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-cpx-with-ingress-controller/values.yaml
+  image: registry.connect.redhat.com/citrix/cpx-13-0:latest 
+  pullPolicy: Always
+  ingressClass: ""
+  ipam: false
+  kubernetesURL: ""
+  license:
+    accept: "No"
+  logLevel: INFO
+  openshift: true
+  logProxy: ""
+  mgmtHttpPort: 9080
+  mgmtHttpsPort: 9443
+  nodeSelector:
+    key: ""
+    value: ""
+  nsProtocol: http
+  routeLabels: ""
+  namespaceLabels: ""
+  defaultSSLCertSecret: ""
+  entityPrefix: ""
+  serviceType:
+    loadBalancer:
+      enabled: false
+      externalTrafficPolicy: Local
+    nodePort:
+      enabled: false
+      httpPort: ""
+      httpsPort: ""
+  cic:
+    image: registry.connect.redhat.com/citrix/citrix-ingress-controller:latest
+    pullPolicy: Always
+    required: true
+  serviceAccount:
+    create: true
+  crds:
+    install: true
+    retainOnDelete: false
+  exporter:
+    image: registry.connect.redhat.com/citrix/citrix-adc-metrics-exporter:latest
+    ports:
+      containerPort: 8888
+    pullPolicy: Always
+    required: false
+  ADMSettings:
+    ADMFingerPrint: ""
+    ADMIP: ""
+    bandWidth: ""
+    bandWidthLicense: false
+    cpxCores: ""
+    licenseServerIP: ""
+    licenseServerPort: 27000
+    loginSecret: ""
+    vCPULicense: false
+  cpxBgpRouter: false
+  nsGateway: 192.168.1.1
+  nsIP: 192.168.1.2
+  ingressIP: ""
+  bgpSettings:
+    bgpConfig:
+    - bgpRouter:
+        localAS: 100
+        neighbor:
+        - ASOriginationInterval: 10
+          address: ""
+          advertisementInterval: 10
+          remoteAS: 100
+    required: false
+  cicSettings:
+    cicConfig:
+      NS_COOKIE_VERSION: "0"
+      NS_HTTP2_SERVER_SIDE: "OFF"
+    required: false
+  aws: false
+  sslCertManagedByAWS: false
+  serviceAnnotations:
+    aws:
+      backendProtocol: ""
+      negotiationPolicy: ""
+      proxyProtocol: false
+      resourcesTags: ""
+      sslCert: ""
+      sslPorts: ""
+  coeConfig:
+    distributedTracing:
+      enable: false
+      samplingrate: 100
+    endpoint:
+      server: ""
+    required: false
+    timeseries:
+      auditlogs:
+        enable: false
+      events:
+        enable: false
+      metrics:
+        enable: false
+        mode: avro
+      port: 5563
+    transactions:
+      enable: false
+      port: 5557

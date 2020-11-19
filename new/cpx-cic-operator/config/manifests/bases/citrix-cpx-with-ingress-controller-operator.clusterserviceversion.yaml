@@ -1,0 +1,47 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+    operators.operatorframework.io/builder: operator-sdk-v1.1.0
+    operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
+  name: citrix-cpx-with-ingress-controller-operator.vX.Y.Z
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: Citrix ADC CPX is a container-based application delivery controller that can be provisioned on a Docker host. Citrix ADC CPX enables customers to leverage Docker engine capabilities and use NetScaler load balancing and traffic management features for container-based applications. Citrix Ingress Controller which will be running in side-car mode with Citrix ADC CPX will automatically configures Citrix ADC CPX based on the Ingress resource configuration. This operator can be used deploy Citrix ADC CPX with Citrix ingress controller in an OpenShift environment.
+  displayName: Citrix ADC CPX with Ingress Controller
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - Ingress
+  - Ingress Controller
+  - Kubernetes
+  - ADC
+  - CPX
+  links:
+  - name: Citrix Cpx With Ingress Controller Operator
+    url: https://citrix-cpx-with-ingress-controller-operator.domain
+  maintainers:
+  - email: priyanka.sharma@citrix.com
+    name: Priyanka Sharma
+  maturity: alpha
+  provider:
+    name: Citrix
+  version: 0.0.0
