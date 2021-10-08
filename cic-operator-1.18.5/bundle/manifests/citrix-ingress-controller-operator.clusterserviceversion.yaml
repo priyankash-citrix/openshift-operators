@@ -97,7 +97,7 @@ metadata:
     categories: Networking
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware), Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem and cloud deployments. It automatically configures one or more Citrix ADC based on the Ingress resource configuration. This operator can be used deploy Citrix Ingress Controller in an Openshift environment.
     containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest
-    createdAt: 2021-10-07T11:56:17Z
+    createdAt: 2021-10-08T11:33:28Z
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
     operators.operatorframework.io/builder: operator-sdk-v1.12.0+git
@@ -267,11 +267,11 @@ spec:
                   failureThreshold: 5
                 resources:
                   limits:
-                    cpu: 200m
-                    memory: 100Mi
+                    cpu: 500m
+                    memory: 500Mi
                   requests:
-                    cpu: 100m
-                    memory: 60Mi
+                    cpu: 200m
+                    memory: 200Mi
                 securityContext:
                   allowPrivilegeEscalation: false
               securityContext:
