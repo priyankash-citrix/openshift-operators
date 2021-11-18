@@ -1,0 +1,104 @@
+apiVersion: citrix.com/v1alpha1
+kind: CitrixCpxWithIngressController
+metadata:
+  name: citrixcpxwithingresscontroller-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-cpx-with-ingress-controller/values.yaml
+  ADMSettings:
+    ADMIP: null
+    bandWidth: null
+    bandWidthLicense: false
+    cpxCores: null
+    licenseServerIP: null
+    licenseServerPort: 27000
+    loginSecret: null
+    vCPULicense: false
+  bgpSettings:
+    bgpConfig:
+    - bgpRouter:
+        localAS: 100
+        neighbor:
+        - ASOriginationInterval: 10
+          address: null
+          advertisementInterval: 10
+          remoteAS: 100
+    required: false
+  cic:
+    image: quay.io/citrix/citrix-k8s-ingress-controller:1.18.5
+    pullPolicy: IfNotPresent
+    required: true
+  coeConfig:
+    distributedTracing:
+      enable: false
+      samplingrate: 100
+    endpoint:
+      server: null
+    required: false
+    timeseries:
+      auditlogs:
+        enable: false
+      events:
+        enable: false
+      metrics:
+        enable: false
+        mode: avro
+      port: 5563
+    transactions:
+      enable: false
+      port: 5557
+  cpxBgpRouter: false
+  crds:
+    install: false
+    retainOnDelete: false
+  defaultSSLCertSecret: null
+  entityPrefix: null
+  exporter:
+    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.8
+    ports:
+      containerPort: 8888
+    pullPolicy: IfNotPresent
+    required: false
+  image: quay.io/citrix/citrix-k8s-cpx-ingress:13.0-79.64
+  imagePullSecrets: []
+  ingressClass: null
+  ingressIP: null
+  ipam: false
+  kubernetesURL: null
+  license:
+    accept: false
+  logLevel: INFO
+  logProxy: null
+  mgmtHttpPort: 9080
+  mgmtHttpsPort: 9443
+  namespaceLabels: null
+  nodeSelector:
+    key: null
+    value: null
+  nsCookieVersion: "0"
+  nsGateway: 192.168.1.1
+  nsHTTP2ServerSide: "OFF"
+  nsIP: 192.168.1.2
+  nsProtocol: http
+  openshift: false
+  pullPolicy: IfNotPresent
+  routeLabels: null
+  serviceAccount:
+    create: true
+  serviceAnnotations: {}
+  servicePorts: []
+  serviceSpec:
+    loadBalancerSourceRanges: []
+  serviceType:
+    loadBalancer:
+      enabled: false
+      externalTrafficPolicy: Local
+    nodePort:
+      enabled: false
+      httpPort: null
+      httpsPort: null
+  setAsDefaultIngressClass: false
+  sslCertManagedByAWS: false
+  tolerations: []
+  updateIngressStatus: false
+  
+  
