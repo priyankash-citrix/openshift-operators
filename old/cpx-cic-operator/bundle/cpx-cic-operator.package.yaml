@@ -1,4 +1,0 @@
-packageName: cpx-cic-operator
-channels:
-  - name: alpha
-    currentCSV: cpx-cic-operator.v130.47.103

@@ -1,9 +1,0 @@
----
-- version: v1alpha1
-  group: charts.helm.k8s.io
-  kind: CitrixCPXIngressController
-  chart: helm-charts/citrix-k8s-cpx-ingress-controller
-  overrideValues:
-    cic.image: $RELATED_IMAGE_CIC
-    cpx.image: $RELATED_IMAGE_CPX
-    exporter.image: $RELATED_IMAGE_EXPORTER

@@ -1,0 +1,100 @@
+apiVersion: citrix.com/v1alpha1
+kind: CitrixIngressController
+metadata:
+  name: citrixingresscontroller-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-ingress-controller/values.yaml
+  adcCredentialSecret: null
+  affinity: {}
+  analyticsConfig:
+    distributedTracing:
+      enable: false
+      samplingrate: 100
+    endpoint:
+      server: null
+      service: null
+    required: false
+    timeseries:
+      auditlogs:
+        enable: false
+      events:
+        enable: false
+      metrics:
+        enable: false
+        mode: avro
+      port: 30002
+    transactions:
+      enable: false
+      port: 30001
+  clusterName: null
+  cncPbr: false
+  crds:
+    install: false
+    retainOnDelete: false
+  defaultSSLCertSecret: null
+  disableAPIServerCertVerify: false
+  disableOpenshiftRoutes: null
+  entityPrefix: null
+  exporter:
+    extraVolumeMounts: []
+    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.9
+    ports:
+      containerPort: 8888
+    pullPolicy: IfNotPresent
+    required: false
+    resources: {}
+  extraVolumeMounts: []
+  extraVolumes: []
+  fullnameOverride: ""
+  ignoreNodeExternalIP: false
+  image: quay.io/citrix/citrix-k8s-ingress-controller:1.26.7
+  imagePullSecrets: []
+  ingressClass: null
+  ipam: false
+  jsonLog: false
+  kubernetesURL: null
+  license:
+    accept: false
+  logLevel: INFO
+  logProxy: null
+  nameOverride: ""
+  namespaceLabels: null
+  nitroReadTimeout: null
+  nodeSelector:
+    key: null
+    value: null
+  nodeWatch: false
+  nsConfigDnsRec: null
+  nsCookieVersion: "0"
+  nsDnsNameserver: null
+  nsEnableLabel: true
+  nsHTTP2ServerSide: "OFF"
+  nsIP: x.x.x.x
+  nsLbHashAlgo:
+    hashAlgorithm: DEFAULT
+    hashFingers: 256
+    required: false
+  nsPort: 443
+  nsProtocol: HTTPS
+  nsSNIPS: null
+  nsSvcLbDnsRec: null
+  nsVIP: null
+  openshift: false
+  optimizeEndpointBinding: null
+  podAnnotations: {}
+  podIPsforServiceGroupMembers: false
+  pullPolicy: IfNotPresent
+  resources: {}
+  routeLabels: null
+  secretStore:
+    enabled: false
+    password: {}
+    username: {}
+  serviceAccount:
+    create: true
+  serviceClass: null
+  setAsDefaultIngressClass: false
+  tolerations: []
+  updateIngressStatus: true
+  
+  

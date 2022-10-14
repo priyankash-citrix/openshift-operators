@@ -1,9 +1,0 @@
-# Use the 'create api' subcommand to add watches to this file.
-- group: citrix.com
-  version: v1alpha1
-  kind: CitrixIngressController
-  chart: helm-charts/citrix-ingress-controller
-  overrideValues:
-    image: $RELATED_IMAGE_CIC
-    exporter.image: $RELATED_IMAGE_EXPORTER
-# +kubebuilder:scaffold:watch
