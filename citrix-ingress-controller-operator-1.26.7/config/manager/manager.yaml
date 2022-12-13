@@ -3,6 +3,12 @@ kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
+    app.kubernetes.io/name: namespace
+    app.kubernetes.io/instance: system
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/created-by: citrix-ingress-controller-operator
+    app.kubernetes.io/part-of: citrix-ingress-controller-operator
+    app.kubernetes.io/managed-by: kustomize
   name: system
 ---
 apiVersion: apps/v1
@@ -12,6 +18,12 @@ metadata:
   namespace: system
   labels:
     control-plane: controller-manager
+    app.kubernetes.io/name: deployment
+    app.kubernetes.io/instance: controller-manager
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/created-by: citrix-ingress-controller-operator
+    app.kubernetes.io/part-of: citrix-ingress-controller-operator
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     matchLabels:
@@ -24,6 +36,26 @@ spec:
       labels:
         control-plane: controller-manager
     spec:
+      # TODO(user): Uncomment the following code to configure the nodeAffinity expression
+      # according to the platforms which are supported by your solution.
+      # It is considered best practice to support multiple architectures. You can
+      # build your manager image using the makefile target docker-buildx.
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #           - key: kubernetes.io/arch
+      #             operator: In
+      #             values:
+      #               - amd64
+      #               - arm64
+      #               - ppc64le
+      #               - s390x
+      #           - key: kubernetes.io/os
+      #             operator: In
+      #             values:
+      #               - linux
       securityContext:
         runAsNonRoot: true
         # TODO(user): For common cases that do not require escalating privileges
@@ -67,8 +99,8 @@ spec:
             memory: 64Mi
         env:
           - name: RELATED_IMAGE_CIC
-            value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:2d44399ae59cd6d73bdc1c1fcd387c11e272841cb97333c782cacb7ff1987d01
+            value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:7b83044920d5a43c755bab9131664538d816cde9d7d43837fe1230dae63d0e80
           - name: RELATED_IMAGE_EXPORTER
-            value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:2508c3a1780b281f43487c0ed1c115003687683d5856b26324a0832b1216fd58
+            value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:69e504358162f518918eb4915e13c1b37240d097a998a8d2af426040d8beb120
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10
