@@ -413,7 +413,7 @@ spec:
   - name: Citrix Ingress Controller Operator
     url: https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/deploy/deploy-cic-openshift-operator.md
   maintainers:
-  - email: 'prashant.jha@citrix.com'
+  - email: 'prajha@tibco.com'
     name: 'Prashant Ranjan'
   maturity: alpha
   provider:
