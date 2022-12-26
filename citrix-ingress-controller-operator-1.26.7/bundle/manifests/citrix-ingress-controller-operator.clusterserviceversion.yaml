@@ -132,12 +132,12 @@ metadata:
     capabilities: Basic Install
     categories: Networking
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware), Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem and cloud deployments. It automatically configures one or more Citrix ADC based on the Ingress resource configuration. This operator can be used deploy Citrix Ingress Controller in an Openshift environment.
-    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller@sha256:7b83044920d5a43c755bab9131664538d816cde9d7d43837fe1230dae63d0e80"
+    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller@sha256:2a44a0727a5bb496bd9e933667f1f87b4e746b4e14bc83e91690a53e3a70f821"
     createdAt: 2022-09-28T10:00:00Z
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
     olm.skipRange: ">=1.18.5 <1.28.2"
-    operators.operatorframework.io/builder: operator-sdk-v1.25.0
+    operators.operatorframework.io/builder: operator-sdk-v1.26.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
   name: citrix-ingress-controller-operator.v1.28.2
   namespace: placeholder
@@ -328,7 +328,7 @@ spec:
                   value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:7b83044920d5a43c755bab9131664538d816cde9d7d43837fe1230dae63d0e80
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:69e504358162f518918eb4915e13c1b37240d097a998a8d2af426040d8beb120
-                image: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller:latest
+                image: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller@sha256:2a44a0727a5bb496bd9e933667f1f87b4e746b4e14bc83e91690a53e3a70f821
                 livenessProbe:
                   httpGet:
                     path: /healthz
