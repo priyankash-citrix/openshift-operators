@@ -37,7 +37,11 @@ spec:
   entityPrefix: null
   exporter:
     extraVolumeMounts: []
-    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.9
+    image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
+      }}:{{ .Values.exporter.imageTag }}'
+    imageRegistry: quay.io
+    imageRepository: citrix/citrix-adc-metrics-exporter
+    imageTag: 1.4.9
     ports:
       containerPort: 8888
     pullPolicy: IfNotPresent
@@ -47,8 +51,12 @@ spec:
   extraVolumes: []
   fullnameOverride: ""
   ignoreNodeExternalIP: false
-  image: quay.io/citrix/citrix-k8s-ingress-controller:1.26.7
+  image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
+    }}'
   imagePullSecrets: []
+  imageRegistry: quay.io
+  imageRepository: citrix/citrix-k8s-ingress-controller
+  imageTag: 1.28.2
   ingressClass: null
   ipam: false
   jsonLog: false
@@ -84,6 +92,7 @@ spec:
   podAnnotations: {}
   podIPsforServiceGroupMembers: false
   pullPolicy: IfNotPresent
+  rbacRole: false
   resources: {}
   routeLabels: null
   secretStore:
