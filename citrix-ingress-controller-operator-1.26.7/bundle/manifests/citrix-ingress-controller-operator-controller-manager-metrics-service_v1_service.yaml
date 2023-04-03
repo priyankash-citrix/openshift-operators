@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/name: service
     app.kubernetes.io/part-of: citrix-ingress-controller-operator
     control-plane: controller-manager
-  name: citrix-ingress-controller-operator-ctrl-mgr-metrics-svc
+  name: citrix-ingress-controller-operator-controller-manager-metrics-service
 spec:
   ports:
   - name: https

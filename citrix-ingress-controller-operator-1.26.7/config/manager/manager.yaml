@@ -97,10 +97,10 @@ spec:
           requests:
             cpu: 10m
             memory: 64Mi
-       env:
+        env:
           - name: RELATED_IMAGE_CIC
             value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:75ca60c64d83d31c6fdd7fe374649a1b2453c6402460b31f66647de23823ea6e
           - name: RELATED_IMAGE_EXPORTER
-            value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:69e504358162f518918eb4915e13c1b37240d097a998a8d2af426040d8beb120
+            value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10

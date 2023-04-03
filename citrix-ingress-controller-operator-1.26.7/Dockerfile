@@ -8,7 +8,6 @@ LABEL name="Citrix Ingress Controller Operator" \
       description="This operator will deploy Citrix Ingress Controller to the cluster."
 
 COPY licenses /licenses
-
 ENV HOME=/opt/helm
 COPY watches.yaml ${HOME}/watches.yaml
 COPY helm-charts  ${HOME}/helm-charts
