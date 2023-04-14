@@ -186,7 +186,7 @@ metadata:
     createdAt: "2023-04-14T05:30:02Z"
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
-    replaces: citrix-cpx-with-ingress-controller-operator.v1.31.3
+    replaces: citrix-cpx-with-ingress-controller-operator.v1.26.7
     operators.operatorframework.io/builder: operator-sdk-v1.27.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
   name: citrix-cpx-with-ingress-controller-operator.v1.31.3
@@ -256,12 +256,10 @@ spec:
           - services
           - services/finalizers
           - endpoints
-          - persistentvolumeclaims
           - events
           - configmaps
           - secrets
           - serviceaccounts
-          - persistentvolumeclaims
           verbs:
           - '*'
         - apiGroups:
@@ -269,8 +267,6 @@ spec:
           resources:
           - deployments
           - daemonsets
-          - replicasets
-          - statefulsets
           verbs:
           - '*'
         - apiGroups:
@@ -379,7 +375,7 @@ spec:
                   value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:73fb0e154cc92105e404094706f546316544cb4657491ca6c30770d010202506
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
-                image: controller:latest
+                image: quay.io/prashantjh/cpx-cic-operator
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -398,9 +394,9 @@ spec:
                 resources:
                   limits:
                     cpu: 500m
-                    memory: 200Mi
+                    memory: 500Mi
                   requests:
-                    cpu: 500m
+                    cpu: 200m
                     memory: 200Mi
                 securityContext:
                   allowPrivilegeEscalation: false
