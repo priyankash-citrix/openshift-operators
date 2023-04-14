@@ -3,6 +3,12 @@ kind: Namespace
 metadata:
   labels:
     control-plane: controller-manager
+    app.kubernetes.io/name: namespace
+    app.kubernetes.io/instance: system
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/created-by: citrix-cpx-with-ingress-controller-operator
+    app.kubernetes.io/part-of: citrix-cpx-with-ingress-controller-operator
+    app.kubernetes.io/managed-by: kustomize
   name: system
 ---
 apiVersion: apps/v1
@@ -12,6 +18,12 @@ metadata:
   namespace: system
   labels:
     control-plane: controller-manager
+    app.kubernetes.io/name: deployment
+    app.kubernetes.io/instance: controller-manager
+    app.kubernetes.io/component: manager
+    app.kubernetes.io/created-by: citrix-cpx-with-ingress-controller-operator
+    app.kubernetes.io/part-of: citrix-cpx-with-ingress-controller-operator
+    app.kubernetes.io/managed-by: kustomize
 spec:
   selector:
     matchLabels:
@@ -24,6 +36,26 @@ spec:
       labels:
         control-plane: controller-manager
     spec:
+      # TODO(user): Uncomment the following code to configure the nodeAffinity expression
+      # according to the platforms which are supported by your solution.
+      # It is considered best practice to support multiple architectures. You can
+      # build your manager image using the makefile target docker-buildx.
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #         - matchExpressions:
+      #           - key: kubernetes.io/arch
+      #             operator: In
+      #             values:
+      #               - amd64
+      #               - arm64
+      #               - ppc64le
+      #               - s390x
+      #           - key: kubernetes.io/os
+      #             operator: In
+      #             values:
+      #               - linux
       securityContext:
         runAsNonRoot: true
         # TODO(user): For common cases that do not require escalating privileges
@@ -61,13 +93,13 @@ spec:
         resources:
           limits:
             cpu: 500m
-            memory: 500Mi
+            memory: 128Mi
           requests:
-            cpu: 200m
-            memory: 200Mi
+            cpu: 10m 
+            memory: 64Mi
         env:
           - name: RELATED_IMAGE_CPX
-            value: quay.io/citrix/citrix-k8s-cpx-ingress@sha256:f9acb4582ab535a30289f51182cf51fbb951368316accdfbd3a054d7b753be1d
+            value: quay.io/citrix/citrix-k8s-cpx-ingress@sha256:b6ea0473e6b55c06b14763cc554ce8060b9ea69140fb2399174a94a9312576de
           - name: RELATED_IMAGE_CIC
             value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:2d44399ae59cd6d73bdc1c1fcd387c11e272841cb97333c782cacb7ff1987d01
           - name: RELATED_IMAGE_EXPORTER

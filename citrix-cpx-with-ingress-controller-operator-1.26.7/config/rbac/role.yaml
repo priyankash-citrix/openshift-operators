@@ -8,6 +8,13 @@ rules:
 ##
 # We need to get namespaces so the operator can read namespaces to ensure they exist
 - apiGroups:
+  - rbac.authorization.k8s.io
+  verbs:
+  - "*"
+  resources:
+  - clusterrolebindings
+  - clusterroles
+- apiGroups:
   - ""
   resources:
   - namespaces
@@ -32,13 +39,6 @@ rules:
 ## Rules for citrix.com/v1alpha1, Kind: CitrixCpxWithIngressController
 ##
 - apiGroups:
-  - rbac.authorization.k8s.io
-  verbs:
-  - "*"
-  resources:
-  - clusterrolebindings
-  - clusterroles
-- apiGroups:
   - citrix.com
   resources:
   - citrixcpxwithingresscontrollers
@@ -51,18 +51,22 @@ rules:
   resources:
   - pods
   - services
-  - configmaps
-  - secrets
-  - serviceaccounts
   - services/finalizers
   - endpoints
+  - persistentvolumeclaims
   - events
+  - configmaps
+  - secrets
+  - persistentvolumeclaims
   verbs:
   - "*"
 - apiGroups:
   - apps
   resources:
   - deployments
+  - daemonsets
+  - replicasets
+  - statefulsets
   verbs:
   - "*"
 - apiGroups:
@@ -83,4 +87,5 @@ rules:
   - servicemonitors
   verbs:
   - "*"
+
 #+kubebuilder:scaffold:rules

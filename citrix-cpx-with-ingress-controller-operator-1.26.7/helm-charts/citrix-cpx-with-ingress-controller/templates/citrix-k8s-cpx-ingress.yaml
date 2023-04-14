@@ -31,7 +31,7 @@ spec:
 {{- end }}
       containers:
         - name: cpx-ingress
-          image: "{{ .Values.image }}"
+          image: "{{ tpl .Values.image . }}"
           imagePullPolicy: {{ .Values.pullPolicy }}
           tty: true
           securityContext:
@@ -129,10 +129,12 @@ spec:
               name: shared-data
             - mountPath: /cpx/
               name: cpx-volume
+            - mountPath: /cpx/conf
+              name: cpx-volume-conf
 {{- if .Values.cic.required }}
         # Add cic as a sidecar
         - name: cic
-          image: "{{ .Values.cic.image }}"
+          image: "{{ tpl .Values.cic.image . }}"
           imagePullPolicy: {{ .Values.cic.pullPolicy }}
           env:
           - name: "EULA"
@@ -144,8 +146,12 @@ spec:
           - name: "NS_IP"
             value: "127.0.0.1"
 {{- end }}
+{{- if .Values.rbacRole }}
+          - name: "SCOPE"
+            value: "local"
+{{- end }}
           - name: "NS_APPS_NAME_PREFIX"
-            value: {{ .Values.entityPrefix | default "k8s"}}
+            value: {{ .Values.entityPrefix | default "k8s"| quote }}
           - name: "NS_DEPLOYMENT_MODE"
             value: "SIDECAR"
 {{- if and .Values.openshift .Values.routeLabels }}
@@ -271,7 +277,7 @@ spec:
             {{- toYaml .Values.cic.resources | nindent 12 }}
 {{- if .Values.exporter.required }}
         - name: exporter
-          image: "{{ .Values.exporter.image }}"
+          image: "{{ tpl .Values.exporter.image . }}"
           imagePullPolicy: {{ .Values.exporter.pullPolicy }}
           args:
             - "--secure=no"
@@ -296,6 +302,8 @@ spec:
         - name: shared-data
           emptyDir: {}
         - name: cpx-volume
+          emptyDir: {}
+        - name: cpx-volume-conf
           emptyDir: {}
 {{- if and .Values.nodeSelector.key .Values.nodeSelector.value }}
       nodeSelector:

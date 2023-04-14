@@ -48,7 +48,11 @@ spec:
           remoteAS: 100
     required: false
   cic:
-    image: quay.io/citrix/citrix-k8s-ingress-controller:1.26.7
+    image: '{{ .Values.cic.imageRegistry }}/{{ .Values.cic.imageRepository }}:{{ .Values.cic.imageTag
+      }}'
+    imageRegistry: quay.io
+    imageRepository: citrix/citrix-k8s-ingress-controller
+    imageTag: 1.31.3
     pullPolicy: IfNotPresent
     required: true
     resources: {}
@@ -63,15 +67,23 @@ spec:
   disableOpenshiftRoutes: null
   entityPrefix: null
   exporter:
-    image: quay.io/citrix/citrix-adc-metrics-exporter:1.4.9
+    image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
+      }}:{{ .Values.exporter.imageTag }}'
+    imageRegistry: quay.io
+    imageRepository: citrix/citrix-adc-metrics-exporter
+    imageTag: 1.4.9
     ports:
       containerPort: 8888
     pullPolicy: IfNotPresent
     required: false
     resources: {}
   fullnameOverride: ""
-  image: quay.io/citrix/citrix-k8s-cpx-ingress:13.1-30.52
+  image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
+    }}'
   imagePullSecrets: []
+  imageRegistry: quay.io
+  imageRepository: citrix/citrix-k8s-cpx-ingress
+  imageTag: 13.1-37.38
   ingressClass: null
   ingressIP: null
   ipam: false
@@ -104,7 +116,11 @@ spec:
   openshift: false
   optimizeEndpointBinding: null
   podAnnotations: {}
+  profileHttpFrontend: {}
+  profileSslFrontend: {}
+  profileTcpFrontend: {}
   pullPolicy: IfNotPresent
+  rbacRole: false
   replicaCount: 1
   resources: {}
   routeLabels: null
