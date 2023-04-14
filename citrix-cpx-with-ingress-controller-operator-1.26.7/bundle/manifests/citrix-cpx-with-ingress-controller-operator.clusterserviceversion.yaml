@@ -182,7 +182,7 @@ metadata:
     capabilities: Basic Install
     categories: Networking
     description: Citrix ADC CPX is a container-based application delivery controller that can be provisioned on a Docker host. Citrix ADC CPX enables customers to leverage Docker engine capabilities and use NetScaler load balancing and traffic management features for container-based applications. Citrix Ingress Controller which will be running in side-car mode with Citrix ADC CPX will automatically configures Citrix ADC CPX based on the Ingress resource configuration. This operator can be used deploy Citrix ADC CPX with Citrix ingress controller in an Openshift environment.
-    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller@sha256:a33ec045d02f2807f23d6d654a19e3e076b6fa07935a85bd8c6b17770a40f300
+    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller@sha256:0421631284be9fc8551ef652f25ae4255f0177279b3f42c850887b55594442dc
     createdAt: "2023-04-14T05:30:02Z"
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
@@ -375,7 +375,7 @@ spec:
                   value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:73fb0e154cc92105e404094706f546316544cb4657491ca6c30770d010202506
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
-                image: quay.io/prashantjh/cpx-cic-operator
+                image: registry.connect.redhat.com/citrix/citrix-k8s-cpx-ingress-controller@sha256:0421631284be9fc8551ef652f25ae4255f0177279b3f42c850887b55594442dc
                 livenessProbe:
                   httpGet:
                     path: /healthz
