@@ -93,16 +93,16 @@ spec:
         resources:
           limits:
             cpu: 500m
-            memory: 128Mi
+            memory: 200Mi
           requests:
-            cpu: 10m 
-            memory: 64Mi
+            cpu: 500m 
+            memory: 200Mi
         env:
           - name: RELATED_IMAGE_CPX
             value: quay.io/citrix/citrix-k8s-cpx-ingress@sha256:b6ea0473e6b55c06b14763cc554ce8060b9ea69140fb2399174a94a9312576de
           - name: RELATED_IMAGE_CIC
-            value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:2d44399ae59cd6d73bdc1c1fcd387c11e272841cb97333c782cacb7ff1987d01
+            value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:73fb0e154cc92105e404094706f546316544cb4657491ca6c30770d010202506
           - name: RELATED_IMAGE_EXPORTER
-            value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:2508c3a1780b281f43487c0ed1c115003687683d5856b26324a0832b1216fd58
+            value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
       serviceAccountName: controller-manager
       terminationGracePeriodSeconds: 10
