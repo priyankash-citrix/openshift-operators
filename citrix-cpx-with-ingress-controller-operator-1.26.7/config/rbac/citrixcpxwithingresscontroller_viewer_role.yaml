@@ -2,6 +2,13 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: citrixcpxwithingresscontroller-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: citrix-cpx-with-ingress-controller-operator
+    app.kubernetes.io/part-of: citrix-cpx-with-ingress-controller-operator
+    app.kubernetes.io/managed-by: kustomize
   name: citrixcpxwithingresscontroller-viewer-role
 rules:
 - apiGroups:

@@ -1,10 +1,8 @@
 # Build the manager binary
-FROM quay.io/operator-framework/helm-operator:v1.23.0
-
-### Required OpenShift Labels
+FROM quay.io/operator-framework/helm-operator:v1.27.0
 LABEL name="Citrix ADC CPX with Citrix Ingress Controller Operator" \
       vendor="Citrix" \
-      version="v1.26.7" \
+      version="v1.31.3" \
       release="1" \
       summary="This is an Citrix ADC CPX with Citrix ingress controller helm operator." \
       description="This operator will deploy Citrix ADC CPX with Citrix ingress controller running as side-car, in the cluster."
