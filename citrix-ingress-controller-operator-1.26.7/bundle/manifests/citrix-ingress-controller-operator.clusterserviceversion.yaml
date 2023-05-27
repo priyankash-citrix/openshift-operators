@@ -55,7 +55,7 @@ metadata:
               "extraVolumeMounts": [],
               "image": "{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository }}:{{ .Values.exporter.imageTag }}",
               "imageRegistry": "quay.io",
-              "imageRepository": "citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a",
+              "imageRepository": "citrix/citrix-adc-metrics-exporter",
               "imageTag": "1.4.9",
               "ports": {
                 "containerPort": 8888
@@ -71,8 +71,8 @@ metadata:
             "image": "{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag }}",
             "imagePullSecrets": [],
             "imageRegistry": "quay.io",
-            "imageRepository": "citrix/citrix-k8s-ingress-controller@sha256:75ca60c64d83d31c6fdd7fe374649a1b2453c6402460b31f66647de23823ea6e",
-            "imageTag": "1.30.1",
+            "imageRepository": "citrix/citrix-k8s-ingress-controller",
+            "imageTag": "1.31.3",
             "ingressClass": [],
             "ipam": false,
             "jsonLog": false,
@@ -135,14 +135,14 @@ metadata:
     capabilities: Basic Install
     categories: Networking
     description: Citrix provides an ingress controller for Citrix ADC MPX (hardware), Citrix ADC VPX (virtualized), and Citrix ADC CPX (containerized) for on-prem and cloud deployments. It automatically configures one or more Citrix ADC based on the Ingress resource configuration. This operator can be used deploy Citrix Ingress Controller in an Openshift environment.
-    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller@sha256:2a44a0727a5bb496bd9e933667f1f87b4e746b4e14bc83e91690a53e3a70f821
+    containerImage: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller@sha256:eaaa2b774d4c6e8b4cda5c173f2f2da6181de14afab154c471d347143076ed6c
     createdAt: 2023-04-03T10:00:00Z
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
-    replaces: citrix-ingress-controller-operator.v1.28.2
+    replaces: citrix-ingress-controller-operator.v1.30.1
     operators.operatorframework.io/builder: operator-sdk-v1.27.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
-  name: citrix-ingress-controller-operator.v1.30.1
+  name: citrix-ingress-controller-operator.v1.31.3
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -328,7 +328,7 @@ spec:
                 - --leader-election-id=citrix-ingress-controller-operator
                 env:
                 - name: RELATED_IMAGE_CIC
-                  value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:75ca60c64d83d31c6fdd7fe374649a1b2453c6402460b31f66647de23823ea6e
+                  value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:73fb0e154cc92105e404094706f546316544cb4657491ca6c30770d010202506
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
                 image: quay.io/prashantjh/cic-operator
@@ -423,8 +423,8 @@ spec:
     name: Citrix
     url: https://www.citrix.com
   relatedImages:
-  - image: quay.io/citrix/citrix-k8s-ingress-controller@sha256:75ca60c64d83d31c6fdd7fe374649a1b2453c6402460b31f66647de23823ea6e
+  - image: quay.io/citrix/citrix-k8s-ingress-controller@sha256:73fb0e154cc92105e404094706f546316544cb4657491ca6c30770d010202506
     name: cic
   - image: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
     name: exporter
-  version: 1.30.1
+  version: 1.31.3
