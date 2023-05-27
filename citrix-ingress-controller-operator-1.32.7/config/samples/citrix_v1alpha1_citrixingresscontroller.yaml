@@ -1,0 +1,112 @@
+apiVersion: citrix.com/v1alpha1
+kind: CitrixIngressController
+metadata:
+  name: citrixingresscontroller-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/citrix-ingress-controller/values.yaml
+  adcCredentialSecret: null
+  affinity: {}
+  analyticsConfig:
+    distributedTracing:
+      enable: false
+      samplingrate: 100
+    endpoint:
+      server: null
+      service: null
+    required: false
+    timeseries:
+      auditlogs:
+        enable: false
+      events:
+        enable: false
+      metrics:
+        enable: false
+        mode: avro
+      port: 30002
+    transactions:
+      enable: false
+      port: 30001
+  clusterName: null
+  cncPbr: false
+  crds:
+    install: false
+    retainOnDelete: false
+  defaultSSLCertSecret: null
+  disableAPIServerCertVerify: false
+  disableOpenshiftRoutes: null
+  entityPrefix: null
+  exporter:
+    extraVolumeMounts: []
+    image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
+      }}:{{ .Values.exporter.imageTag }}'
+    imageRegistry: quay.io
+    imageRepository: citrix/citrix-adc-metrics-exporter
+    imageTag: 1.4.9
+    ports:
+      containerPort: 8888
+    pullPolicy: IfNotPresent
+    required: false
+    resources: {}
+  extraVolumeMounts: []
+  extraVolumes: []
+  fullnameOverride: ""
+  ignoreNodeExternalIP: false
+  image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
+    }}'
+  imagePullSecrets: []
+  imageRegistry: quay.io
+  imageRepository: citrix/citrix-k8s-ingress-controller
+  imageTag: 1.32.7
+  ingressClass: null
+  ipam: false
+  jsonLog: false
+  kubernetesURL: null
+  license:
+    accept: false
+  logLevel: INFO
+  logProxy: null
+  nameOverride: ""
+  namespaceLabels: null
+  nitroReadTimeout: null
+  nodeSelector:
+    key: null
+    value: null
+  nodeWatch: false
+  nsConfigDnsRec: null
+  nsCookieVersion: "0"
+  nsDnsNameserver: null
+  nsEnableLabel: true
+  nsHTTP2ServerSide: "OFF"
+  nsIP: x.x.x.x
+  nsLbHashAlgo:
+    hashAlgorithm: DEFAULT
+    hashFingers: 256
+    required: false
+  nsPort: 443
+  nsProtocol: HTTPS
+  nsSNIPS: null
+  nsSvcLbDnsRec: null
+  nsVIP: null
+  openshift: false
+  optimizeEndpointBinding: null
+  podAnnotations: {}
+  podIPsforServiceGroupMembers: false
+  profileHttpFrontend: {}
+  profileSslFrontend: {}
+  profileTcpFrontend: {}
+  pullPolicy: IfNotPresent
+  rbacRole: false
+  resources: {}
+  routeLabels: null
+  secretStore:
+    enabled: false
+    password: {}
+    username: {}
+  serviceAccount:
+    create: true
+  serviceClass: null
+  setAsDefaultIngressClass: false
+  tolerations: []
+  updateIngressStatus: true
+  
+  
