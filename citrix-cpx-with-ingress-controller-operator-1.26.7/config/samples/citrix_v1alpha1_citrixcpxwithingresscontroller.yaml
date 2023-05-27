@@ -52,7 +52,7 @@ spec:
       }}'
     imageRegistry: quay.io
     imageRepository: citrix/citrix-k8s-ingress-controller
-    imageTag: 1.31.3
+    imageTag: 1.32.7
     pullPolicy: IfNotPresent
     required: true
     resources: {}
