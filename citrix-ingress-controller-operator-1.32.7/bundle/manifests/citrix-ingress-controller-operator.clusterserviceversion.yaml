@@ -72,7 +72,7 @@ metadata:
             "imagePullSecrets": [],
             "imageRegistry": "quay.io",
             "imageRepository": "citrix/citrix-k8s-ingress-controller",
-            "imageTag": "1.32.7",
+            "imageTag": "1.33.4 ",
             "ingressClass": [],
             "ipam": false,
             "jsonLog": false,
@@ -139,10 +139,10 @@ metadata:
     createdAt: 2023-05-26T10:00:00Z
     support: Citrix
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
-    replaces: citrix-ingress-controller-operator.v1.30.1
+    replaces: citrix-ingress-controller-operator.v1.33.4 
     operators.operatorframework.io/builder: operator-sdk-v1.28.1
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
-  name: citrix-ingress-controller-operator.v1.32.7
+  name: citrix-ingress-controller-operator.v1.33.4 
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -328,10 +328,10 @@ spec:
                 - --leader-election-id=citrix-ingress-controller-operator
                 env:
                 - name: RELATED_IMAGE_CIC
-                  value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:41e4ae223e557b85edba04da3a48f58662ca72c15083f7708a157fa4485c0ff0
+                  value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:46c80ee51e5cae494f9d08eb308bedb4899e5fc998d2d9a7314fca232724cbdb
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
-                image: registry.connect.redhat.com/citrix/citrix-k8s-ingress-controller@sha256:c6806faec5d244643496442c2f8883abb9aea6c8f28dafe45227bdac6ec5b14b
+                image: quay.io/prashantjh/cic-operator
                 livenessProbe:
                   httpGet:
                     path: /healthz
@@ -423,8 +423,8 @@ spec:
     name: Citrix
     url: https://www.citrix.com
   relatedImages:
-  - image: quay.io/citrix/citrix-k8s-ingress-controller@sha256:41e4ae223e557b85edba04da3a48f58662ca72c15083f7708a157fa4485c0ff0
+  - image: quay.io/citrix/citrix-k8s-ingress-controller@sha256:46c80ee51e5cae494f9d08eb308bedb4899e5fc998d2d9a7314fca232724cbdb
     name: cic
   - image: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
     name: exporter
-  version: 1.32.7
+  version: 1.33.4 
