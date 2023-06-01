@@ -2,7 +2,7 @@
 FROM quay.io/operator-framework/helm-operator:v1.28.1
 LABEL name="Citrix Ingress Controller Operator" \
       vendor="Citrix" \
-      version="v1.32.7" \
+      version="v1.33.4 " \
       release="1" \
       summary="This is an Citrix Ingress Controller helm operator." \
       description="This operator will deploy Citrix Ingress Controller to the cluster."
