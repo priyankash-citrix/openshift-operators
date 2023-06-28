@@ -1,0 +1,50 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: netscaler-operator.v0.0.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: ADDDD
+  displayName: NetScaler Operator
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: false
+    type: SingleNamespace
+  - supported: false
+    type: MultiNamespace
+  - supported: true
+    type: AllNamespaces
+  keywords:
+  - Ingress
+  - NetScaler
+  - ADC
+  - Kubernetes
+  - OpenShift
+  - Citrix
+  - Controller
+  - Observability
+  - Metrices
+  links:
+  - name: Netscaler Operator
+    url: https://netscaler-operator.domain
+  maintainers:
+  - email: priyanka.sharma@cloud.com
+    name: Priyanka Sharma
+  maturity: alpha
+  provider:
+    name: NetScaler
+    url: ADDDDD
+  version: 0.0.0

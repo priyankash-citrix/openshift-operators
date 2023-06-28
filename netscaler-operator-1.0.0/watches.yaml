@@ -1,0 +1,23 @@
+# Use the 'create api' subcommand to add watches to this file.
+- group: netscaler.com
+  version: v1
+  kind: NetscalerIngressController
+  chart: helm-charts/netscaler-ingress-controller
+  overrideValues:
+    image: $RELATED_IMAGE_NIC
+    exporter.image: $RELATED_IMAGE_EXPORTER
+- group: netscaler.com
+  version: v1
+  kind: NetscalerCpxWithIngressController
+  chart: helm-charts/netscaler-cpx-with-ingress-controller
+  overrideValues:
+    image: $RELATED_IMAGE_CPX
+    nsic.image: $RELATED_IMAGE_NIC
+    exporter.image: $RELATED_IMAGE_EXPORTER
+- group: netscaler.com
+  version: v1
+  kind: NetscalerObservabilityExporter
+  chart: helm-charts/netscaler-observability-exporter
+  overrideValues:
+    image: $RELATED_IMAGE_NOE
+#+kubebuilder:scaffold:watch

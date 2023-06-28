@@ -1,0 +1,47 @@
+# YAML file for NS Logproxy service
+apiVersion: v1
+kind: Service
+metadata:
+  name: noe
+  labels:
+    app: noe
+spec:
+{{- if eq .Values.headless true }}
+  clusterIP: None
+{{- end}}
+  ports:
+    - port: 5557
+      protocol: TCP
+      name: lstreamd
+{{- if .Values.timeseries.enabled }}
+    - port: 5563
+      protocol: TCP
+      name: rest
+{{- end}}
+  selector:
+      app: noe
+---
+{{- if eq .Values.nodePortRequired true }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: noe-nodeport
+  labels:
+    app: noe
+spec:
+  type: NodePort
+  ports:
+    - port: 5557
+      protocol: TCP
+      name: lstreamd
+      nodePort: {{ .Values.transaction.nodePort }}
+{{- if .Values.timeseries.enabled }}
+    - port: 5563
+      protocol: TCP
+      name: rest
+      nodePort: {{ .Values.timeseries.nodePort }}
+{{- end}}
+  selector: 
+      app: noe
+---
+{{- end}}

@@ -1,0 +1,12 @@
+apiVersion: v2
+appVersion: "1.6.001"
+description: A Helm chart for NetScaler Observability Exporter
+name: netscaler-observability-exporter
+version: 1.6.001
+icon: https://raw.githubusercontent.com/citrix/citrix-helm-charts/gh-pages/icon.png 
+home: https://www.cloud.com
+sources:
+- https://github.com/citrix/citrix-observability-exporter
+maintainers:
+- name: ritjaintibco
+  email: Ritik.Jain@cloud.com
