@@ -66,8 +66,8 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 {{- end -}}
 
-{{- define "nicconfigmap.fullname" -}}
-{{- $name := default .Chart.Name "nic-configmap" .Values.nameOverride -}}
+{{- define "nsicconfigmap.fullname" -}}
+{{- $name := default .Chart.Name "nsic-configmap" .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}

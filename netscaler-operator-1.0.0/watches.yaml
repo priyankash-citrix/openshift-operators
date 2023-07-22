@@ -4,7 +4,7 @@
   kind: NetscalerIngressController
   chart: helm-charts/netscaler-ingress-controller
   overrideValues:
-    image: $RELATED_IMAGE_NIC
+    image: $RELATED_IMAGE_NSIC
     exporter.image: $RELATED_IMAGE_EXPORTER
 - group: netscaler.com
   version: v1
@@ -12,12 +12,12 @@
   chart: helm-charts/netscaler-cpx-with-ingress-controller
   overrideValues:
     image: $RELATED_IMAGE_CPX
-    nsic.image: $RELATED_IMAGE_NIC
+    nsic.image: $RELATED_IMAGE_NSIC
     exporter.image: $RELATED_IMAGE_EXPORTER
 - group: netscaler.com
   version: v1
   kind: NetscalerObservabilityExporter
   chart: helm-charts/netscaler-observability-exporter
   overrideValues:
-    image: $RELATED_IMAGE_NOE
+    image: $RELATED_IMAGE_NSOE
 #+kubebuilder:scaffold:watch

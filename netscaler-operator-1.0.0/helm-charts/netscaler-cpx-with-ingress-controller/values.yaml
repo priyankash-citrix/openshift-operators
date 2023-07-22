@@ -45,8 +45,8 @@ ingressIP:
 # If IPAM controller is used for auto allocation of the external IP for service of type LoadBalancer, set this option to true
 ipam: False
 
-# Enable RBAC role (so called local role), by default NIC deployed with ClusterRole.
-# below variable to deploy NIC with RBAC role, only ingress service supported with this config
+# Enable RBAC role (so called local role), by default NSIC deployed with ClusterRole.
+# below variable to deploy NSIC with RBAC role, only ingress service supported with this config
 rbacRole: False
 
 # API server Cert verification can be disabled, while communicating with API Server, if disableAPIServerCertVerify set to True
@@ -79,11 +79,11 @@ serviceSpec:
 servicePorts: []
 
 # NetScaler Ingress Controller config details
-nic:
+nsic:
   imageRegistry: quay.io
   imageRepository: citrix/citrix-k8s-ingress-controller
   imageTag: 1.33.4
-  image: "{{ .Values.nic.imageRegistry }}/{{ .Values.nic.imageRepository }}:{{ .Values.nic.imageTag }}"
+  image: "{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag }}"
   pullPolicy: IfNotPresent
   required: true
   resources: {}

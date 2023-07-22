@@ -30,7 +30,7 @@ spec:
 {{- end }}
   template:
     metadata:
-      name: nic
+      name: nsic
       labels:
 {{- if .Values.openshift }}
         router: {{ include "netscaler-ingress-controller.fullname" . }}
@@ -44,12 +44,12 @@ spec:
     spec:
       serviceAccountName: {{ include "netscaler-ingress-controller.serviceAccountName" . }}
       containers:
-      - name: nic
+      - name: nsic
         image: "{{ tpl .Values.image . }}"
         imagePullPolicy: {{ .Values.pullPolicy }}
         args:
           - --configmap
-            {{ .Release.Namespace }}/{{ include "nicconfigmap.fullname" . }}
+            {{ .Release.Namespace }}/{{ include "nsicconfigmap.fullname" . }}
 {{- if .Values.defaultSSLCertSecret }}
           - --default-ssl-certificate
             {{ .Release.Namespace }}/{{ .Values.defaultSSLCertSecret }}
@@ -69,7 +69,7 @@ spec:
           - --feature-node-watch
             {{ .Values.nodeWatch }}
           - --enable-cnc-pbr
-            {{ .Values.nncPbr }}
+            {{ .Values.nsncPbr }}
 {{- if .Values.ipam }}
           - --ipam
             citrix-ipam-controller

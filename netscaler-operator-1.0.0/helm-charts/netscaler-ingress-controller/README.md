@@ -8,12 +8,12 @@
    ```
    helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
 
-   helm install nic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>
+   helm install nsic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>
    ```
 
    To install NetScaler Provided Custom Resource Definition(CRDs) along with NetScaler Ingress Controller
    ```
-   helm install nic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,crds.install=true
+   helm install nsic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,crds.install=true
    ```
 
 ### For OpenShift
@@ -21,12 +21,12 @@
    ```
    helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
 
-   helm install nic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,openshift=true
+   helm install nsic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,openshift=true
    ```
 
    To install NetScaler Provided Custom Resource Definition(CRDs) along with NetScaler Ingress Controller
    ```
-   helm install nic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,openshift=true,crds.install=true
+   helm install nsic netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,openshift=true,crds.install=true
    ```
 
 > **Important:**
@@ -51,17 +51,17 @@ This Helm chart deploys NetScaler ingress controller in the [Kubernetes](https:/
 
 -  You have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator), if you want to view the metrics of the NetScaler CPX collected by the [metrics exporter](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics).
 
--  The user name and password of the NetScaler VPX or MPX appliance used as the ingress device. The NetScaler appliance needs to have system user account (non-default) with certain privileges so that NetScaler ingress controller can configure the NetScaler VPX or MPX appliance. For instructions to create the system user account on NetScaler, see [Create System User Account for NIC in NetScaler](#create-system-user-account-for-nic-in-citrix-adc).
+-  The user name and password of the NetScaler VPX or MPX appliance used as the ingress device. The NetScaler appliance needs to have system user account (non-default) with certain privileges so that NetScaler ingress controller can configure the NetScaler VPX or MPX appliance. For instructions to create the system user account on NetScaler, see [Create System User Account for NSIC in NetScaler](#create-system-user-account-for-nsic-in-citrix-adc).
 
     You can pass user name and password using Kubernetes secrets. Create a Kubernetes secret for the user name and password using the following command:
 
     ```
-       kubectl create secret generic nslogin --from-literal=username='nic' --from-literal=password='mypassword'
+       kubectl create secret generic nslogin --from-literal=username='nsic' --from-literal=password='mypassword'
     ```
 
 #### Create system User account for NetScaler ingress controller in NetScaler
 
-NetScaler ingress controller configures the NetScaler using a system user account of the NetScaler. The system user account should have certain privileges so that the NIC has permission configure the following on the NetScaler:
+NetScaler ingress controller configures the NetScaler using a system user account of the NetScaler. The system user account should have certain privileges so that the NSIC has permission configure the following on the NetScaler:
 
 -  Add, Delete, or View Content Switching (CS) virtual server
 -  Configure CS policies and actions
@@ -94,13 +94,13 @@ To create the system user account, do the following:
     For example:
 
     ```
-       add system user nic mypassword
+       add system user nsic mypassword
     ```
 
 3.  Create a policy to provide required permissions to the system user account. Use the following command:
 
     ```
-      add cmdpolicy nic-policy ALLOW '^(\?!shell)(\?!sftp)(\?!scp)(\?!batch)(\?!source)(\?!.*superuser)(\?!.*nsroot)(\?!install)(\?!show\s+system\s+(user|cmdPolicy|file))(\?!(set|add|rm|create|export|kill)\s+system)(\?!(unbind|bind)\s+system\s+(user|group))(\?!diff\s+ns\s+config)(\?!(set|unset|add|rm|bind|unbind|switch)\s+ns\s+partition).*|(^install\s*(wi|wf))|(^\S+\s+system\s+file)^(\?!shell)(\?!sftp)(\?!scp)(\?!batch)(\?!source)(\?!.*superuser)(\?!.*nsroot)(\?!install)(\?!show\s+system\s+(user|cmdPolicy|file))(\?!(set|add|rm|create|export|kill)\s+system)(\?!(unbind|bind)\s+system\s+(user|group))(\?!diff\s+ns\s+config)(\?!(set|unset|add|rm|bind|unbind|switch)\s+ns\s+partition).*|(^install\s*(wi|wf))|(^\S+\s+system\s+file)'
+      add cmdpolicy nsic-policy ALLOW '^(\?!shell)(\?!sftp)(\?!scp)(\?!batch)(\?!source)(\?!.*superuser)(\?!.*nsroot)(\?!install)(\?!show\s+system\s+(user|cmdPolicy|file))(\?!(set|add|rm|create|export|kill)\s+system)(\?!(unbind|bind)\s+system\s+(user|group))(\?!diff\s+ns\s+config)(\?!(set|unset|add|rm|bind|unbind|switch)\s+ns\s+partition).*|(^install\s*(wi|wf))|(^\S+\s+system\s+file)^(\?!shell)(\?!sftp)(\?!scp)(\?!batch)(\?!source)(\?!.*superuser)(\?!.*nsroot)(\?!install)(\?!show\s+system\s+(user|cmdPolicy|file))(\?!(set|add|rm|create|export|kill)\s+system)(\?!(unbind|bind)\s+system\s+(user|group))(\?!diff\s+ns\s+config)(\?!(set|unset|add|rm|bind|unbind|switch)\s+ns\s+partition).*|(^install\s*(wi|wf))|(^\S+\s+system\s+file)'
     ```
 
     **Note**: The system user account would have privileges based on the command policy that you define.
@@ -117,7 +117,7 @@ To create the system user account, do the following:
 4.  Bind the policy to the system user account using the following command:
 
     ```
-       bind system user nic nic-policy 0
+       bind system user nsic nsic-policy 0
     ```
 
 ## Installing the Chart
@@ -189,7 +189,7 @@ The following components are installed:
 
    1. Create secret using NetScaler VPX credentials, which will be used by NetScaler ingress controller for configuring NetScaler VPX/MPX:
 
-	kubectl create secret generic nslogin --from-literal=username='nic' --from-literal=password='mypassword'
+	kubectl create secret generic nslogin --from-literal=username='nsic' --from-literal=password='mypassword'
 
    2. Deploy NetScaler ingress controller using helm command:
 
@@ -293,9 +293,9 @@ Example files: [wildcarddns-crd.yaml](https://github.com/citrix/citrix-helm-char
 
 Taints are applied on cluster nodes whereas tolerations are applied on pods. Tolerations enable pods to be scheduled on node with matching taints. For more information see [Taints and Tolerations in Kubernetes](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/).
 
-Toleration can be applied to NetScaler ingress controller pod using `tolerations` argument while deploying NIC using helm chart. This argument takes list of tolerations that user need to apply on the NIC pods.
+Toleration can be applied to NetScaler ingress controller pod using `tolerations` argument while deploying NSIC using helm chart. This argument takes list of tolerations that user need to apply on the NSIC pods.
 
-For example, following command can be used to apply toleration on the NIC pod:
+For example, following command can be used to apply toleration on the NSIC pod:
 
 ```
 helm install my-release netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,tolerations[0].key=<toleration-key>,tolerations[0].value=<toleration-value>,tolerations[0].operator=<toleration-operator>,tolerations[0].effect=<toleration-effect>
@@ -313,11 +313,11 @@ The following table lists the mandatory and optional parameters that you can con
 
 | Parameters | Mandatory or Optional | Default value | Description |
 | --------- | --------------------- | ------------- | ----------- |
-| license.accept | Mandatory | no | Set `yes` to accept the NIC end user license agreement. |
+| license.accept | Mandatory | no | Set `yes` to accept the NSIC end user license agreement. |
 | imageRegistry                   | Mandatory  |  `quay.io`               |  The NetScaler ingress controller image registry             |  
 | imageRepository                 | Mandatory  |  `citrix/citrix-k8s-ingress-controller`              |   The NetScaler ingress controller image repository             | 
 | imageTag                  | Mandatory  |  `1.33.4`               |   The NetScaler ingress controller image tag            | 
-| pullPolicy | Mandatory | IfNotPresent | The NIC image pull policy. |
+| pullPolicy | Mandatory | IfNotPresent | The NSIC image pull policy. |
 | imagePullSecrets | Optional | N/A | Provide list of Kubernetes secrets to be used for pulling the images from a private Docker registry or repository. For more information on how to create this secret please see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/). |
 | nameOverride | Optional | N/A | String to partially override deployment fullname template with a string (will prepend the release name) |
 | fullNameOverride | Optional | N/A | String to fully override deployment fullname template with a string |
@@ -329,23 +329,23 @@ The following table lists the mandatory and optional parameters that you can con
 | nsIP | Mandatory | N/A | The IP address of the NetScaler device. For details, see [Prerequisites](#prerequistes). |
 | nsVIP | Optional | N/A | The Virtual IP address on the NetScaler device. |
 | nsSNIPS | Optional | N/A | The list of subnet IPAddresses on the NetScaler device, which will be used to create PBR Routes instead of Static Routes [PBR support](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/docs/how-to/pbr.md) |
-| nsPort | Optional | 443 | The port used by NIC to communicate with NetScaler. You can use port 80 for HTTP. |
-| nsProtocol | Optional | HTTPS | The protocol used by NIC to communicate with NetScaler. You can also use HTTP on port 80. |
+| nsPort | Optional | 443 | The port used by NSIC to communicate with NetScaler. You can use port 80 for HTTP. |
+| nsProtocol | Optional | HTTPS | The protocol used by NSIC to communicate with NetScaler. You can also use HTTP on port 80. |
 | nsEnableLabel | Optional | True | Set to true for plotting Servicegraph. Ensure ``analyticsConfig` are set.  |
 | nitroReadTimeout | Optional | 20 | The nitro Read timeout in seconds, defaults to 20 |
-| logLevel | Optional | DEBUG | The loglevel to control the logs generated by NIC. The supported loglevels are: CRITICAL, ERROR, WARNING, INFO, DEBUG and TRACE. For more information, see [Logging](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/configure/log-levels.md).|
+| logLevel | Optional | DEBUG | The loglevel to control the logs generated by NSIC. The supported loglevels are: CRITICAL, ERROR, WARNING, INFO, DEBUG and TRACE. For more information, see [Logging](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/configure/log-levels.md).|
 | jsonLog | Optional | false | Set this argument to true if log messages are required in JSON format |   
 | nsConfigDnsRec | Optional | false | To enable/disable DNS address Record addition in ADC through Ingress |
 | nsSvcLbDnsRec | Optional | false | To enable/disable DNS address Record addition in ADC through Type Load Balancer Service |
 | nsDnsNameserver | Optional | N/A | To add DNS Nameservers in ADC |
 | optimizeEndpointBinding | Optional | false | To enable/disable binding of backend endpoints to servicegroup in a single API-call. Recommended when endpoints(pods) per application are large in number. Applicable only for NetScaler Version >=13.0-45.7  |
-| kubernetesURL | Optional | N/A | The kube-apiserver url that NIC uses to register the events. If the value is not specified, NIC uses the [internal kube-apiserver IP address](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod). |
-| clusterName | Optional | N/A | The unique identifier of the kubernetes cluster on which the NIC is deployed. Used in multi-cluster deployments. |
-| ingressClass | Optional | N/A | If multiple ingress load balancers are used to load balance different ingress resources. You can use this parameter to specify NIC to configure NetScaler associated with specific ingress class. For more information on Ingress class, see [Ingress class support](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/configure/ingress-classes/). For Kubernetes version >= 1.19, this will create an IngressClass object with the name specified here |
+| kubernetesURL | Optional | N/A | The kube-apiserver url that NSIC uses to register the events. If the value is not specified, NSIC uses the [internal kube-apiserver IP address](https://kubernetes.io/docs/tasks/access-application-cluster/access-cluster/#accessing-the-api-from-a-pod). |
+| clusterName | Optional | N/A | The unique identifier of the kubernetes cluster on which the NSIC is deployed. Used in multi-cluster deployments. |
+| ingressClass | Optional | N/A | If multiple ingress load balancers are used to load balance different ingress resources. You can use this parameter to specify NSIC to configure NetScaler associated with specific ingress class. For more information on Ingress class, see [Ingress class support](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/configure/ingress-classes/). For Kubernetes version >= 1.19, this will create an IngressClass object with the name specified here |
 | setAsDefaultIngressClass | Optional | False | Set the IngressClass object as default ingress class. New Ingresses without an "ingressClassName" field specified will be assigned the class specified in ingressClass. Applicable only for kubernetes versions >= 1.19 |
-| serviceClass | Optional | N/A | By Default ingress controller configures all TypeLB Service on the ADC. You can use this parameter to finetune this behavior by specifing NIC to only configure TypeLB Service with specific service class. For more information on Service class, see [Service class support](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/configure/service-classes/). |
+| serviceClass | Optional | N/A | By Default ingress controller configures all TypeLB Service on the ADC. You can use this parameter to finetune this behavior by specifing NSIC to only configure TypeLB Service with specific service class. For more information on Service class, see [Service class support](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/configure/service-classes/). |
 | nodeWatch | Optional | false | Use the argument if you want to automatically configure network route from the Ingress NetScaler VPX or MPX to the pods in the Kubernetes cluster. For more information, see [Automatically configure route on the NetScaler instance](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/network/staticrouting/#automatically-configure-route-on-the-citrix-adc-instance). |
-| nncPbr | Optional | False | Use this argument to inform NIC that NetScaler Node Controller(NNC) is configuring Policy Based Routes(PBR) on the NetScaler. For more information, see [NNC-PBR-SUPPORT](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/docs/how-to/pbr.md#configure-pbr-using-the-citrix-node-controller) |
+| nsncPbr | Optional | False | Use this argument to inform NSIC that NetScaler Node Controller(NSNC) is configuring Policy Based Routes(PBR) on the NetScaler. For more information, see [NSNC-PBR-SUPPORT](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/docs/how-to/pbr.md#configure-pbr-using-the-citrix-node-controller) |
 | defaultSSLCertSecret | Optional | N/A | Provide Kubernetes secret name that needs to be used as a default non-SNI certificate in NetScaler. |
 | podIPsforServiceGroupMembers | Optional | False |  By default NetScaler Ingress Controller will add NodeIP and NodePort as service group members while configuring type LoadBalancer Services and NodePort services. This variable if set to `True` will change the behaviour to add pod IP and Pod port instead of nodeIP and nodePort. Users can set this to `True` if there is a route between ADC and K8s clusters internal pods either using feature-node-watch argument or using NetScaler Node Controller. |
 | ignoreNodeExternalIP | Optional | False | While adding NodeIP, as Service group members for type LoadBalancer services or NodePort services, NetScaler Ingress Controller has a selection criteria whereas it choose Node ExternalIP if available and Node InternalIP, if Node ExternalIP is not present. But some users may want to use Node InternalIP over Node ExternalIP even if Node ExternalIP is present. If this variable is set to `True`, then it prioritises the Node Internal IP to be used for service group members even if node ExternalIP is present |
@@ -363,7 +363,7 @@ The following table lists the mandatory and optional parameters that you can con
 | namespaceLabels | Optional | N/A | You can use this parameter to provide the namespace labels selectors to be used by NetScaler Ingress Controller for routeSharding in OpenShift cluster. |
 | podAnnotations | Optional | N/A | Map of annotations to add to the pods. |
 | affinity | Optional | N/A | Affinity labels for pod assignment. |
-| exporter.required | Optional | false | Use the argument, if you want to run the [Exporter for NetScaler Stats](https://github.com/citrix/citrix-adc-metrics-exporter) along with NIC to pull metrics for the NetScaler VPX or MPX|
+| exporter.required | Optional | false | Use the argument, if you want to run the [Exporter for NetScaler Stats](https://github.com/citrix/citrix-adc-metrics-exporter) along with NSIC to pull metrics for the NetScaler VPX or MPX|
 | exporter.imageRegistry                   | Optional  |  `quay.io`               |  The Exporter for NetScaler Stats image registry             |  
 | exporter.imageRepository                 | Optional  |  `citrix/citrix-adc-metrics-exporter`              |   The Exporter for NetScaler Stats image repository             | 
 | exporter.imageTag                  | Optional  |  `1.4.9`               |  The Exporter for NetScaler Stats image tag            | 
@@ -373,11 +373,11 @@ The following table lists the mandatory and optional parameters that you can con
 | exporter.extraVolumeMounts  |  Optional |  [] |  Specify the Additional VolumeMounts to be mounted in Exporter container. Specify the volumes in `extraVolumes`  |
 | openshift | Optional | false | Set this argument if OpenShift environment is being used. |
 | disableOpenshiftRoutes | Optional | false | By default Openshift routes are processed in openshift environment, this variable can be used to disable Ingress controller processing the openshift routes. |
-| nodeSelector.key | Optional | N/A | Node label key to be used for nodeSelector option in NIC deployment. |
-| nodeSelector.value | Optional | N/A | Node label value to be used for nodeSelector option in NIC deployment. |
-| tolerations | Optional | N/A | Specify the tolerations for the NIC deployment. |
-| crds.install | Optional | False | Unset this argument if you don't want to install CustomResourceDefinitions which are consumed by NIC. |
-| crds.retainOnDelete | Optional | false | Set this argument if you want to retain CustomResourceDefinitions even after uninstalling NIC. This will avoid data-loss of Custom Resource Objects created before uninstallation. |
+| nodeSelector.key | Optional | N/A | Node label key to be used for nodeSelector option in NSIC deployment. |
+| nodeSelector.value | Optional | N/A | Node label value to be used for nodeSelector option in NSIC deployment. |
+| tolerations | Optional | N/A | Specify the tolerations for the NSIC deployment. |
+| crds.install | Optional | False | Unset this argument if you don't want to install CustomResourceDefinitions which are consumed by NSIC. |
+| crds.retainOnDelete | Optional | false | Set this argument if you want to retain CustomResourceDefinitions even after uninstalling NSIC. This will avoid data-loss of Custom Resource Objects created before uninstallation. |
 | analyticsConfig.required | Mandatory | false | Set this to true if you want to configure NetScaler to send metrics and transaction records to analytics . |
 | analyticsConfig.distributedTracing.enable | Optional | false | Set this value to true to enable OpenTracing in NetScaler. |
 | analyticsConfig.distributedTracing.samplingrate | Optional | 100 | Specifies the OpenTracing sampling rate in percentage. |
@@ -393,9 +393,9 @@ The following table lists the mandatory and optional parameters that you can con
 | nsLbHashAlgo.required | Optional | false | Set this value to set the LB consistent hashing Algorithm |
 | nsLbHashAlgo.hashFingers | Optional | 256 | Specifies the number of fingers to be used for hashing algorithm. Possible values are from 1 to 1024, Default value is 256 |
 | nsLbHashAlgo.hashAlgorithm | Optional | 'default' | Specifies the supported algorithm. Supported algorithms are "default", "jarh", "prac", Default value is 'default' |
-| extraVolumeMounts  |  Optional |  [] |  Specify the Additional VolumeMounts to be mounted in NIC container  |
+| extraVolumeMounts  |  Optional |  [] |  Specify the Additional VolumeMounts to be mounted in NSIC container  |
 | extraVolumes  |  Optional |  [] |  Specify the Additional Volumes for additional volumeMounts  |
-| rbacRole  | Optional |  false  |  To deploy NIC with RBAC Role set rbacRole=true; by default NIC gets installed with RBAC ClusterRole(rbacRole=false)) |
+| rbacRole  | Optional |  false  |  To deploy NSIC with RBAC Role set rbacRole=true; by default NSIC gets installed with RBAC ClusterRole(rbacRole=false)) |
 
 Alternatively, you can define a YAML file with the values for the parameters and pass the values while installing the chart.
 
@@ -427,12 +427,12 @@ If your deployment uses one single NetScaler Device to loadbalance between multi
    helm install my-release netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,nsSNIPS='[<NS_SNIP1>\, <NS_SNIP2>\, ...]'
    ```
 
-   [NetScaler Node Controller](https://github.com/citrix/citrix-k8s-node-controller) by default also adds static routes while creating the VXLAN tunnel. To use [Policy Based Routing(PBR)] (https://docs.citrix.com/en-us/citrix-adc/current-release/networking/ip-routing/configuring-policy-based-routes/configuring-policy-based-routes-pbrs-for-ipv4-traffic.html) to avoid static route clash, both NetScaler Node Controller and NetScaler Ingress Controller has to work in conjunction and has to be started with specific arguments. For more details refer [NNC-PBR-SUPPORT](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/docs/how-to/pbr.md#configure-pbr-using-the-citrix-node-controller).
+   [NetScaler Node Controller](https://github.com/citrix/citrix-k8s-node-controller) by default also adds static routes while creating the VXLAN tunnel. To use [Policy Based Routing(PBR)] (https://docs.citrix.com/en-us/citrix-adc/current-release/networking/ip-routing/configuring-policy-based-routes/configuring-policy-based-routes-pbrs-for-ipv4-traffic.html) to avoid static route clash, both NetScaler Node Controller and NetScaler Ingress Controller has to work in conjunction and has to be started with specific arguments. For more details refer [NSNC-PBR-SUPPORT](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/docs/how-to/pbr.md#configure-pbr-using-the-citrix-node-controller).
 
    Use the following command to inform NetScaler Ingress Controller that NetScaler Node Controller is configuring Policy Based Routes(PBR) on the NetScaler
 
    ```
-   helm install my-release netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,clusterName=<unique-cluster-identifier>,nncPbr=<True/False>
+   helm install my-release netscaler/netscaler-ingress-controller --set nsIP=<NSIP>,license.accept=yes,adcCredentialSecret=<Secret-for-ADC-credentials>,clusterName=<unique-cluster-identifier>,nsncPbr=<True/False>
    ```
 
 For configuring static routes manually on NetScaler VPX or MPX to reach the pods inside the cluster follow:

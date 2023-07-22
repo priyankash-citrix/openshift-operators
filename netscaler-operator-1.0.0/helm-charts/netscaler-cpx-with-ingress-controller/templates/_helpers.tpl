@@ -70,7 +70,7 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{- define "cpxconfigmap.fullname" -}}
-{{- $name := default .Chart.Name "cpx-nic-configmap" .Values.nameOverride -}}
+{{- $name := default .Chart.Name "cpx-nsic-configmap" .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
 {{- .Release.Name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}

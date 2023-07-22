@@ -15,19 +15,19 @@ We can configure NetScaler Observability Exporter helm chart to export transacti
    helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
 
    For streaming transactions to Kafka, timeseries to Prometheus and tracing to zipkin:
-     helm install noe netscaler/netscaler-observability-exporter --set kafka.enabled=true --set kafka.broker="X.X.X.X\,Y.Y.Y.Y" --set kafka.topic=HTTP --set kafka.dataFormat=AVRO --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
+     helm install nsoe netscaler/netscaler-observability-exporter --set kafka.enabled=true --set kafka.broker="X.X.X.X\,Y.Y.Y.Y" --set kafka.topic=HTTP --set kafka.dataFormat=AVRO --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
 
    For streaming transactions to Elasticsearch, timeseries to Prometheus and tracing to zipkin:
-     helm install noe netscaler/netscaler-observability-exporter --set elasticsearch.enabled=true --set elasticsearch.server=elasticsearch:9200 --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
+     helm install nsoe netscaler/netscaler-observability-exporter --set elasticsearch.enabled=true --set elasticsearch.server=elasticsearch:9200 --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
 
    For streaming transactions to Splunk, timeseries to Prometheus and tracing to zipkin:
-     helm install noe netscaler/netscaler-observability-exporter --set splunk.enabled=true --set splunk.server="splunkServer:port" --set splunk.authtoken="authtoken" --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
+     helm install nsoe netscaler/netscaler-observability-exporter --set splunk.enabled=true --set splunk.server="splunkServer:port" --set splunk.authtoken="authtoken" --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
 
    For streaming timeseries data to Prometheus:
-     helm install noe netscaler/netscaler-observability-exporter --set timeseries.enabled=true
+     helm install nsoe netscaler/netscaler-observability-exporter --set timeseries.enabled=true
 
    For streaming tracing data to Zipkin:
-     helm install noe netscaler/netscaler-observability-exporter --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
+     helm install nsoe netscaler/netscaler-observability-exporter --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
 
 ```
 
@@ -43,11 +43,11 @@ This Helm chart deploys NetScaler Observability Exporter in the [Kubernetes](htt
 
    - To enable Elasticsearch endpoint for transactions, set elasticsearch.enabled to true and server to the elasticsearch endpoint like `elasticsearch.default.svc.cluster.local:9200`. Default value for Elasticsearch endpoint is `elasticsearch:9200`.
 
-   - To enable Kafka endpoint for transactions, set coe.kafka.enabled to true, coe.kafka.broker to kafka broker IPs, kafka.topic, and kafka.dataFormat . Default value for kafka topic is `HTTP`. Default value for kafka.dataFormat is `AVRO`.
+   - To enable Kafka endpoint for transactions, set kafka.enabled to true, kafka.broker to kafka broker IPs, kafka.topic, and kafka.dataFormat . Default value for kafka topic is `HTTP`. Default value for kafka.dataFormat is `AVRO`.
 
    - To enable Timeseries data upload in prometheus format, set timeseries.enabled to true.  Currently Prometheus is the only timeseries endpoint supported.
 
-   - To enable Splunk endpoint for transactions, set splunk.enabled to true, splunk.server to Splunk server with port, splunk.authtoken to the token and splunk.indexprefix to the index prefix to upload the transactions. Default value for splunk.indexprefix is adc_noe .
+   - To enable Splunk endpoint for transactions, set splunk.enabled to true, splunk.server to Splunk server with port, splunk.authtoken to the token and splunk.indexprefix to the index prefix to upload the transactions. Default value for splunk.indexprefix is adc_nsoe .
 
 ## Installing the Chart
 Add the NetScaler Observability Exporter helm chart repository using command:
@@ -73,31 +73,35 @@ The following table lists the mandatory and optional parameters that you can con
 | Parameters | Mandatory or Optional | Default value | Description |
 | --------- | --------------------- | ------------- | ----------- |
 | license.accept | Mandatory | no | Set `yes` to accept the NetScaler end user license agreement. |
-| imageRegistry                   | Mandatory  |  `quay.io`               |  The NOE image registry             |  
-| imageRepository                 | Mandatory  |  `citrix/citrix-observability-exporter`              |   The NOE image repository             | 
-| imageTag                  | Mandatory  |  `1.6.001`               |  The NOE image tag            |
-| pullPolicy | Mandatory | IfNotPresent | The NOE image pull policy. |
-| nodePortRequired | Optional | false | Set true to create a nodeport NOE service. |
+| imageRegistry                   | Mandatory  |  `quay.io`               |  The NSOE image registry             |  
+| imageRepository                 | Mandatory  |  `citrix/citrix-observability-exporter`              |   The NSOE image repository             | 
+| imageTag                  | Mandatory  |  `1.6.001`               |  The NSOE image tag            |
+| pullPolicy | Mandatory | IfNotPresent | The NSOE image pull policy. |
+| nodePortRequired | Optional | false | Set true to create a nodeport NSOE service. |
 | headless | Optional | false | Set true to create Headless service. |
-| transaction.nodePort | Optional | 30001 | Specify the port used to expose NOE service outside cluster for transaction endpoint. |
+| transaction.nodePort | Optional | 30001 | Specify the port used to expose NSOE service outside cluster for transaction endpoint. |
 | ns_tracing.enabled | Optional | false | Set true to enable sending trace data to tracing server. |
 | ns_tracing.server | Optional | `zipkin:9411/api/v1/spans` | The tracing server api endpoint. |
 | elasticsearch.enabled | Optional | false | Set true to enable sending transaction data to elasticsearch server. |
 | elasticsearch.server | Optional | `elasticsearch:9200` | The Elasticsearch server api endpoint. |
-| elasticsearch.indexprefix | Optional | adc_noe | The elasticsearch index prefix. |
+| elasticsearch.indexprefix | Optional | adc_nsoe | The elasticsearch index prefix. |
 | splunk.enabled | Optional | false | Set true to enable sending transaction data to splunk server. |
 | splunk.authtoken | Optional |  | Set the authtoken for splunk. |
-| splunk.indexprefix | Optional | adc_noe | The splunk index prefix. |
+| splunk.indexprefix | Optional | adc_nsoe | The splunk index prefix. |
 | kafka.enabled | Optional | false | Set true to enable sending transaction data to kafka server. |
 | kafka.broker | Optional |  | The kafka broker IP details. |
 | kafka.topic | Optional | `HTTP` | The kafka topic details to upload data. |
 | kafka.dataFormat | Optional | `AVRO` | The format of the data exported to Kafka -- can be either JSON or AVRO, and defaults to AVRO
 | timeseries.enabled | Optional | false | Set true to enable sending timeseries data to prometheus. |
-| timeseries.nodePort | Optional | 30002 | Specify the port used to expose NOE service outside cluster for timeseries endpoint. |
+| timeseries.nodePort | Optional | 30002 | Specify the port used to expose NSOE service outside cluster for timeseries endpoint. |
 | json_trans_rate_limiting.enabled | Optional | false | Set true to enable rate-limiting of transactions for JSON-based endpoints: Splunk, ElasticSearch and Zipkin. |
 | json_trans_rate_limiting.limit | Optional | 100 | Specify the rate-limit: 100 means approximately 800 TPS. |
-| json_trans_rate_limiting.queuelimit | Optional | 1000 | The amount of transactional data that can pile up, before NOE starts shedding them. For Zipkin, 1000 is approximately 64 MB of data; For Splunk and ElasticSearch, this is approximately 32 MB of data. |
+| json_trans_rate_limiting.queuelimit | Optional | 1000 | The amount of transactional data that can pile up, before NSOE starts shedding them. For Zipkin, 1000 is approximately 64 MB of data; For Splunk and ElasticSearch, this is approximately 32 MB of data. |
 | json_trans_rate_limiting.window | Optional | 5 | The recalculation window in seconds-  the lower the window size ( must be greater than 0), the more effective will be the rate-limiting but it will have CPU overhead |
+| podAnnotations | Optional | N/A | Map of annotations to add to the pods. |
+| resources | Optional | N/A |	CPU/Memory resource requests/limits for NetScaler obervsbility exporter container. |
+| tolerations | Optional | N/A | Specify the tolerations for the NSOE deployment. |
+| affinity | Optional | N/A | Affinity labels for pod assignment. |
 
 Alternatively, you can define a YAML file with the values for the parameters and pass the values while installing the chart.
 
@@ -107,7 +111,7 @@ For example:
 ```
 
 > **Note:**
-> 1. It might be required to expose NOE using nodePort. In such case, nodePort service can also be created additionally using the set option 'nodePortRequired=true'
+> 1. It might be required to expose NSOE using nodePort. In such case, nodePort service can also be created additionally using the set option 'nodePortRequired=true'
 > 3. It might be required to stream only transactional data, without streaming timeseries or tracing data:
 >      - For disabling timeseries, set the option 'timeseries.enabled=false'
 >      - For disabling tracing, set the option 'ns_tracing.enabled=false' and do not set 'ns_tracing.server'

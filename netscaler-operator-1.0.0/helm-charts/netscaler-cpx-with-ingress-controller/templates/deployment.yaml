@@ -131,11 +131,11 @@ spec:
               name: cpx-volume
             - mountPath: /cpx/conf
               name: cpx-volume-conf
-{{- if .Values.nic.required }}
-        # Add nic as a sidecar
-        - name: nic
-          image: "{{ tpl .Values.nic.image . }}"
-          imagePullPolicy: {{ .Values.nic.pullPolicy }}
+{{- if .Values.nsic.required }}
+        # Add nsic as a sidecar
+        - name: nsic
+          image: "{{ tpl .Values.nsic.image . }}"
+          imagePullPolicy: {{ .Values.nsic.pullPolicy }}
           env:
           - name: "EULA"
             value: "{{ .Values.license.accept }}"
@@ -274,7 +274,7 @@ spec:
             - mountPath: /var/deviceinfo
               name: shared-data
           resources:
-            {{- toYaml .Values.nic.resources | nindent 12 }}
+            {{- toYaml .Values.nsic.resources | nindent 12 }}
 {{- if .Values.exporter.required }}
         - name: exporter
           image: "{{ tpl .Values.exporter.image . }}"

@@ -52,7 +52,7 @@ ipam: False
 disableAPIServerCertVerify: False
 logProxy:
 nodeWatch: false
-nncPbr: False
+nsncPbr: False
 nodeSelector:
   key:
   value:
@@ -121,8 +121,8 @@ crds:
   install: false
   retainOnDelete: false
 
-# Enable RBAC role (so called local role), by default NIC deployed with ClusterRole.
-# below variable to deploy NIC with RBAC role, only ingress service supported with this config
+# Enable RBAC role (so called local role), by default NSIC deployed with ClusterRole.
+# below variable to deploy NSIC with RBAC role, only ingress service supported with this config
 rbacRole: False
 
 # Config required to be done by NetScaler Ingress Controller for sending metrics to NetScaler Observability Exporter

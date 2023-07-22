@@ -88,8 +88,8 @@ spec:
   mgmtHttpsPort: 9443
   nameOverride: ""
   namespaceLabels: null
-  nic:
-    image: '{{ .Values.nic.imageRegistry }}/{{ .Values.nic.imageRepository }}:{{ .Values.nic.imageTag
+  nsic:
+    image: '{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag
       }}'
     imageRegistry: quay.io
     imageRepository: citrix/citrix-k8s-ingress-controller

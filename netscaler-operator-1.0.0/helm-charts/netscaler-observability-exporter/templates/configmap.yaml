@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: noe-config
+  name: nsoe-config
 data:
   lstreamd_default.conf: |
     {
@@ -60,7 +60,7 @@ data:
 {{- else if .Values.elasticsearch.enabled }}
           "ES": {
               "ServerUrl": {{ .Values.elasticsearch.server | default "elasticsearch:9200" | quote }},
-              "IndexPrefix": {{ .Values.elasticsearch.indexprefix | default "adc_noe" | quote }},
+              "IndexPrefix": {{ .Values.elasticsearch.indexprefix | default "adc_nsoe" | quote }},
               "IndexInterval": "daily",
               "RecordType": {
                   "HTTP": "all",
@@ -86,7 +86,7 @@ data:
           "SPLUNK": {
               "ServerUrl": {{ .Values.splunk.server | default "" | quote }},
               "AuthToken": {{ .Values.splunk.authtoken | default "" | quote }},
-              "Index": {{ .Values.splunk.indexprefix | default "adc_noe" | quote }},
+              "Index": {{ .Values.splunk.indexprefix | default "adc_nsoe" | quote }},
               "RecordType": {
                   "HTTP": "all",
                   "TCP": "all",

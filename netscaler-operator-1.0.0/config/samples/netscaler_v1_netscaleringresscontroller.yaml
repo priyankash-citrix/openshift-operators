@@ -67,7 +67,7 @@ spec:
   nameOverride: ""
   namespaceLabels: null
   nitroReadTimeout: null
-  nncPbr: false
+  nsncPbr: false
   nodeSelector:
     key: null
     value: null
