@@ -9,7 +9,7 @@ metadata:
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions: {}
-  description: ADDDD
+  description: This is an operator to install Cloud Native portfolio provided by NetScaler
   displayName: NetScaler Operator
   icon:
   - base64data: ""
@@ -19,11 +19,11 @@ spec:
       deployments: null
     strategy: ""
   installModes:
-  - supported: false
+  - supported: true
     type: OwnNamespace
-  - supported: false
+  - supported: true
     type: SingleNamespace
-  - supported: false
+  - supported: true
     type: MultiNamespace
   - supported: true
     type: AllNamespaces
@@ -39,12 +39,12 @@ spec:
   - Metrices
   links:
   - name: Netscaler Operator
-    url: https://netscaler-operator.domain
+    url: https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/deploy/deploy-ns-operator.md 
   maintainers:
   - email: priyanka.sharma@cloud.com
     name: Priyanka Sharma
-  maturity: alpha
+  maturity: stable
   provider:
     name: NetScaler
-    url: ADDDDD
-  version: 0.0.0
+    url: https://www.netscaler.com/
+  version: 1.1.0

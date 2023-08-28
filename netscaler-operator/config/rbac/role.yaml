@@ -38,6 +38,8 @@ rules:
   resources:
   - "clusterrolebindings"
   - "clusterroles"
+  - "roles"
+  - "rolebindings"
 - verbs:
   - "*"
   apiGroups:
@@ -45,6 +47,12 @@ rules:
   resources:
   - "deployments"
   - "daemonsets"
+- apiGroups:
+  - "apps.openshift.io"
+  resources:
+  - "deploymentconfigs"
+  verbs:
+  - '*'
 - verbs:
   - "*"
   apiGroups:

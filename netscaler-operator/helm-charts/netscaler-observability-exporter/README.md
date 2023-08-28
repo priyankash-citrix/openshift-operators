@@ -43,7 +43,7 @@ This Helm chart deploys NetScaler Observability Exporter in the [Kubernetes](htt
 
    - To enable Elasticsearch endpoint for transactions, set elasticsearch.enabled to true and server to the elasticsearch endpoint like `elasticsearch.default.svc.cluster.local:9200`. Default value for Elasticsearch endpoint is `elasticsearch:9200`.
 
-   - To enable Kafka endpoint for transactions, set kafka.enabled to true, kafka.broker to kafka broker IPs, kafka.topic, and kafka.dataFormat . Default value for kafka topic is `HTTP`. Default value for kafka.dataFormat is `AVRO`.
+   - To enable Kafka endpoint for transactions, set coe.kafka.enabled to true, coe.kafka.broker to kafka broker IPs, kafka.topic, and kafka.dataFormat . Default value for kafka topic is `HTTP`. Default value for kafka.dataFormat is `AVRO`.
 
    - To enable Timeseries data upload in prometheus format, set timeseries.enabled to true.  Currently Prometheus is the only timeseries endpoint supported.
 
@@ -75,7 +75,7 @@ The following table lists the mandatory and optional parameters that you can con
 | license.accept | Mandatory | no | Set `yes` to accept the NetScaler end user license agreement. |
 | imageRegistry                   | Mandatory  |  `quay.io`               |  The NSOE image registry             |  
 | imageRepository                 | Mandatory  |  `citrix/citrix-observability-exporter`              |   The NSOE image repository             | 
-| imageTag                  | Mandatory  |  `1.6.001`               |  The NSOE image tag            |
+| imageTag                  | Mandatory  |  `1.7.001`               |  The NSOE image tag            |
 | pullPolicy | Mandatory | IfNotPresent | The NSOE image pull policy. |
 | nodePortRequired | Optional | false | Set true to create a nodeport NSOE service. |
 | headless | Optional | false | Set true to create Headless service. |
@@ -91,15 +91,15 @@ The following table lists the mandatory and optional parameters that you can con
 | kafka.enabled | Optional | false | Set true to enable sending transaction data to kafka server. |
 | kafka.broker | Optional |  | The kafka broker IP details. |
 | kafka.topic | Optional | `HTTP` | The kafka topic details to upload data. |
-| kafka.dataFormat | Optional | `AVRO` | The format of the data exported to Kafka -- can be either JSON or AVRO, and defaults to AVRO
+| kafka.dataFormat | Optional | `AVRO` | The format of the data exported to Kafka -- can be either JSON or AVRO, and defaults to AVRO |
 | timeseries.enabled | Optional | false | Set true to enable sending timeseries data to prometheus. |
 | timeseries.nodePort | Optional | 30002 | Specify the port used to expose NSOE service outside cluster for timeseries endpoint. |
 | json_trans_rate_limiting.enabled | Optional | false | Set true to enable rate-limiting of transactions for JSON-based endpoints: Splunk, ElasticSearch and Zipkin. |
 | json_trans_rate_limiting.limit | Optional | 100 | Specify the rate-limit: 100 means approximately 800 TPS. |
 | json_trans_rate_limiting.queuelimit | Optional | 1000 | The amount of transactional data that can pile up, before NSOE starts shedding them. For Zipkin, 1000 is approximately 64 MB of data; For Splunk and ElasticSearch, this is approximately 32 MB of data. |
-| json_trans_rate_limiting.window | Optional | 5 | The recalculation window in seconds-  the lower the window size ( must be greater than 0), the more effective will be the rate-limiting but it will have CPU overhead |
+| json_trans_rate_limiting.window | Optional | 5 | The recalculation window in seconds-the lower the window size ( must be greater than 0), the more effective will be the rate-limiting but it will have CPU overhead |
 | podAnnotations | Optional | N/A | Map of annotations to add to the pods. |
-| resources | Optional | N/A |	CPU/Memory resource requests/limits for NetScaler obervsbility exporter container. |
+| resources | Optional | N/A | CPU/Memory resource requests/limits for NetScaler observability exporter container. |
 | tolerations | Optional | N/A | Specify the tolerations for the NSOE deployment. |
 | affinity | Optional | N/A | Affinity labels for pod assignment. |
 

@@ -450,12 +450,12 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | license.accept | Mandatory | no | Set `yes` to accept the NetScaler ingress controller end user license agreement. |
 | imageRegistry                   | Mandatory  |  `quay.io`               |  The NetScaler CPX image registry             |  
 | imageRepository                 | Mandatory  |  `citrix/citrix-k8s-cpx-ingress`              |   The NetScaler CPX image repository             | 
-| imageTag                  | Mandatory  |  `13.1-30.52`               |   The NetScaler CPX image tag            | 
+| imageTag                  | Mandatory  |  `13.1-49.13`               |   The NetScaler CPX image tag            | 
 | pullPolicy | Mandatory | IfNotPresent | The NetScaler CPX image pull policy. |
 | daemonSet | Optional | False | Set this to true if NetScaler CPX needs to be deployed as DaemonSet. |
 | nsic.imageRegistry                   | Mandatory  |  `quay.io`               |  The NetScaler ingress controller image registry             |  
 | nsic.imageRepository                 | Mandatory  |  `citrix/citrix-k8s-ingress-controller`              |   The NetScaler ingress controller image repository             | 
-| nsic.imageTag                  | Mandatory  |  `1.33.4`               |   The NetScaler ingress controller image tag            | 
+| nsic.imageTag                  | Mandatory  |  `1.34.16`               |   The NetScaler ingress controller image tag            | 
 | nsic.pullPolicy | Mandatory | IfNotPresent | The NetScaler ingress controller image pull policy. |
 | nsic.required | Mandatory | true | NSIC to be run as sidecar with NetScaler CPX |
 | nsic.resources | Optional | {} |	CPU/Memory resource requests/limits for NetScaler Ingress Controller container |
@@ -527,6 +527,7 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | exporter.pullPolicy | Optional | IfNotPresent | The Exporter for NetScaler Stats image pull policy. |
 | exporter.resources | Optional | {} |	CPU/Memory resource requests/limits for Metrics exporter container |
 | exporter.ports.containerPort | Optional | 8888 | The Exporter for NetScaler Stats container port. |
+| exporter.serviceMonitorExtraLabels | Optional | N/A | Extra labels for service monitor whem Citrix-adc-metrics-exporter is enabled. |
 | analyticsConfig.required | Mandatory | false | Set this to true if you want to configure NetScaler to send metrics and transaction records to analytics service. |
 | analyticsConfig.distributedTracing.enable | Optional | false | Set this value to true to enable OpenTracing in NetScaler. |
 | analyticsConfig.distributedTracing.samplingrate | Optional | 100 | Specifies the OpenTracing sampling rate in percentage. |

@@ -6,6 +6,7 @@
   overrideValues:
     image: $RELATED_IMAGE_NSIC
     exporter.image: $RELATED_IMAGE_EXPORTER
+    openshift: $OPENSHIFT
 - group: netscaler.com
   version: v1
   kind: NetscalerCpxWithIngressController
@@ -14,6 +15,7 @@
     image: $RELATED_IMAGE_CPX
     nsic.image: $RELATED_IMAGE_NSIC
     exporter.image: $RELATED_IMAGE_EXPORTER
+    openshift: $OPENSHIFT
 - group: netscaler.com
   version: v1
   kind: NetscalerObservabilityExporter

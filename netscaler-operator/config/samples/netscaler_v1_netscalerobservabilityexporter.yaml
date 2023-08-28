@@ -1,44 +1,49 @@
 apiVersion: netscaler.com/v1
 kind: NetscalerObservabilityExporter
 metadata:
-  name: netscalerobservabilityexporter-sample
+  name: nsoe
 spec:
   # Default values copied from <project_dir>/helm-charts/netscaler-observability-exporter/values.yaml
+  affinity: {}
   elasticsearch:
     enabled: false
-    indexprefix: null
-    server: null
+    indexprefix: ""
+    server: ""
   headless: false
   image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
     }}'
   imageRegistry: quay.io
   imageRepository: citrix/citrix-observability-exporter
-  imageTag: 1.5.001
+  imageTag: 1.7.001
   json_trans_rate_limiting:
     enabled: false
     limit: 100
     queuelimit: 1000
     window: 5
   kafka:
-    broker: null
+    broker: ""
+    dataFormat: AVRO
     enabled: false
-    topic: null
+    topic: "HTTP"
   license:
     accept: false
   nodePortRequired: false
   ns_tracing:
     enabled: false
     server: zipkin:9411/api/v1/spans
+  podAnnotations: {}
   pullPolicy: IfNotPresent
   replicas: 1
+  resources: {}
   splunk:
-    authtoken: null
+    authtoken: ""
     enabled: false
-    indexprefix: null
-    server: null
+    indexprefix: ""
+    server: ""
   timeseries:
     enabled: false
     nodePort: 30002
+  tolerations: []
   transaction:
     nodePort: 30001
   

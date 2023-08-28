@@ -1,18 +1,18 @@
 apiVersion: netscaler.com/v1
 kind: NetscalerIngressController
 metadata:
-  name: netscaleringresscontroller-sample
+  name: nsic
 spec:
   # Default values copied from <project_dir>/helm-charts/netscaler-ingress-controller/values.yaml
-  adcCredentialSecret: null
+  adcCredentialSecret: ""
   affinity: {}
   analyticsConfig:
     distributedTracing:
       enable: false
       samplingrate: 100
     endpoint:
-      server: null
-      service: null
+      server: ""
+      service: ""
     required: false
     timeseries:
       auditlogs:
@@ -26,14 +26,14 @@ spec:
     transactions:
       enable: false
       port: 30001
-  clusterName: null
+  clusterName: ""
   crds:
     install: false
     retainOnDelete: false
-  defaultSSLCertSecret: null
+  defaultSSLCertSecret: ""
   disableAPIServerCertVerify: false
-  disableOpenshiftRoutes: null
-  entityPrefix: null
+  disableOpenshiftRoutes: false
+  entityPrefix: ""
   exporter:
     extraVolumeMounts: []
     image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
@@ -46,6 +46,7 @@ spec:
     pullPolicy: IfNotPresent
     required: false
     resources: {}
+    serviceMonitorExtraLabels: {}
   extraVolumeMounts: []
   extraVolumes: []
   fullnameOverride: ""
@@ -55,26 +56,25 @@ spec:
   imagePullSecrets: []
   imageRegistry: quay.io
   imageRepository: citrix/citrix-k8s-ingress-controller
-  imageTag: 1.33.4
-  ingressClass: null
+  imageTag: 1.34.16
+  ingressClass: []
   ipam: false
   jsonLog: false
-  kubernetesURL: null
+  kubernetesURL: ""
   license:
-    accept: false
+    accept: "no"
   logLevel: INFO
-  logProxy: null
+  logProxy: ""
   nameOverride: ""
-  namespaceLabels: null
-  nitroReadTimeout: null
-  nsncPbr: false
+  namespaceLabels: ""
+  nitroReadTimeout: 20
   nodeSelector:
-    key: null
-    value: null
+    key: ""
+    value: ""
   nodeWatch: false
-  nsConfigDnsRec: null
+  nsConfigDnsRec: false
   nsCookieVersion: "0"
-  nsDnsNameserver: null
+  nsDnsNameserver: ""
   nsEnableLabel: true
   nsHTTP2ServerSide: "OFF"
   nsIP: x.x.x.x
@@ -84,11 +84,12 @@ spec:
     required: false
   nsPort: 443
   nsProtocol: HTTPS
-  nsSNIPS: null
-  nsSvcLbDnsRec: null
-  nsVIP: null
-  openshift: false
-  optimizeEndpointBinding: null
+  nsSNIPS: []
+  nsSvcLbDnsRec: false
+  nsVIP: ""
+  nsncPbr: false
+  openshift: true
+  optimizeEndpointBinding: false
   podAnnotations: {}
   podIPsforServiceGroupMembers: false
   profileHttpFrontend: {}
@@ -97,14 +98,14 @@ spec:
   pullPolicy: IfNotPresent
   rbacRole: false
   resources: {}
-  routeLabels: null
+  routeLabels: ""
   secretStore:
     enabled: false
     password: {}
     username: {}
   serviceAccount:
     create: true
-  serviceClass: null
+  serviceClass: []
   setAsDefaultIngressClass: false
   tolerations: []
   updateIngressStatus: true
