@@ -373,6 +373,7 @@ metadata:
     containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:9baf4351b132b78287e3bef89d6b3d2ac9db508d5e89a8c14482ca2979bc5c0f
     support: NetScaler
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
+    replaces: netscaler-operator.v1.0.1
     createdAt: "2023-07-31T10:45:00Z"
     operators.operatorframework.io/builder: operator-sdk-v1.30.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
@@ -743,5 +744,4 @@ spec:
     image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:9baf4351b132b78287e3bef89d6b3d2ac9db508d5e89a8c14482ca2979bc5c0f
   - name: ose-kube-rbac-proxy
     image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:43dc8a63868bfb4b68901fa3edb492b966da4b3093e049eb595205dd9f4f1c7c
-  replaces: netscaler-operator.v1.0.1
   version: 1.1.0
