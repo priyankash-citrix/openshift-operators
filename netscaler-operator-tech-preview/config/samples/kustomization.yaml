@@ -1,0 +1,6 @@
+## Append samples of your project ##
+resources:
+- netscaler_v1_netscaleringresscontroller.yaml
+- netscaler_v1_netscalercpxwithingresscontroller.yaml
+- netscaler_v1_netscalerobservabilityexporter.yaml
+#+kubebuilder:scaffold:manifestskustomizesamples

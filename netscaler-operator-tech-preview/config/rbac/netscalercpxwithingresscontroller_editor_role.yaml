@@ -1,0 +1,31 @@
+# permissions for end users to edit netscalercpxwithingresscontrollers.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: netscalercpxwithingresscontroller-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: netscaler-operator
+    app.kubernetes.io/part-of: netscaler-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: netscalercpxwithingresscontroller-editor-role
+rules:
+- apiGroups:
+  - netscaler.com
+  resources:
+  - netscalercpxwithingresscontrollers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - netscaler.com
+  resources:
+  - netscalercpxwithingresscontrollers/status
+  verbs:
+  - get

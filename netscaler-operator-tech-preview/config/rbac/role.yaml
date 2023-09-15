@@ -1,0 +1,141 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+##
+## Base operator rules
+##
+# We need to get namespaces so the operator can read namespaces to ensure they exist
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  verbs:
+  - get
+# We need to manage Helm release secrets
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - "*"
+# We need to create events on CRs about things happening during reconciliation
+- apiGroups:
+  - ""
+  resources:
+  - events
+  verbs:
+  - create
+
+##
+## Additonal rules for Operator
+##
+- verbs:
+  - "*"
+  apiGroups:
+  - "rbac.authorization.k8s.io"
+  resources:
+  - "clusterrolebindings"
+  - "clusterroles"
+  - "roles"
+  - "rolebindings"
+- verbs:
+  - "*"
+  apiGroups:
+  - "apps"
+  resources:
+  - "deployments"
+  - "daemonsets"
+- apiGroups:
+  - "apps.openshift.io"
+  resources:
+  - "deploymentconfigs"
+  verbs:
+  - '*'
+- verbs:
+  - "*"
+  apiGroups:
+  - ""
+  resources:
+  - "pods"
+  - "services"
+  - "services/finalizers"
+  - "endpoints"
+  - "persistentvolumeclaims"
+  - "configmaps"
+  - "serviceaccounts"
+- apiGroups:
+  - "apiextensions.k8s.io"
+  resources:
+  - "customresourcedefinitions"
+  verbs:
+  - '*'
+- apiGroups:
+  - "networking.k8s.io"
+  resources:
+  - "ingressclasses"
+  verbs:
+  - '*'
+- apiGroups:
+  - "monitoring.coreos.com"
+  resources:
+  - "servicemonitors"
+  verbs:
+  - "*"
+
+##
+## Rules for netscaler.com/v1, Kind: NetscalerIngressController
+##
+- apiGroups:
+  - netscaler.com
+  resources:
+  - netscaleringresscontrollers
+  - netscaleringresscontrollers/status
+  - netscaleringresscontrollers/finalizers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+
+##
+## Rules for netscaler.com/v1, Kind: NetscalerCpxWithIngressController
+##
+- apiGroups:
+  - netscaler.com
+  resources:
+  - netscalercpxwithingresscontrollers
+  - netscalercpxwithingresscontrollers/status
+  - netscalercpxwithingresscontrollers/finalizers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+
+##
+## Rules for netscaler.com/v1, Kind: NetscalerObservabilityExporter
+##
+- apiGroups:
+  - netscaler.com
+  resources:
+  - netscalerobservabilityexporters
+  - netscalerobservabilityexporters/status
+  - netscalerobservabilityexporters/finalizers
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+
+#+kubebuilder:scaffold:rules

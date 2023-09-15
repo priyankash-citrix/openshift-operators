@@ -1,0 +1,148 @@
+apiVersion: netscaler.com/v1
+kind: NetscalerCpxWithIngressController
+metadata:
+  name: nscpx
+spec:
+  # Default values copied from <project_dir>/helm-charts/netscaler-cpx-with-ingress-controller/values.yaml
+  ADMSettings:
+    ADMIP: ""
+    analyticsServerPort: 5557
+    bandWidth: 1000
+    bandWidthLicense: false
+    cpxCores: 1
+    licenseEdition: PLATINUM
+    licenseServerIP: ""
+    licenseServerPort: 27000
+    loginSecret: ""
+    vCPULicense: false
+  affinity: {}
+  analyticsConfig:
+    distributedTracing:
+      enable: false
+      samplingrate: 100
+    endpoint:
+      server: ""
+      service: ""
+    required: false
+    timeseries:
+      auditlogs:
+        enable: false
+      events:
+        enable: false
+      metrics:
+        enable: false
+        mode: avro
+      port: 5563
+    transactions:
+      enable: false
+      port: 5557
+  bgpPort: 179
+  bgpSettings:
+    bgpConfig:
+    - bgpRouter:
+        localAS: 100
+        neighbor:
+        - ASOriginationInterval: 10
+          address: ""
+          advertisementInterval: 10
+          remoteAS: 100
+    required: false
+  cpxBgpRouter: false
+  cpxLicenseAggregator: ""
+  crds:
+    install: false
+    retainOnDelete: false
+  daemonSet: false
+  defaultSSLCertSecret: ""
+  disableAPIServerCertVerify: false
+  disableOpenshiftRoutes: false
+  entityPrefix: ""
+  exporter:
+    image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
+      }}:{{ .Values.exporter.imageTag }}'
+    imageRegistry: quay.io
+    imageRepository: citrix/citrix-adc-metrics-exporter
+    imageTag: 1.4.9
+    ports:
+      containerPort: 8888
+    pullPolicy: IfNotPresent
+    required: false
+    resources: {}
+  fullnameOverride: ""
+  image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
+    }}'
+  imagePullSecrets: []
+  imageRegistry: quay.io
+  imageRepository: citrix/citrix-k8s-cpx-ingress
+  imageTag: 13.1-49.13
+  ingressClass: []
+  ingressIP: ""
+  ipam: false
+  jsonLog: false
+  kubernetesURL: ""
+  license:
+    accept: "no"
+  logLevel: INFO
+  logProxy: ""
+  mgmtHttpPort: 9080
+  mgmtHttpsPort: 9443
+  nameOverride: ""
+  namespaceLabels: ""
+  nitroReadTimeout: ""
+  nodeSelector:
+    key: ""
+    value: ""
+  nsConfigDnsRec: false
+  nsCookieVersion: "0"
+  nsDnsNameserver: ""
+  nsGateway: 192.168.1.1
+  nsHTTP2ServerSide: "OFF"
+  nsIP: 192.168.1.2
+  nsLbHashAlgo:
+    hashAlgorithm: DEFAULT
+    hashFingers: 256
+    required: false
+  nsProtocol: http
+  nsSvcLbDnsRec: false
+  nsic:
+    image: '{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag
+      }}'
+    imageRegistry: quay.io
+    imageRepository: citrix/citrix-k8s-ingress-controller
+    imageTag: 1.34.16
+    pullPolicy: IfNotPresent
+    required: true
+    resources: {}
+  openshift: true
+  optimizeEndpointBinding: false
+  podAnnotations: {}
+  profileHttpFrontend: {}
+  profileSslFrontend: {}
+  profileTcpFrontend: {}
+  pullPolicy: IfNotPresent
+  rbacRole: false
+  replicaCount: 1
+  resources: {}
+  routeLabels: ""
+  serviceAccount:
+    create: true
+  serviceAnnotations: {}
+  serviceMonitorExtraLabels: {}
+  servicePorts: []
+  serviceSpec:
+    externalTrafficPolicy: Cluster
+    loadBalancerIP: ""
+    loadBalancerSourceRanges: []
+  serviceType:
+    loadBalancer:
+      enabled: false
+    nodePort:
+      enabled: false
+      httpPort: ""
+      httpsPort: ""
+  setAsDefaultIngressClass: false
+  sslCertManagedByAWS: false
+  tolerations: []
+  updateIngressStatus: false
+  
+  
