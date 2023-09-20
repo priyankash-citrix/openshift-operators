@@ -442,6 +442,29 @@ Here tolerations[0].key, tolerations[0].value and tolerations[0].effect are the 
 Effect represents what should happen to the pod if the pod don't have any matching toleration. It can have values `NoSchedule`, `NoExecute` and `PreferNoSchedule`.
 Operator represents the operation to be used for key and value comparison between taint and tolerations. It can have values `Exists` and `Equal`. The default value for operator is `Equal`.
 
+### Resource Quotas
+There are various use-cases when resource quotas are configured on the Kubernetes cluster. If quota is enabled in a namespace for compute resources like cpu and memory, users must specify requests or limits for those values; otherwise, the quota system may reject pod creation. The resource quotas for the CIC and CPX containers can be provided explicitly in the helm chart.
+
+To set requests and limits for the NSIC container, use the variables `nsic.resources.requests` and `nsic.resources.limits` respectively.
+Similarly, to set requests and limits for the CPX container, use the variable `resources.requests` and `resources.limits` respectively.
+
+Below is an example of the helm command that configures
+```
+A) For CIC container:
+  CPU request for 500milli CPUs
+  CPU limit at 1000m
+  Memory request for 512M
+  Memory limit at 1000M
+B) For CPX container:
+  CPU request for 250milli CPUs
+  CPU limit at 500m
+  Memory request for 256M
+  Memory limit at 512M
+```
+```
+helm install my-release netscaler/netscaler-cpx-with-ingress-controller --set license.accept=yes --set nsic.resources.requests.cpu=500m,nsic.resources.requests.memory=512Mi,nsic.resources.limits.cpu=1000m,nsic.resources.limits.memory=1000Mi --set resources.limits.cpu=500m,resources.limits.memory=512Mi,resources.requests.cpu=250m,resources.requests.memory=256Mi
+```
+
 ## Configuration
 The following table lists the configurable parameters of the NetScaler CPX with NetScaler ingress controller as side car chart and their default values.
 
@@ -455,7 +478,7 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | daemonSet | Optional | False | Set this to true if NetScaler CPX needs to be deployed as DaemonSet. |
 | nsic.imageRegistry                   | Mandatory  |  `quay.io`               |  The NetScaler ingress controller image registry             |  
 | nsic.imageRepository                 | Mandatory  |  `citrix/citrix-k8s-ingress-controller`              |   The NetScaler ingress controller image repository             | 
-| nsic.imageTag                  | Mandatory  |  `1.34.16`               |   The NetScaler ingress controller image tag            | 
+| nsic.imageTag                  | Mandatory  |  `1.35.6`               |   The NetScaler ingress controller image tag            | 
 | nsic.pullPolicy | Mandatory | IfNotPresent | The NetScaler ingress controller image pull policy. |
 | nsic.required | Mandatory | true | NSIC to be run as sidecar with NetScaler CPX |
 | nsic.resources | Optional | {} |	CPU/Memory resource requests/limits for NetScaler Ingress Controller container |
@@ -472,6 +495,7 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | nsDnsNameserver | Optional | N/A | To add DNS Nameservers in ADC |
 | optimizeEndpointBinding | Optional | false | To enable/disable binding of backend endpoints to servicegroup in a single API-call. Recommended when endpoints(pods) per application are large in number. Applicable only for NetScaler Version >=13.0-45.7  |
 | defaultSSLCertSecret | Optional | N/A | Provide Kubernetes secret name that needs to be used as a default non-SNI certificate in NetScaler. |
+| defaultSSLSNICertSecret | Optional | N/A | Provide Kubernetes secret name that needs to be used as a default SNI certificate in NetScaler. |
 | nsHTTP2ServerSide | Optional | OFF | Set this argument to `ON` for enabling HTTP2 for NetScaler service group configurations. |
 | cpxLicenseAggregator | Optional | N/A | IP/FQDN of the CPX License Aggregator if it is being used to license the CPX. |
 | nsCookieVersion | Optional | 0 | Specify the persistence cookie version (0 or 1). |
@@ -519,7 +543,6 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | ADMSettings.vCPULicense | Optional | N/A | Set to true if you want to use vCPU based licensing for NetScaler CPX. |
 | ADMSettings.licenseEdition| Optional | PLATINUM | License edition that can be Standard, Platinum and Enterprise . By default, Platinum is selected.|
 | ADMSettings.cpxCores | Optional | 1 | Desired number of vCPU to be set for NetScaler CPX. |
-| ADMSettings.analyticsServerPort | Optional | 5557 | Port used for Analytics by ADM. Required to plot ServiceGraph. |
 | exporter.required | Optional | false | Use the argument if you want to run the [Exporter for NetScaler Stats](https://github.com/citrix/citrix-adc-metrics-exporter) along with NetScaler ingress controller to pull metrics for the NetScaler CPX|
 | exporter.imageRegistry                   | Optional  |  `quay.io`               |  The Exporter for NetScaler Stats image registry             |  
 | exporter.imageRepository                 | Optional  |  `citrix/citrix-adc-metrics-exporter`              |   The Exporter for NetScaler Stats image repository             | 
@@ -527,8 +550,8 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | exporter.pullPolicy | Optional | IfNotPresent | The Exporter for NetScaler Stats image pull policy. |
 | exporter.resources | Optional | {} |	CPU/Memory resource requests/limits for Metrics exporter container |
 | exporter.ports.containerPort | Optional | 8888 | The Exporter for NetScaler Stats container port. |
-| exporter.serviceMonitorExtraLabels | Optional | N/A | Extra labels for service monitor whem Citrix-adc-metrics-exporter is enabled. |
-| analyticsConfig.required | Mandatory | false | Set this to true if you want to configure NetScaler to send metrics and transaction records to analytics service. |
+| exporter.serviceMonitorExtraLabels | Optional |  | Extra labels for service monitor whem Citrix-adc-metrics-exporter is enabled. |
+ analyticsConfig.required | Mandatory | false | Set this to true if you want to configure NetScaler to send metrics and transaction records to analytics service. |
 | analyticsConfig.distributedTracing.enable | Optional | false | Set this value to true to enable OpenTracing in NetScaler. |
 | analyticsConfig.distributedTracing.samplingrate | Optional | 100 | Specifies the OpenTracing sampling rate in percentage. |
 | analyticsConfig.endpoint.server | Optional | N/A | Set this value as the IP address or DNS address of the  analytics server. |
@@ -547,6 +570,8 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | nsLbHashAlgo.required | Optional | false | Set this value to set the LB consistent hashing Algorithm |
 | nsLbHashAlgo.hashFingers | Optional |256 | Specifies the number of fingers to be used for hashing algorithm. Possible values are from 1 to 1024, Default value is 256 |
 | nsLbHashAlgo.hashAlgorithm | Optional | 'default' | Specifies the supported algorithm. Supported algorithms are "default", "jarh", "prac", Default value is 'default' |
+| cpxCommands| Optional | N/A | This argument accepts user-provided NetScaler bootup config that is applied as soon as the CPX is instantiated. Please note that this is not a dynamic config, and any subsequent changes to the configmap don't reflect in the CPX config unless the pod is restarted. For more info, please refer the [documentation](https://docs.netscaler.com/en-us/citrix-adc-cpx/current-release/configure-cpx-kubernetes-using-configmaps.html).  |
+| cpxShellCommands| Optional | N/A | This argument accepts user-provided bootup config that is applied as soon as the CPX is instantiated. Please note that this is not a dynamic config, and any subsequent changes to the configmap don't reflect in the CPX config unless the pod is restarted. For more info, please refer the [documentation](https://docs.netscaler.com/en-us/citrix-adc-cpx/current-release/configure-cpx-kubernetes-using-configmaps.html). |
 
 > **Note:**
 >

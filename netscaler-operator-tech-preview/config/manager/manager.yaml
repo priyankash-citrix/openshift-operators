@@ -82,12 +82,16 @@ spec:
             port: 8081
           initialDelaySeconds: 15
           periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 5
         readinessProbe:
           httpGet:
             path: /readyz
             port: 8081
           initialDelaySeconds: 5
           periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
         # TODO(user): Configure the resources accordingly based on the project requirements.
         # More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
         resources:
@@ -101,7 +105,7 @@ spec:
           - name: RELATED_IMAGE_CPX
             value: quay.io/citrix/citrix-k8s-cpx-ingress@sha256:f4a99330dbacf06d8614df7ce35afca7c70eb47448f64c34d4b055cf5befe810
           - name: RELATED_IMAGE_NSIC
-            value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:a628f1e1963cd931afdba9a5ffc847484f8177f4039f08bb54c713158e96d908
+            value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:f2c978ef97d23353165b119e738ad54bf25bdff1d09fe455929ca7fddccc0d38
           - name: RELATED_IMAGE_EXPORTER
             value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
           - name: RELATED_IMAGE_NSOE

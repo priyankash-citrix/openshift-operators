@@ -31,6 +31,7 @@ spec:
     install: false
     retainOnDelete: false
   defaultSSLCertSecret: ""
+  defaultSSLSNICertSecret: ""
   disableAPIServerCertVerify: false
   disableOpenshiftRoutes: false
   entityPrefix: ""
@@ -56,7 +57,7 @@ spec:
   imagePullSecrets: []
   imageRegistry: quay.io
   imageRepository: citrix/citrix-k8s-ingress-controller
-  imageTag: 1.34.16
+  imageTag: pocsni
   ingressClass: []
   ipam: false
   jsonLog: false
@@ -77,7 +78,7 @@ spec:
   nsDnsNameserver: ""
   nsEnableLabel: true
   nsHTTP2ServerSide: "OFF"
-  nsIP: x.x.x.x
+  nsIP: ""
   nsLbHashAlgo:
     hashAlgorithm: DEFAULT
     hashFingers: 256
@@ -97,7 +98,11 @@ spec:
   profileTcpFrontend: {}
   pullPolicy: IfNotPresent
   rbacRole: false
-  resources: {}
+  resources:
+    limits: {}
+    requests:
+      cpu: 32m
+      memory: 128Mi
   routeLabels: ""
   secretStore:
     enabled: false

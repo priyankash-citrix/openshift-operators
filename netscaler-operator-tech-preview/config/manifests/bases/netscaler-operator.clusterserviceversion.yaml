@@ -9,7 +9,8 @@ metadata:
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions: {}
-  description: This is an operator to install Cloud Native portfolio provided by NetScaler
+  description: NetScaler provides various products to empower Developer/DevOps managing
+    your applications in OpenShift Cluster.
   displayName: NetScaler Operator
   icon:
   - base64data: ""
@@ -39,12 +40,12 @@ spec:
   - Metrices
   links:
   - name: Netscaler Operator
-    url: https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/deploy/deploy-ns-operator.md 
+    url: https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/deploy/deploy-ns-operator.md
   maintainers:
   - email: priyanka.sharma@cloud.com
     name: Priyanka Sharma
-  maturity: stable
+  maturity: alpha
   provider:
     name: NetScaler
     url: https://www.netscaler.com/
-  version: 1.1.0
+  version: 1.1.1
