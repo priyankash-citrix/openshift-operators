@@ -26,7 +26,7 @@ spec:
     enabled: false
     topic: "HTTP"
   license:
-    accept: false
+    accept: "no"
   nodePortRequired: false
   ns_tracing:
     enabled: false

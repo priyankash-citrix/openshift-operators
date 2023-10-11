@@ -13,7 +13,6 @@ metadata:
           "spec": {
             "ADMSettings": {
               "ADMIP": "",
-              "analyticsServerPort": 5557,
               "bandWidth": 1000,
               "bandWidthLicense": false,
               "cpxCores": 1,
@@ -72,7 +71,9 @@ metadata:
               "required": false
             },
             "cpxBgpRouter": false,
+            "cpxCommands": "",
             "cpxLicenseAggregator": "",
+            "cpxShellCommands": "",
             "crds": {
               "install": false,
               "retainOnDelete": false
@@ -137,10 +138,16 @@ metadata:
               "image": "{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag }}",
               "imageRegistry": "quay.io",
               "imageRepository": "citrix/citrix-k8s-ingress-controller",
-              "imageTag": "1.34.16",
+              "imageTag": "1.35.6",
               "pullPolicy": "IfNotPresent",
               "required": true,
-              "resources": {}
+              "resources": {
+                "limits": {},
+                "requests": {
+                  "cpu": "32m",
+                  "memory": "128Mi"
+                }
+              }
             },
             "openshift": true,
             "optimizeEndpointBinding": false,
@@ -151,7 +158,13 @@ metadata:
             "pullPolicy": "IfNotPresent",
             "rbacRole": false,
             "replicaCount": 1,
-            "resources": {},
+            "resources": {
+              "limits": {},
+              "requests": {
+                "cpu": "128m",
+                "memory": "500Mi"
+              }
+            },
             "routeLabels": "",
             "serviceAccount": {
               "create": true
@@ -247,7 +260,7 @@ metadata:
             "imagePullSecrets": [],
             "imageRegistry": "quay.io",
             "imageRepository": "citrix/citrix-k8s-ingress-controller",
-            "imageTag": "1.34.16",
+            "imageTag": "1.35.6",
             "ingressClass": [],
             "ipam": false,
             "jsonLog": false,
@@ -291,7 +304,13 @@ metadata:
             "profileTcpFrontend": {},
             "pullPolicy": "IfNotPresent",
             "rbacRole": false,
-            "resources": {},
+            "resources": {
+              "limits": {},
+              "requests": {
+                "cpu": "32m",
+                "memory": "128Mi"
+              }
+            },
             "routeLabels": "",
             "secretStore": {
               "enabled": false,
@@ -370,13 +389,13 @@ metadata:
     operators.openshift.io/infrastructure-features: '["disconnected"]'
     categories: Networking
     description: "This is an operator to install Cloud Native portfolio provided by NetScaler"
-    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:9baf4351b132b78287e3bef89d6b3d2ac9db508d5e89a8c14482ca2979bc5c0f
+    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:028a880ce8a82b038fd145aa7bb0b1f70565af5ba15c24b45c47e190feec9287
     support: NetScaler
     repository: https://github.com/citrix/citrix-k8s-ingress-controller
-    createdAt: "2023-07-31T10:45:00Z"
-    operators.operatorframework.io/builder: operator-sdk-v1.30.0
+    createdAt: "2023-09-19T18:07:26Z"
+    operators.operatorframework.io/builder: operator-sdk-v1.31.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
-  name: netscaler-operator.v1.1.0
+  name: netscaler-operator.v1.1.2
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -408,7 +427,7 @@ spec:
     Refer [installation instructions](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/deploy/deploy-ns-operator.md).
 
     This operator version contains:
-    1. NetScaler Ingress Controller version [1.34.16](https://github.com/citrix/citrix-helm-charts/releases/tag/cic-v1.34.16)
+    1. NetScaler Ingress Controller version [1.35.6](https://github.com/citrix/citrix-helm-charts/releases/tag/cic-v1.35.6)
     2. NetScaler CPX version [13.1-49.13](https://docs.netscaler.com/en-us/citrix-adc/current-release/citrix-adc-release-notes/release-notes-13-1-49-13.html)
     3. NetScaler Observability Exporter version [1.7.001](https://github.com/citrix/citrix-helm-charts/releases/tag/coe-v1.7.001)
     4. NetScaler Metrics Exporter [1.4.9](https://github.com/citrix/citrix-adc-metrics-exporter/releases/tag/1.4.9)
@@ -515,9 +534,9 @@ spec:
         - apiGroups:
           - netscaler.com
           resources:
-          - netscalercpxwithingresscontrollers
-          - netscalercpxwithingresscontrollers/status
-          - netscalercpxwithingresscontrollers/finalizers
+          - netscalerobservabilityexporters
+          - netscalerobservabilityexporters/status
+          - netscalerobservabilityexporters/finalizers
           verbs:
           - create
           - delete
@@ -529,9 +548,9 @@ spec:
         - apiGroups:
           - netscaler.com
           resources:
-          - netscalerobservabilityexporters
-          - netscalerobservabilityexporters/status
-          - netscalerobservabilityexporters/finalizers
+          - netscalercpxwithingresscontrollers
+          - netscalercpxwithingresscontrollers/status
+          - netscalercpxwithingresscontrollers/finalizers
           verbs:
           - create
           - delete
@@ -598,7 +617,7 @@ spec:
                 - --upstream=http://127.0.0.1:8080/
                 - --logtostderr=true
                 - --v=0
-                image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:43dc8a63868bfb4b68901fa3edb492b966da4b3093e049eb595205dd9f4f1c7c
+                image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:0848d89e9f94be04f17beeee75807d7fd11102737e6483ee674f2cf3ae28f213
                 name: kube-rbac-proxy
                 ports:
                 - containerPort: 8443
@@ -625,31 +644,31 @@ spec:
                 - name: RELATED_IMAGE_CPX
                   value: quay.io/citrix/citrix-k8s-cpx-ingress@sha256:f4a99330dbacf06d8614df7ce35afca7c70eb47448f64c34d4b055cf5befe810
                 - name: RELATED_IMAGE_NSIC
-                  value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:a628f1e1963cd931afdba9a5ffc847484f8177f4039f08bb54c713158e96d908
+                  value: quay.io/citrix/citrix-k8s-ingress-controller@sha256:65890d6fc92e4d12d131f68996f93ded87b06c8e1f0292d86a0d4dfd33e647f0
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
                 - name: RELATED_IMAGE_NSOE
                   value: quay.io/citrix/citrix-observability-exporter@sha256:6eea1ff7f6cc984e87dc2f0d1b98703cba8107c0cfdf278b08c5b01d98c43d41
                 - name: OPENSHIFT
                   value: "True"
-                image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:9baf4351b132b78287e3bef89d6b3d2ac9db508d5e89a8c14482ca2979bc5c0f
+                image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:028a880ce8a82b038fd145aa7bb0b1f70565af5ba15c24b45c47e190feec9287
                 livenessProbe:
+                  failureThreshold: 5
                   httpGet:
                     path: /healthz
                     port: 8081
                   initialDelaySeconds: 15
                   periodSeconds: 20
                   successThreshold: 1
-                  failureThreshold: 5
                 name: manager
                 readinessProbe:
+                  failureThreshold: 5
                   httpGet:
                     path: /readyz
                     port: 8081
                   initialDelaySeconds: 5
                   periodSeconds: 10
                   successThreshold: 1
-                  failureThreshold: 5
                 resources:
                   limits:
                     cpu: 500m
@@ -733,15 +752,15 @@ spec:
   relatedImages:
   - image: quay.io/citrix/citrix-k8s-cpx-ingress@sha256:f4a99330dbacf06d8614df7ce35afca7c70eb47448f64c34d4b055cf5befe810
     name: cpx
-  - image: quay.io/citrix/citrix-k8s-ingress-controller@sha256:a628f1e1963cd931afdba9a5ffc847484f8177f4039f08bb54c713158e96d908
+  - image: quay.io/citrix/citrix-k8s-ingress-controller@sha256:65890d6fc92e4d12d131f68996f93ded87b06c8e1f0292d86a0d4dfd33e647f0
     name: nsic
   - image: quay.io/citrix/citrix-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
     name: exporter
   - image: quay.io/citrix/citrix-observability-exporter@sha256:6eea1ff7f6cc984e87dc2f0d1b98703cba8107c0cfdf278b08c5b01d98c43d41
     name: nsoe
   - name: ns-operator
-    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:9baf4351b132b78287e3bef89d6b3d2ac9db508d5e89a8c14482ca2979bc5c0f
+    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:028a880ce8a82b038fd145aa7bb0b1f70565af5ba15c24b45c47e190feec9287
   - name: ose-kube-rbac-proxy
-    image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:43dc8a63868bfb4b68901fa3edb492b966da4b3093e049eb595205dd9f4f1c7c
-  replaces: netscaler-operator.v1.0.1
-  version: 1.1.0
+    image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:0848d89e9f94be04f17beeee75807d7fd11102737e6483ee674f2cf3ae28f213
+  replaces: netscaler-operator.v1.1.0
+  version: 1.1.2

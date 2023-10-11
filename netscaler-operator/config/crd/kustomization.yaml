@@ -3,6 +3,6 @@
 # It should be run by config/default
 resources:
 - bases/netscaler.com_netscaleringresscontrollers.yaml
-- bases/netscaler.com_netscalercpxwithingresscontrollers.yaml
 - bases/netscaler.com_netscalerobservabilityexporters.yaml
+- bases/netscaler.com_netscalercpxwithingresscontrollers.yaml
 #+kubebuilder:scaffold:crdkustomizeresource

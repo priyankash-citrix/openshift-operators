@@ -22,13 +22,13 @@ resources:
     namespaced: true
   domain: com
   group: netscaler
-  kind: NetscalerCpxWithIngressController
+  kind: NetscalerObservabilityExporter
   version: v1
 - api:
     crdVersion: v1
     namespaced: true
   domain: com
   group: netscaler
-  kind: NetscalerObservabilityExporter
+  kind: NetscalerCpxWithIngressController
   version: v1
 version: "3"
