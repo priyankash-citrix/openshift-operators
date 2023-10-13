@@ -290,7 +290,7 @@ metadata:
             "nsDnsNameserver": "",
             "nsEnableLabel": true,
             "nsHTTP2ServerSide": "OFF",
-            "nsIP": "x.x.x.x",
+            "nsIP": "",
             "nsLbHashAlgo": {
               "hashAlgorithm": "DEFAULT",
               "hashFingers": 256,
