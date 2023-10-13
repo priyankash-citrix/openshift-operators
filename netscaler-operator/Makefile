@@ -3,7 +3,7 @@
 # To re-generate a bundle for another specific version without changing the standard setup, you can:
 # - use the VERSION as arg of the bundle target (e.g make bundle VERSION=0.0.2)
 # - use environment variables to overwrite this value (e.g export VERSION=0.0.2)
-VERSION ?= 1.1.2
+VERSION ?= 2.0.0
 CHANNELS=stable
 DEFAULT_CHANNEL="stable"
 
@@ -50,7 +50,7 @@ endif
 
 # Set the Operator SDK version to use. By default, what is installed on the system is used.
 # This is useful for CI or a project to utilize a specific version of the operator-sdk toolkit.
-OPERATOR_SDK_VERSION ?= v1.31.0
+OPERATOR_SDK_VERSION ?= v1.32.0
 
 # Image URL to use all building/pushing image targets
 IMG ?= controller:latest
@@ -152,7 +152,7 @@ ifeq (,$(shell which helm-operator 2>/dev/null))
 	@{ \
 	set -e ;\
 	mkdir -p $(dir $(HELM_OPERATOR)) ;\
-	curl -sSLo $(HELM_OPERATOR) https://github.com/operator-framework/operator-sdk/releases/download/v1.31.0/helm-operator_$(OS)_$(ARCH) ;\
+	curl -sSLo $(HELM_OPERATOR) https://github.com/operator-framework/operator-sdk/releases/download/v1.32.0/helm-operator_$(OS)_$(ARCH) ;\
 	chmod +x $(HELM_OPERATOR) ;\
 	}
 else

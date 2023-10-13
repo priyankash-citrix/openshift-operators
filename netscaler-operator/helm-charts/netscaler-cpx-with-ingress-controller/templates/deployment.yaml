@@ -20,8 +20,13 @@ spec:
       labels:
         app: {{ include "netscaler-cpx-ingress-controller.fullname" . }}
         adc: "citrix"
-{{- with .Values.podAnnotations }}
+{{- if .Values.analyticsConfig.timeseries.metrics.enableNativeScrape }}
       annotations:
+        netscaler.prometheus/path: nitro/v1/config/systemfile?args=filename%3Ametrics_prom_ns_analytics_time_series_profile.log%2Cfilelocation%3A%2Fvar%2Fnslog&format=prometheus
+        netscaler.prometheus/scrape: "true"
+        netscaler.prometheus/port: "9080"
+{{- end }}
+{{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
 {{- end }}
     spec:
@@ -86,7 +91,7 @@ spec:
           - name: "NS_HTTPS_PORT"
             value: {{ .Values.mgmtHttpsPort | quote }}
 {{- end }}
-##Need to set env var BANDWIDTH in order to provide Bandwidth license to NetScaler ADC CPX from ADM or CPX License Aggregator
+##Need to set env var BANDWIDTH in order to provide Bandwidth license to NetScaler NetScaler CPX from ADM or CPX License Aggregator
 {{- if and ( or ( .Values.ADMSettings.licenseServerIP ) ( .Values.cpxLicenseAggregator ) ) ( eq .Values.ADMSettings.bandWidthLicense true ) }}
           - name: "BANDWIDTH"
             value: {{ .Values.ADMSettings.bandWidth | quote }}
@@ -133,6 +138,18 @@ spec:
           image: "{{ tpl .Values.nsic.image . }}"
           imagePullPolicy: {{ .Values.nsic.pullPolicy }}
           env:
+{{- if .Values.analyticsConfig.timeseries.metrics.enableNativeScrape }}
+          - name: "PROM_USER"
+            valueFrom:
+             secretKeyRef:
+              name: {{ required "Provide Secret for read only user for native Prometheus mode" .Values.nsic.prometheusCredentialSecret }}
+              key: username
+          - name: "PROM_PASSWORD"
+            valueFrom:
+             secretKeyRef:
+              name: {{ required "Provide Secret for read only user for native Prometheus mode" .Values.nsic.prometheusCredentialSecret }}
+              key: password
+{{- end }}
           - name: "EULA"
             value: "{{ .Values.license.accept }}"
 {{- if .Values.cpxBgpRouter }}

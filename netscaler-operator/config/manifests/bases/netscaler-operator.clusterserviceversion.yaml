@@ -9,8 +9,7 @@ metadata:
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions: {}
-  description: NetScaler provides various products to empower Developer/DevOps managing
-    your applications in OpenShift Cluster.
+  description: abcd
   displayName: NetScaler Operator
   icon:
   - base64data: ""
@@ -20,32 +19,26 @@ spec:
       deployments: null
     strategy: ""
   installModes:
-  - supported: true
+  - supported: false
     type: OwnNamespace
-  - supported: true
+  - supported: false
     type: SingleNamespace
-  - supported: true
+  - supported: false
     type: MultiNamespace
   - supported: true
     type: AllNamespaces
   keywords:
-  - Ingress
-  - NetScaler
-  - ADC
-  - Kubernetes
-  - OpenShift
-  - Citrix
-  - Controller
-  - Observability
-  - Metrices
+  - ingress
   links:
   - name: Netscaler Operator
-    url: https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/deploy/deploy-ns-operator.md
+    url: https://netscaler-operator.domain
   maintainers:
   - email: priyanka.sharma@cloud.com
     name: Priyanka Sharma
-  maturity: stable
+  - email: arijit.ray@cloud.com
+    name: Arijit Ray
+  maturity: alpha
   provider:
     name: NetScaler
-    url: https://www.netscaler.com/
-  version: 1.1.2
+    url: https://netscaler.com
+  version: 0.0.0

@@ -4,8 +4,8 @@
 
 # NetScaler CPX config details
 imageRegistry: quay.io
-imageRepository: citrix/citrix-k8s-cpx-ingress
-imageTag: 13.1-49.13
+imageRepository: netscaler/netscaler-cpx
+imageTag: 13.1-49.15
 image: "{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag }}"
 pullPolicy: IfNotPresent
 imagePullSecrets: []
@@ -81,8 +81,8 @@ servicePorts: []
 # NetScaler Ingress Controller config details
 nsic:
   imageRegistry: quay.io
-  imageRepository: citrix/citrix-k8s-ingress-controller
-  imageTag: 1.35.6
+  imageRepository: netscaler/netscaler-k8s-ingress-controller
+  imageTag: 1.36.5
   image: "{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag }}"
   pullPolicy: IfNotPresent
   required: true
@@ -101,6 +101,8 @@ nsic:
       # limits:
       #   cpu: 1000m
       #   memory: 1000Mi
+  prometheusCredentialSecret: # K8s Secret Name for read only user creation for native Prometheus support
+
 entityPrefix:
 license:
   accept: no
@@ -151,7 +153,7 @@ ADMSettings:
 exporter:
   required: false
   imageRegistry: quay.io
-  imageRepository: citrix/citrix-adc-metrics-exporter
+  imageRepository: netscaler/netscaler-adc-metrics-exporter
   imageTag: 1.4.9
   image: "{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository }}:{{ .Values.exporter.imageTag }}"
   pullPolicy: IfNotPresent
@@ -189,6 +191,9 @@ analyticsConfig:
     metrics:
       enable: false
       mode: 'avro'
+      exportFrequency: 30
+      schemaFile: schema.json
+      enableNativeScrape: false
     auditlogs:
       enable: false
     events:

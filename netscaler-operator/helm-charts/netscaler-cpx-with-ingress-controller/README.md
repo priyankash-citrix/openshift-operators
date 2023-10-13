@@ -1,12 +1,12 @@
 # NetScaler CPX with NetScaler Ingress Controller running as sidecar.
 
-In a [Kubernetes](https://kubernetes.io/) or [OpenShift](https://www.openshift.com) cluster, you can deploy [NetScaler CPX](https://docs.citrix.com/en-us/citrix-adc-cpx) with NetScaler ingress controller as a [sidecar](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). The NetScaler CPX instance is used for load balancing the North-South traffic to the microservices in your cluster. And, the sidecar NetScaler ingress controller configures the NetScaler CPX.
+In a [Kubernetes](https://kubernetes.io/) or [OpenShift](https://www.openshift.com) cluster, you can deploy [NetScaler CPX](https://docs.netscaler.com/en-us/citrix-adc-cpx/cpx/) with NetScaler ingress controller as a [sidecar](https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/). The NetScaler CPX instance is used for load balancing the North-South traffic to the microservices in your cluster. And, the sidecar NetScaler ingress controller configures the NetScaler CPX.
 
 ## TL;DR;
 
 ### For Kubernetes
    ```
-   helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+   helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
    helm install netscaler-cpx-with-ingress-controller netscaler/netscaler-cpx-with-ingress-controller --set license.accept=yes
    ```
@@ -19,7 +19,7 @@ In a [Kubernetes](https://kubernetes.io/) or [OpenShift](https://www.openshift.c
 ### For OpenShift
 
    ```
-   helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+   helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
    helm install netscaler-cpx-with-ingress-controller netscaler/netscaler-cpx-with-ingress-controller --set license.accept=yes,openshift=true
    ```
@@ -41,9 +41,9 @@ This Helm chart deploys a NetScaler CPX with NetScaler ingress controller as a s
 
 -  The [Kubernetes](https://kubernetes.io/) version should be 1.16 and above if using Kubernetes environment.
 -  The [Openshift](https://www.openshift.com) version 4.8 or later if using OpenShift platform.
--  The [Helm](https://helm.sh/) version 3.x or later. You can follow instruction given [here](https://github.com/citrix/citrix-helm-charts/blob/master/Helm_Installation_version_3.md) to install the same.
--  You have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator), if you want to view the metrics of the NetScaler CPX collected by the [metrics exporter](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics).
-- Registration of NetScaler CPX in ADM: You may want to register your CPX in ADM for licensing or to obtain [servicegraph](https://docs.citrix.com/en-us/citrix-application-delivery-management-service/application-analytics-and-management/service-graph.html). For this you will have to create a Kubernetes secret using ADM credentials and provide it while install the chart. Create a Kubernetes secret for the user name and password using the following command:
+-  The [Helm](https://helm.sh/) version 3.x or later. You can follow instruction given [here](https://github.com/netscaler/netscaler-helm-charts/blob/master/Helm_Installation_version_3.md) to install the same.
+-  You have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator), if you want to view the metrics of the NetScaler CPX collected by the [metrics exporter](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics).
+- Registration of NetScaler CPX in ADM: You may want to register your CPX in ADM for licensing or to obtain [servicegraph](https://docs.netscaler.com/en-us/citrix-application-delivery-management-service/application-analytics-and-management/service-graph.html). For this you will have to create a Kubernetes secret using ADM credentials and provide it while install the chart. Create a Kubernetes secret for the user name and password using the following command:
 
   ```
   kubectl create secret generic admlogin --from-literal=username=<adm-username> --from-literal=password=<adm-password>
@@ -53,7 +53,7 @@ This Helm chart deploys a NetScaler CPX with NetScaler ingress controller as a s
 Add the NetScaler Ingress Controller helm chart repository using command:
 
    ```
-   helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+   helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
    ```
 
 ### For Kubernetes:
@@ -71,7 +71,7 @@ To install the chart with the release name ``` my-release```:
 The command deploys NetScaler CPX with NetScaler ingress controller as a sidecar on the Kubernetes cluster with the default configuration. The [configuration](#configuration) section lists the mandatory and optional parameters that you can configure during installation.
 
 #### 2. NetScaler CPX with NetScaler Ingress Controller and Exporter running as side car.
-[Metrics exporter](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/metrics/promotheus-grafana/) using Prometheus Operator and Grafana.
+[Metrics exporter](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/metrics/promotheus-grafana.html) using Prometheus Operator and Grafana.
 > **Note:**
 >
 > Ensure that you have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator).
@@ -95,7 +95,7 @@ To install the chart with the release name, `my-release`, use the following comm
    ```
 
 #### 2. NetScaler CPX with NetScaler Ingress Controller and Exporter running as side car.
-[Metrics exporter](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/metrics/promotheus-grafana/) using Prometheus Operator and Grafana.
+[Metrics exporter](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/metrics/promotheus-grafana.html) using Prometheus Operator and Grafana.
 > **Note:**
 >
 > Ensure that you have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator).
@@ -109,9 +109,9 @@ Use the following command for this:
 
 The following components are installed:
 
--  [NetScaler CPX](https://docs.citrix.com/en-us/citrix-adc-cpx/netscaler-cpx.html)
--  [NetScaler ingress controller](https://github.com/citrix/citrix-k8s-ingress-controller) (if enabled)
--  [Exporter](https://github.com/citrix/citrix-adc-metrics-exporter) (if enabled)
+-  [NetScaler CPX](https://docs.netscaler.com/en-us/citrix-adc-cpx/current-release/about)
+-  [NetScaler ingress controller](https://github.com/netscaler/netscaler-k8s-ingress-controller) (if enabled)
+-  [Exporter](https://github.com/netscaler/netscaler-adc-metrics-exporter) (if enabled)
 
 
 ### NetScaler CPX Service Annotations:
@@ -123,7 +123,7 @@ The following components are installed:
    helm install my-release netscaler/netscaler-cpx-with-ingress-controller --set license.accept=yes,serviceAnnotations.service\\.beta\\.kubernetes\\.io/azure-load-balancer-internal=True
    ```
 
-   or the same can be provided in [values.yaml](https://github.com/citrix/citrix-helm-charts/blob/master/netscaler-cpx-with-ingress-controller/values.yaml):
+   or the same can be provided in [values.yaml](https://github.com/netscaler/netscaler-helm-charts/blob/master/netscaler-cpx-with-ingress-controller/values.yaml):
 
    ```
    license:
@@ -149,7 +149,7 @@ The following components are installed:
    helm install my-release netscaler/netscaler-cpx-with-ingress-controller --set license.accept=yes,servicePorts[0].port=9999,servicePorts[0].protocol=TCP,servicePorts[0].name=https
    ```
 
-   or the same can be provided in [values.yaml](https://github.com/citrix/citrix-helm-charts/blob/master/netscaler-cpx-with-ingress-controller/values.yaml):
+   or the same can be provided in [values.yaml](https://github.com/netscaler/netscaler-helm-charts/blob/master/netscaler-cpx-with-ingress-controller/values.yaml):
 
    ```
    license:
@@ -185,12 +185,12 @@ The following components are installed:
 
 ## NetScaler CPX DaemonSet with NetScaler Ingress Controller as sidecar for BGP Advertisement
 
-   The previous section of deploying CPX as a Deployment  requires a Tier-1 Loadbalancer such as NetScaler VPX or cloud loadbalancers to route the traffic to CPX instances running in Kubernetes cluster, but you can also leverage  BGP network fabric in your on-prem environemnt to route the traffic to CPX instances in a Kubernetes or Openshift cluster. you need to deploy CPX with NetScaler Ingress Controller as Daemonset to advertise the ExternalIPs of the K8s services of type LoadBalancer to your BGP Fabric. NetScaler CPX establishes a BGP peering session with your network routers, and uses that peering session to advertise the IP addresses of external cluster services. If your routers have ECMP capability, the traffic is load-balanced to multiple CPX instances by the upstream router, which in turn load-balances to actual application pods. When you deploy the NetScaler CPX with this mode, NetScaler CPX adds iptables rules for each service of type LoadBalancer on Kubernetes nodes. The traffic destined to the external IP address is routed to NetScaler CPX pods. You can also set the 'ingressIP' variable to an IP Address to advertise the External IP address for Ingress resources. Refer [documentation](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/network/cpx-bgp-router.md) for complete details about BGP advertisement with CPX.
+   The previous section of deploying CPX as a Deployment  requires a Tier-1 Loadbalancer such as NetScaler VPX or cloud loadbalancers to route the traffic to CPX instances running in Kubernetes cluster, but you can also leverage  BGP network fabric in your on-prem environemnt to route the traffic to CPX instances in a Kubernetes or Openshift cluster. you need to deploy CPX with NetScaler Ingress Controller as Daemonset to advertise the ExternalIPs of the K8s services of type LoadBalancer to your BGP Fabric. NetScaler CPX establishes a BGP peering session with your network routers, and uses that peering session to advertise the IP addresses of external cluster services. If your routers have ECMP capability, the traffic is load-balanced to multiple CPX instances by the upstream router, which in turn load-balances to actual application pods. When you deploy the NetScaler CPX with this mode, NetScaler CPX adds iptables rules for each service of type LoadBalancer on Kubernetes nodes. The traffic destined to the external IP address is routed to NetScaler CPX pods. You can also set the 'ingressIP' variable to an IP Address to advertise the External IP address for Ingress resources. Refer [documentation](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/network/bgp-enhancement.md) for complete details about BGP advertisement with CPX.
 
 ### Download the chart
 You can download the chart usimg `helm pull` command.
 ```
-helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 helm pull netscaler/netscaler-cpx-with-ingress-controller
 tar -zxvf netscaler-cpx-with-ingress-controller-x.y.z.tgz
 ```
@@ -266,7 +266,7 @@ If you are using ingress resources, you must set the `ingressIP` to a valid IP A
 The command deploys NetScaler CPX Daemonset with NetScaler ingress controller as a sidecar on the Kubernetes cluster with the default configuration. The [configuration](#configuration) section lists the mandatory and optional parameters that you can configure during installation.
 
 #### 2. NetScaler CPX with NetScaler Ingress Controller and Exporter running as side car for BGP Advertisement.
-[Metrics exporter](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/metrics/promotheus-grafana/) using Prometheus Operator and Grafana.
+[Metrics exporter](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/metrics/promotheus-grafana.html) using Prometheus Operator and Grafana.
 > **Note:**
 >
 > Ensure that you have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator).
@@ -311,7 +311,7 @@ If you are running NetScaler IPAM controller for auto allocation of IPs for Serv
    ```
 
 #### 2. NetScaler CPX with NetScaler Ingress Controller and Exporter running as side car for BGP Advertisement.
-[Metrics exporter](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/metrics/promotheus-grafana/) using Prometheus Operator and Grafana.
+[Metrics exporter](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/metrics-visualizer#visualization-of-metrics) can be deployed as sidecar to the NetScaler CPX and collects metrics from the NetScaler CPX instance. You can then [visualize these metrics](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/metrics/promotheus-grafana.html) using Prometheus Operator and Grafana.
 > **Note:**
 >
 > Ensure that you have installed [Prometheus Operator](https://github.com/coreos/prometheus-operator).
@@ -339,7 +339,7 @@ CRDs can be installed/upgraded when we install/upgrade NetScaler CPX with NetSca
 > **Note:**
 > Installing again may fail due to the presence of CRDs. Make sure that you back up all CustomResource objects and clean up CRDs before re-installing NetScaler CPX with NetScaler ingress controller.
 
-There are a few examples of how to use these CRDs, which are placed in the folder: [Example-CRDs](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds). Refer to them and install as needed, using the following command:
+There are a few examples of how to use these CRDs, which are placed in the folder: [Example-CRDs](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds). Refer to them and install as needed, using the following command:
 ```kubectl create -f <crd-example.yaml>```
 
 ### Details of the supported CRDs:
@@ -348,29 +348,29 @@ There are a few examples of how to use these CRDs, which are placed in the folde
 
 Authentication policies are used to enforce access restrictions to resources hosted by an application or an API server.
 
-NetScaler provides a Kubernetes CustomResourceDefinitions (CRDs) called the [Auth CRD](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/crd/auth) that you can use with the NetScaler ingress controller to define authentication policies on the ingress NetScaler.
+NetScaler provides a Kubernetes CustomResourceDefinitions (CRDs) called the [Auth CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/crd/auth) that you can use with the NetScaler ingress controller to define authentication policies on the ingress NetScaler.
 
-Example file: [auth_example.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/auth_example.yaml)
+Example file: [auth_example.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/auth_example.yaml)
 
 #### continuousdeployments CRD  for canary:
 
-Canary release is a technique to reduce the risk of introducing a new software version in production by first rolling out the change to a small subset of users. After user validation, the application is rolled out to the larger set of users. NetScaler-Integrated [Canary Deployment solution](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/crd/canary) stitches together all components of continuous delivery (CD) and makes canary deployment easier for the application developers.
+Canary release is a technique to reduce the risk of introducing a new software version in production by first rolling out the change to a small subset of users. After user validation, the application is rolled out to the larger set of users. NetScaler-Integrated [Canary Deployment solution](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/crd/canary) stitches together all components of continuous delivery (CD) and makes canary deployment easier for the application developers.
 
 #### httproutes and listeners CRDs for contentrouting:
 
-[Content Routing (CR)](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/crd/contentrouting) is the execution of defined rules that determine the placement and configuration of network traffic between users and web applications, based on the content being sent. For example, a pattern in the URL or header fields of the request.
+[Content Routing (CR)](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/crd/contentrouting) is the execution of defined rules that determine the placement and configuration of network traffic between users and web applications, based on the content being sent. For example, a pattern in the URL or header fields of the request.
 
-Example files: [HTTPRoute_crd.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/HTTPRoute_crd.yaml), [Listener_crd.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/Listener_crd.yaml)
+Example files: [HTTPRoute_crd.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/HTTPRoute_crd.yaml), [Listener_crd.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/Listener_crd.yaml)
 
 #### ratelimits CRD:
 
-In a Kubernetes deployment, you can [rate limit the requests](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/crd/ratelimit) to the resources on the back end server or services using rate limiting feature provided by the ingress NetScaler.
+In a Kubernetes deployment, you can [rate limit the requests](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/crd/ratelimit) to the resources on the back end server or services using rate limiting feature provided by the ingress NetScaler.
 
-Example files: [ratelimit-example1.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/ratelimit-example1.yaml), [ratelimit-example2.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/ratelimit-example2.yaml)
+Example files: [ratelimit-example1.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/ratelimit-example1.yaml), [ratelimit-example2.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/ratelimit-example2.yaml)
 
 #### vips CRD:
 
-NetScaler provides a CustomResourceDefinitions (CRD) called [VIP](https://github.com/citrix/citrix-k8s-ingress-controller/tree/master/crd/vip) for asynchronous communication between the IPAM controller and NetScaler ingress controller.
+NetScaler provides a CustomResourceDefinitions (CRD) called [VIP](https://github.com/netscaler/netscaler-k8s-ingress-controller/tree/master/crd/vip) for asynchronous communication between the IPAM controller and NetScaler ingress controller.
 
 The IPAM controller is provided by NetScaler for IP address management. It allocates IP address to the service from a defined IP address range. The NetScaler ingress controller configures the IP address allocated to the service as virtual IP (VIP) in NetScaler VPX. And, the service is exposed using the IP address.
 
@@ -378,37 +378,37 @@ When a new service is created, the NetScaler ingress controller creates a CRD ob
 
 #### rewritepolicies CRD:
 
-In kubernetes environment, to deploy specific layer 7 policies to handle scenarios such as, redirecting HTTP traffic to a specific URL, blocking a set of IP addresses to mitigate DDoS attacks, imposing HTTP to HTTPS and so on, requires you to add appropriate libraries within the microservices and manually configure the policies. Instead, you can use the [Rewrite and Responder features](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/crd/rewrite-responder-policies-deployment.yaml) provided by the Ingress NetScaler device to deploy these policies.
+In kubernetes environment, to deploy specific layer 7 policies to handle scenarios such as, redirecting HTTP traffic to a specific URL, blocking a set of IP addresses to mitigate DDoS attacks, imposing HTTP to HTTPS and so on, requires you to add appropriate libraries within the microservices and manually configure the policies. Instead, you can use the [Rewrite and Responder features](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/crd/rewrite-policy/rewrite-responder-policies-deployment.yaml) provided by the Ingress NetScaler device to deploy these policies.
 
-Example files: [target-url-rewrite.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/target-url-rewrite.yaml)
+Example files: [target-url-rewrite.yaml](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/simplified-deployment-usecases/CRDs/rewrite.md#url-manipulation)
 
 #### wafs CRD:
 
-[WAF CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/waf.md) can be used to configure the web application firewall policies with the NetScaler ingress controller on the NetScaler VPX, MPX, SDX, and CPX. The WAF CRD enables communication between the NetScaler ingress controller and NetScaler for enforcing web application firewall policies.
+[WAF CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/waf.md) can be used to configure the web application firewall policies with the NetScaler ingress controller on the NetScaler VPX, MPX, SDX, and CPX. The WAF CRD enables communication between the NetScaler ingress controller and NetScaler for enforcing web application firewall policies.
 
-In a Kubernetes deployment, you can enforce a web application firewall policy to protect the server using the WAF CRD. For more information about web application firewall, see [Web application security](https://docs.citrix.com/en-us/citrix-adc/13/application-firewall/introduction/web-application-security.html).
+In a Kubernetes deployment, you can enforce a web application firewall policy to protect the server using the WAF CRD. For more information about web application firewall, see [Web application security](https://docs.netscaler.com/en-us/citrix-adc/current-release/application-firewall/introduction-to-citrix-web-app-firewall.html).
 
-Example files: [wafhtmlxsssql.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/wafhtmlxsssql.yaml)
+Example files: [wafhtmlxsssql.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/wafhtmlxsssql.yaml)
 
 #### CORS CRD:
 
-[CORS CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/cors.md) Cross-origin resource sharing (CORS) is a mechanism allows a web application running under one domain to securely access resources in another domain. You can configure CORS policies on NetScaler using NetScaler ingress controller to allow one domain (the origin domain) to call APIs in another domain. For more information, see the [cross-origin resource sharing CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/cors.md) documentation.
+[CORS CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/cors.md) Cross-origin resource sharing (CORS) is a mechanism allows a web application running under one domain to securely access resources in another domain. You can configure CORS policies on NetScaler using NetScaler ingress controller to allow one domain (the origin domain) to call APIs in another domain. For more information, see the [cross-origin resource sharing CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/cors.md) documentation.
 
-Example files: [cors-crd.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/corspolicy-example.yaml)
+Example files: [cors-crd.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/corspolicy-example.yaml)
 
 #### APPQOE CRD:
 
-[APPQOE CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/appqoe.md) When a NetScaler appliance receives an HTTP request and forwards it to a back-end server, sometimes there may be connection failures with the back-end server. You can configure the request-retry feature on NetScaler to forward the request to the next available server, instead of sending the reset to the client. Hence, the client saves round trip time when NetScaler initiates the same request to the next available service.
-For more information, see the AppQoE support documentation. [Appqoe resource sharing CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/appqoe.md) documentation.
+[APPQOE CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/appqoe.md) When a NetScaler appliance receives an HTTP request and forwards it to a back-end server, sometimes there may be connection failures with the back-end server. You can configure the request-retry feature on NetScaler to forward the request to the next available server, instead of sending the reset to the client. Hence, the client saves round trip time when NetScaler initiates the same request to the next available service.
+For more information, see the AppQoE support documentation. [Appqoe resource sharing CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/appqoe.md) documentation.
 
-Example files: [appqoe-crd.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/appqoe_example.yaml)
+Example files: [appqoe-crd.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/appqoe_example.yaml)
 
 #### WILDCARDDNS CRD:
 
-[WILDCARDDNS CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/wildcarddns.md) Wildcard DNS domains are used to handle requests for nonexistent domains and subdomains. In a zone, use wildcard domains to redirect queries for all nonexistent domains or subdomains to a particular server, instead of creating a separate Resource Record (RR) for each domain. The most common use of a wildcard DNS domain is to create a zone that can be used to forward mail from the internet to some other mail system.
-For more information, see the Wild card DNS domains support documentation. [Wildcard DNS Entry CRD](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/crds/wildcarddns.md) documentation.
+[WILDCARDDNS CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/wildcarddns.md) Wildcard DNS domains are used to handle requests for nonexistent domains and subdomains. In a zone, use wildcard domains to redirect queries for all nonexistent domains or subdomains to a particular server, instead of creating a separate Resource Record (RR) for each domain. The most common use of a wildcard DNS domain is to create a zone that can be used to forward mail from the internet to some other mail system.
+For more information, see the Wild card DNS domains support documentation. [Wildcard DNS Entry CRD](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/crds/wildcarddns.md) documentation.
 
-Example files: [wildcarddns-crd.yaml](https://github.com/citrix/citrix-helm-charts/tree/master/example-crds/wildcarddns-example.yaml)
+Example files: [wildcarddns-crd.yaml](https://github.com/netscaler/netscaler-helm-charts/tree/master/example-crds/wildcarddns-example.yaml)
 
 ## NetScaler CPX servicetype LoadBalancer
 NetScaler CPX can be installed with service having servicetype LoadBalancer. Following arguments can be used in the `helm install` command for the same:
@@ -485,12 +485,12 @@ If NetScaler CPX needs to send data to the ADM for analytics purpose, then the b
 kubectl create secret generic admlogin --from-literal=username=<adm-agent-username> --from-literal=password=<adm-agent-password>
 ```
 
-|Note: If you have installed container based `adm-agent` using [this](https://github.com/citrix/citrix-helm-charts/tree/master/adm-agent) helm chart, above step is not required, you just need to tag the namespace where the CPX is being deployed with `citrix-cpx=enabled`.
+|Note: If you have installed container based `adm-agent` using [this](https://github.com/netscaler/netscaler-helm-charts/tree/master/adm-agent) helm chart, above step is not required, you just need to tag the namespace where the CPX is being deployed with `citrix-cpx=enabled`.
 
 2. Deploy NetScaler CPX with NSIC using helm command:
 
 ```
-helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
 helm install my-release netscaler/netscaler-cpx-with-ingress-controller  --set license.accept=yes,analyticsConfig.required=true,analyticsConfig.distributedTracing.enable=true,analyticsConfig.endpoint.service=<Namespace/ADM_ServiceName-logstream>,ADMSettings.ADMIP=<ADM-Agent-IP_OR_FQDN>,ADMSettings.loginSecret=<Secret-for-ADM-Agent-credentials>,analyticsConfig.transactions.enable=true,analyticsConfig.transactions.port=5557
 ```
@@ -503,21 +503,75 @@ If NetScaler CPX needs to send data to the NSOE for observability, then the belo
 Deploy NetScaler CPX with NSIC using helm command:
 
 ```
-helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
-helm install my-release netscaler/netscaler-cpx-with-ingress-controller  --set license.accept=yes,analyticsConfig.required=true,analyticsConfig.timeseries.metrics.enable=true,analyticsConfig.timeseries.metrics.port=5563,analyticsConfig.timeseries.metrics.mode=prometheus,analyticsConfig.transactions.enable=true,analyticsConfig.transactions.port=5557,analyticsConfig.distributedTracing.enable=true,analyticsConfig.endpoint.server=<NSOE_SERVICE_IP>,analyticsConfig.endpoint.service=<Namespace/NSOE_SERVICE_NAME>
+helm install my-release netscaler/netscaler-cpx-with-ingress-controller  --set license.accept=yes,analyticsConfig.required=true,analyticsConfig.timeseries.metrics.enable=true,analyticsConfig.timeseries.port=5563,analyticsConfig.timeseries.metrics.mode=prometheus,analyticsConfig.transactions.enable=true,analyticsConfig.transactions.port=5557,analyticsConfig.distributedTracing.enable=true,analyticsConfig.endpoint.server=<NSOE_SERVICE_IP>,analyticsConfig.endpoint.service=<Namespace/NSOE_SERVICE_NAME>
 ```
+
+#### Analytics Configuration required for export of metrics to Prometheus
+
+If NetScaler CPX needs to send data to Prometheus directly without an exporter resource in between, then the below steps can be followed to install NetScaler CPX with ingress controller. NSIC configures NetScaler CPX with the configuration required.
+
+1. Create secret to enable read-only access for a user, which will be required by NetScaler CPX to export metrics to Prometheus.
+
+```
+kubectl create secret generic prom-user --from-literal=username=<prometheus-username> --from-literal=password=<prometheus-password>
+```
+
+2. Deploy NetScaler CPX with NSIC using helm command:
+
+```
+helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
+
+helm install my-release netscaler/netscaler-cpx-with-ingress-controller --set license.accept=yes,nsic.prometheusCredentialSecret=<Secret-for-read-only-user-creation>,analyticsConfig.required=true,analyticsConfig.timeseries.metrics.enable=true,analyticsConfig.timeseries.port=5563,analyticsConfig.timeseries.metrics.mode=prometheus,analyticsConfig.timeseries.metrics.enableNativeScrape=true
+```
+
+3. To setup Prometheus in order to scrape natively from NetScaler CPX pod, a new scrape job is required to be added under scrape_configs in the Prometheus [configuration](https://prometheus.io/docs/prometheus/latest/configuration/configuration/). For more details, check kubernetes_sd_config [here](https://prometheus.io/docs/prometheus/latest/configuration/configuration/#kubernetes_sd_config). A sample of the Prometheus job is given below -
+
+```
+    - job_name: 'kubernetes-cpx'
+      scheme: http
+      metrics_path: /nitro/v1/config/systemfile
+      params:
+        args: ['filename:metrics_prom_ns_analytics_time_series_profile.log,filelocation:/var/nslog']
+        format: ['prometheus']
+      basic_auth:
+        username:  # Prometheus username set in nsic.prometheusCredentialSecret
+        password:  # Prometheus password set in nsic.prometheusCredentialSecret
+      scrape_interval: 30s
+      kubernetes_sd_configs:
+      - role: pod
+      relabel_configs:
+      - source_labels: [__meta_kubernetes_pod_annotation_netscaler_prometheus_scrape]
+        action: keep
+        regex: true
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_netscaler_prometheus_port]
+        action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        target_label: __address__
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: kubernetes_namespace
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: kubernetes_pod_name
+```
+
+> **Note:**
+>
+> For more details on Prometheus integration, please refer to [this](https://docs.netscaler.com/en-us/citrix-adc/current-release/observability/prometheus-integration)
 
 ### NetScaler CPX License Provisioning
 #### Bandwidth based licensing
 
-By default, CPX runs with 20 Mbps bandwidth called as [CPX Express](https://www.citrix.com/en-in/products/citrix-adc/cpx-express.html). However, for better performance and production deployments, customer needs licensed CPX instances. [NetScaler ADM](https://www.citrix.com/en-in/products/citrix-application-delivery-management/) is used to check out licenses for NetScaler CPX. For more detail on CPX licensing please refer [this](https://docs.netscaler.com/en-us/citrix-adc-cpx/current-release/cpx-licensing.html).
+By default, CPX runs with 20 Mbps bandwidth called as [CPX Express](https://www.netscaler.com/platform/cpx-container). However, for better performance and production deployments, customer needs licensed CPX instances. [NetScaler ADM](https://docs.netscaler.com/en-us/citrix-application-delivery-management-service/) is used to check out licenses for NetScaler CPX. For more detail on CPX licensing please refer [this](https://docs.netscaler.com/en-us/citrix-adc-cpx/current-release/cpx-licensing.html).
 
 For provisioning licensing on NetScaler CPX, it is mandatory to provide License Server information to CPX. This can be done by setting **ADMSettings.licenseServerIP** as License Server IP. In addition to this, **ADMSettings.bandWidthLicense** needs to be set true and desired bandwidth capacity in Mbps should be set **ADMSettings.bandWidth**.
 For example, to set 2Gbps as bandwidth capacity, below command can be used.
 
  ```
-helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
 helm install my-release netscaler/netscaler-cpx-with-ingress-controller  --set license.accept=yes --set ADMSettings.licenseServerIP=<LICENSESERVER_IP_OR_FQDN>,ADMSettings.bandWidthLicense=True --set ADMSettings.bandWidth=2000,ADMSettings.licenseEdition="ENTERPRISE"
 ```
@@ -527,7 +581,7 @@ helm install my-release netscaler/netscaler-cpx-with-ingress-controller  --set l
 For vCPU based licensing on NetScaler CPX, set `ADMSettings.vCPULicense` as True and `ADMSettings.cpxCores` with the number of cores that can be allocated for the CPX.
 
 ```
-helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
 helm install my-release netscaler/netscaler-cpx-with-ingress-controller  --set license.accept=yes --set ADMSettings.licenseServerIP=<LICENSESERVER_IP_OR_FQDN>,ADMSettings.vCPULicense=True --set ADMSettings.cpxCores=4,ADMSettings.licenseEdition="ENTERPRISE"
 ```
@@ -561,35 +615,37 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | ---------- | --------------------- | ------------- | ----------- |
 | license.accept | Mandatory | no | Set `yes` to accept the NetScaler ingress controller end user license agreement. |
 | imageRegistry                   | Mandatory  |  `quay.io`               |  The NetScaler CPX image registry             |  
-| imageRepository                 | Mandatory  |  `citrix/citrix-k8s-cpx-ingress`              |   The NetScaler CPX image repository             | 
-| imageTag                  | Mandatory  |  `13.1-49.13`               |   The NetScaler CPX image tag            | 
+| imageRepository                 | Mandatory  |  `netscaler/netscaler-cpx`              |   The NetScaler CPX image repository             | 
+| imageTag                  | Mandatory  |  `13.1-49.15`               |   The NetScaler CPX image tag            | 
 | pullPolicy | Mandatory | IfNotPresent | The NetScaler CPX image pull policy. |
 | daemonSet | Optional | False | Set this to true if NetScaler CPX needs to be deployed as DaemonSet. |
 | nsic.imageRegistry                   | Mandatory  |  `quay.io`               |  The NetScaler ingress controller image registry             |  
-| nsic.imageRepository                 | Mandatory  |  `citrix/citrix-k8s-ingress-controller`              |   The NetScaler ingress controller image repository             | 
-| nsic.imageTag                  | Mandatory  |  `1.35.6`               |   The NetScaler ingress controller image tag            | 
+| nsic.imageRepository                 | Mandatory  |  `netscaler/netscaler-k8s-ingress-controller`              |   The NetScaler ingress controller image repository             | 
+| nsic.imageTag                  | Mandatory  |  `1.36.5`               |   The NetScaler ingress controller image tag            | 
 | nsic.pullPolicy | Mandatory | IfNotPresent | The NetScaler ingress controller image pull policy. |
 | nsic.required | Mandatory | true | NSIC to be run as sidecar with NetScaler CPX |
 | nsic.resources | Optional | {} |	CPU/Memory resource requests/limits for NetScaler Ingress Controller container |
 | nsic.rbacRole  | Optional |  false  |  To deploy NSIC with RBAC Role set rbacRole=true; by default NSIC gets installed with RBAC ClusterRole(rbacRole=false)) |
+| nsic.prometheusCredentialSecret  | Optional |  N/A  |  The secret key required to create read only user for nat
+ive export of metrics using Prometheus. |
 | imagePullSecrets | Optional | N/A | Provide list of Kubernetes secrets to be used for pulling the images from a private Docker registry or repository. For more information on how to create this secret please see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/). |
 | nameOverride | Optional | N/A | String to partially override deployment fullname template with a string (will prepend the release name) |
 | fullNameOverride | Optional | N/A | String to fully override deployment fullname template with a string |
 | resources | Optional | {} |	CPU/Memory resource requests/limits for NetScaler CPX container |
 | nitroReadTimeout | Optional | 20 | The nitro Read timeout in seconds, defaults to 20 | 
-| logLevel | Optional | DEBUG | The loglevel to control the logs generated by NSIC. The supported loglevels are: CRITICAL, ERROR, WARNING, INFO, DEBUG and TRACE. For more information, see [Logging](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/configure/log-levels.md).|
+| logLevel | Optional | INFO | The loglevel to control the logs generated by NSIC. The supported loglevels are: CRITICAL, ERROR, WARNING, INFO, DEBUG and TRACE. For more information, see [Logging](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/configure/log-levels.md).|
 | jsonLog | Optional | false | Set this argument to true if log messages are required in JSON format | 
-| nsConfigDnsRec | Optional | false | To enable/disable DNS address Record addition in ADC through Ingress |
-| nsSvcLbDnsRec | Optional | false | To enable/disable DNS address Record addition in ADC through Type Load Balancer Service |
-| nsDnsNameserver | Optional | N/A | To add DNS Nameservers in ADC |
+| nsConfigDnsRec | Optional | false | To enable/disable DNS address Record addition in NetScaler through Ingress |
+| nsSvcLbDnsRec | Optional | false | To enable/disable DNS address Record addition in NetScaler through Type Load Balancer Service |
+| nsDnsNameserver | Optional | N/A | To add DNS Nameservers in NetScaler |
 | optimizeEndpointBinding | Optional | false | To enable/disable binding of backend endpoints to servicegroup in a single API-call. Recommended when endpoints(pods) per application are large in number. Applicable only for NetScaler Version >=13.0-45.7  |
 | defaultSSLCertSecret | Optional | N/A | Provide Kubernetes secret name that needs to be used as a default non-SNI certificate in NetScaler. |
 | nsHTTP2ServerSide | Optional | OFF | Set this argument to `ON` for enabling HTTP2 for NetScaler service group configurations. |
 | cpxLicenseAggregator | Optional | N/A | IP/FQDN of the CPX License Aggregator if it is being used to license the CPX. |
 | nsCookieVersion | Optional | 0 | Specify the persistence cookie version (0 or 1). |
-| profileSslFrontend | Optional | N/A | Specify the frontend SSL profile. For Details see [Configuration using FRONTEND_SSL_PROFILE](https://docs.citrix.com/en-us/citrix-k8s-ingress-controller/configure/profiles.html#global-front-end-profile-configuration-using-configmap-variables) |
-| profileTcpFrontend | Optional | N/A | Specify the frontend TCP profile. For Details see [Configuration using FRONTEND_TCP_PROFILE](https://docs.citrix.com/en-us/citrix-k8s-ingress-controller/configure/profiles.html#global-front-end-profile-configuration-using-configmap-variables) |
-| profileHttpFrontend | Optional | N/A | Specify the frontend HTTP profile. For Details see [Configuration using FRONTEND_HTTP_PROFILE](https://docs.citrix.com/en-us/citrix-k8s-ingress-controller/configure/profiles.html#global-front-end-profile-configuration-using-configmap-variables) |
+| profileSslFrontend | Optional | N/A | Specify the frontend SSL profile. For Details see [Configuration using FRONTEND_SSL_PROFILE](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/configure/profiles.html#global-front-end-profile-configuration-using-configmap-variables) |
+| profileTcpFrontend | Optional | N/A | Specify the frontend TCP profile. For Details see [Configuration using FRONTEND_TCP_PROFILE](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/configure/profiles.html#global-front-end-profile-configuration-using-configmap-variables) |
+| profileHttpFrontend | Optional | N/A | Specify the frontend HTTP profile. For Details see [Configuration using FRONTEND_HTTP_PROFILE](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/configure/profiles.html#global-front-end-profile-configuration-using-configmap-variables) |
 | logProxy | Optional | N/A | Provide Elasticsearch or Kafka or Zipkin endpoint for NetScaler observability exporter. |
 | nsProtocol | Optional | http | Protocol http or https used for the communication between NetScaler Ingress Controller and CPX |
 | cpxBgpRouter | Optional | false| If set to true, this CPX is deployed as daemonset in BGP controller mode wherein BGP advertisements are done for attracting external traffic to Kubernetes clusters |
@@ -599,7 +655,7 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | bgpPort | Optional | 179 | BGP port used by CPX for BGP advertisement if cpxBgpRouter is set to true|
 | ingressIP | Optional | N/A | External IP address to be used by ingress resources if not overriden by ingress.com/frontend-ip annotation in Ingress resources. This is also advertised to external routers when pxBgpRouter is set to true|
 | entityPrefix | Optional | k8s | The prefix for the resources on the NetScaler CPX. |
-| ingressClass | Optional | N/A | If multiple ingress load balancers are used to load balance different ingress resources. You can use this parameter to specify NetScaler ingress controller to configure NetScaler associated with specific ingress class. For more information on Ingress class, see [Ingress class support](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/configure/ingress-classes/). For Kubernetes version >= 1.19, this will create an IngressClass object with the name specified here  |
+| ingressClass | Optional | N/A | If multiple ingress load balancers are used to load balance different ingress resources. You can use this parameter to specify NetScaler ingress controller to configure NetScaler associated with specific ingress class. For more information on Ingress class, see [Ingress class support](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/configure/ingress-classes/). For Kubernetes version >= 1.19, this will create an IngressClass object with the name specified here  |
 | setAsDefaultIngressClass | Optional | False | Set the IngressClass object as default. New Ingresses without an "ingressClassName" field specified will be assigned the class specified in ingressClass. Applicable only for kubernetes versions >= 1.19 |
 | updateIngressStatus | Optional | False | Set this argument if you want to update ingress status of the ingress resources exposed via CPX. This is only applicable if servicetype of CPX service is LoadBalancer. |
 | disableAPIServerCertVerify | Optional | False | Set this parameter to True for disabling API Server certificate verification. |
@@ -622,7 +678,7 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | serviceSpec.loadBalancerIP | Optional | N/A | Use this parameter to provide LoadBalancer IP to CPX service of type LoadBalancer. `serviceType.loadBalancer.enabled` should be set to `true` for using this parameter. |
 | serviceSpec.loadBalancerSourceRanges | Optional | N/A | Provide the list of IP Address or range which should be allowed to access the Network Load Balancer. `serviceType.loadBalancer.enabled` should be set to `true` for using this parameter. For details, see [Network Load Balancer support on AWS](https://kubernetes.io/docs/concepts/services-networking/service/#aws-nlb-support). |
 | servicePorts | Optional | N/A | List of port. Each element in this list is a dictionary that contains information about the port. For example, [see this](#netscaler-adc-cpx-service-ports). |
-| ADMSettings.licenseServerIP | Optional | N/A | Provide the NetScaler Application Delivery Management (ADM) IP address to license NetScaler CPX. For more information, see [Licensing](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/licensing/). |
+| ADMSettings.licenseServerIP | Optional | N/A | Provide the NetScaler Application Delivery Management (ADM) IP address to license NetScaler CPX. For more information, see [Licensing]( https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/licensing/). |
 | ADMSettings.licenseServerPort | Optional | 27000 | NetScaler ADM port if non-default port is used. |
 | ADMSettings.ADMIP | Optional | N/A |  NetScaler Application Delivery Management (ADM) IP address. |
 | ADMSettings.loginSecret | Optional | N/A | The secret key to login to the ADM. For information on how to create the secret keys, see [Prerequisites](#prerequistes). |
@@ -631,14 +687,14 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | ADMSettings.vCPULicense | Optional | N/A | Set to true if you want to use vCPU based licensing for NetScaler CPX. |
 | ADMSettings.licenseEdition| Optional | PLATINUM | License edition that can be Standard, Platinum and Enterprise . By default, Platinum is selected.|
 | ADMSettings.cpxCores | Optional | 1 | Desired number of vCPU to be set for NetScaler CPX. |
-| exporter.required | Optional | false | Use the argument if you want to run the [Exporter for NetScaler Stats](https://github.com/citrix/citrix-adc-metrics-exporter) along with NetScaler ingress controller to pull metrics for the NetScaler CPX|
+| exporter.required | Optional | false | Use the argument if you want to run the [Exporter for NetScaler Stats](https://github.com/netscaler/netscaler-adc-metrics-exporter) along with NetScaler ingress controller to pull metrics for the NetScaler CPX|
 | exporter.imageRegistry                   | Optional  |  `quay.io`               |  The Exporter for NetScaler Stats image registry             |  
-| exporter.imageRepository                 | Optional  |  `citrix/citrix-adc-metrics-exporter`              |   The Exporter for NetScaler Stats image repository             | 
+| exporter.imageRepository                 | Optional  |  `netscaler/netscaler-adc-metrics-exporter`              |   The Exporter for NetScaler Stats image repository             | 
 | exporter.imageTag                  | Optional  |  `1.4.9`               |  The Exporter for NetScaler Stats image tag            | 
 | exporter.pullPolicy | Optional | IfNotPresent | The Exporter for NetScaler Stats image pull policy. |
 | exporter.resources | Optional | {} |	CPU/Memory resource requests/limits for Metrics exporter container |
 | exporter.ports.containerPort | Optional | 8888 | The Exporter for NetScaler Stats container port. |
-| exporter.serviceMonitorExtraLabels | Optional |  | Extra labels for service monitor whem Citrix-adc-metrics-exporter is enabled. |
+| exporter.serviceMonitorExtraLabels | Optional |  | Extra labels for service monitor whem NetScaler-adc-metrics-exporter is enabled. |
  analyticsConfig.required | Mandatory | false | Set this to true if you want to configure NetScaler to send metrics and transaction records to analytics service. |
 | analyticsConfig.distributedTracing.enable | Optional | false | Set this value to true to enable OpenTracing in NetScaler. |
 | analyticsConfig.distributedTracing.samplingrate | Optional | 100 | Specifies the OpenTracing sampling rate in percentage. |
@@ -647,6 +703,9 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | analyticsConfig.timeseries.port | Optional | 5563 | Specify the port used to expose analytics service for timeseries endpoint. |
 | analyticsConfig.timeseries.metrics.enable | Optional | Set this value to true to enable sending metrics from NetScaler. |
 | analyticsConfig.timeseries.metrics.mode | Optional | avro |  Specifies the mode of metric endpoint. |
+| analyticsConfig.timeseries.metrics.exportFrequency | Optional | 30 |  Specifies the time interval for exporting time-series data. Possible values range from 30 to 300 seconds. |
+| analyticsConfig.timeseries.metrics.schemaFile | Optional | schema.json |  Specifies the name of a schema file with the required Netscaler counters to be added and configured for metricscollector to export. A reference schema file reference_schema.json with all the supported counters is also available under the path /var/metrics_conf/. This schema file can be used as a reference to build a custom list of counters. |
+| analyticsConfig.timeseries.metrics.enableNativeScrape | Optional | false |  Set this value to true for native export of metrics. |
 | analyticsConfig.timeseries.auditlogs.enable | Optional | false | Set this value to true to export audit log data from NetScaler. |
 | analyticsConfig.timeseries.events.enable | Optional | false | Set this value to true to export events from the NetScaler. |
 | analyticsConfig.transactions.enable | Optional | false | Set this value to true to export transactions from NetScaler. |
@@ -654,7 +713,7 @@ The following table lists the configurable parameters of the NetScaler CPX with 
 | crds.install | Optional | False | Unset this argument if you don't want to install CustomResourceDefinitions which are consumed by NSIC. |
 | crds.retainOnDelete | Optional | false | Set this argument if you want to retain CustomResourceDefinitions even after uninstalling NSIC. This will avoid data-loss of Custom Resource Objects created before uninstallation. |
 | bgpSettings.required | Optional | false | Set this argument if you want to enable BGP configurations for exposing service of Type Loadbalancer through BGP fabric|
-| bgpSettings.bgpConfig | Optional| N/A| This represents BGP configurations in YAML format. For the description about individual fields, please refer the [documentation](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/network/cpx-bgp-router.md) |
+| bgpSettings.bgpConfig | Optional| N/A| This represents BGP configurations in YAML format. For the description about individual fields, please refer the [documentation](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/network/bgp-enhancement.md) |
 | nsLbHashAlgo.required | Optional | false | Set this value to set the LB consistent hashing Algorithm |
 | nsLbHashAlgo.hashFingers | Optional |256 | Specifies the number of fingers to be used for hashing algorithm. Possible values are from 1 to 1024, Default value is 256 |
 | nsLbHashAlgo.hashAlgorithm | Optional | 'default' | Specifies the supported algorithm. Supported algorithms are "default", "jarh", "prac", Default value is 'default' |
@@ -674,7 +733,7 @@ For example:
 
 > **Tip:**
 >
-> The [values.yaml](https://github.com/citrix/citrix-helm-charts/blob/master/netscaler-cpx-with-ingress-controller/values.yaml) contains the default values of the parameters.
+> The [values.yaml](https://github.com/netscaler/netscaler-helm-charts/blob/master/netscaler-cpx-with-ingress-controller/values.yaml) contains the default values of the parameters.
 
 ## Uninstalling the Chart
 To uninstall/delete the ```my-release``` deployment:
@@ -684,7 +743,7 @@ To uninstall/delete the ```my-release``` deployment:
 
 ## Related documentation
 
-- [NetScaler CPX Documentation](https://docs.citrix.com/en-us/citrix-adc-cpx/12-1/cpx-architecture-and-traffic-flow.html)
-- [NetScaler ingress controller Documentation](https://developer-docs.citrix.com/projects/citrix-k8s-ingress-controller/en/latest/)
-- [NetScaler ingress controller GitHub](https://github.com/citrix/citrix-k8s-ingress-controller)
-- [BGP advertisement for External IPs with CPX](https://github.com/citrix/citrix-k8s-ingress-controller/blob/master/docs/network/cpx-bgp-router.md)
+- [NetScaler CPX Documentation](https://docs.netscaler.com/en-us/citrix-adc-cpx/current-release/cpx-architecture-and-traffic-flow)
+- [NetScaler ingress controller Documentation](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/)
+- [NetScaler ingress controller GitHub](https://github.com/netscaler/netscaler-k8s-ingress-controller)
+- [BGP advertisement for External IPs with CPX](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/network/bgp-enhancement.md)
