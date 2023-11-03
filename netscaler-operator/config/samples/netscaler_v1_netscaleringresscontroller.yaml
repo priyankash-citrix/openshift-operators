@@ -21,7 +21,10 @@ spec:
         enable: false
       metrics:
         enable: false
+        enableNativeScrape: false
+        exportFrequency: 30
         mode: avro
+        schemaFile: schema.json
       port: 30002
     transactions:
       enable: false
@@ -39,7 +42,7 @@ spec:
     image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
       }}:{{ .Values.exporter.imageTag }}'
     imageRegistry: quay.io
-    imageRepository: citrix/citrix-adc-metrics-exporter
+    imageRepository: netscaler/netscaler-adc-metrics-exporter
     imageTag: 1.4.9
     ports:
       containerPort: 8888
@@ -55,8 +58,8 @@ spec:
     }}'
   imagePullSecrets: []
   imageRegistry: quay.io
-  imageRepository: citrix/citrix-k8s-ingress-controller
-  imageTag: 1.35.6
+  imageRepository: netscaler/netscaler-k8s-ingress-controller
+  imageTag: 1.36.5
   ingressClass: []
   ipam: false
   jsonLog: false

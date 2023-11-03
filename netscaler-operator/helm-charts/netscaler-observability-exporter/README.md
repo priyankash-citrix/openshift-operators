@@ -12,7 +12,7 @@ We can configure NetScaler Observability Exporter helm chart to export transacti
 
 ### TL; DR; 
 ```
-   helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+   helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 
    For streaming transactions to Kafka, timeseries to Prometheus and tracing to zipkin:
      helm install nsoe netscaler/netscaler-observability-exporter --set kafka.enabled=true --set kafka.broker="X.X.X.X\,Y.Y.Y.Y" --set kafka.topic=HTTP --set kafka.dataFormat=AVRO --set timeseries.enabled=true --set ns_tracing.enabled=true --set ns_tracing.server="zipkin:9411/api/v1/spans"
@@ -37,7 +37,7 @@ This Helm chart deploys NetScaler Observability Exporter in the [Kubernetes](htt
 ### Prerequisites
 
 -  The [Kubernetes](https://kubernetes.io/) version 1.6 or later if using Kubernetes environment.
--  The [Helm](https://helm.sh/) version is 3.x or later. You can follow instruction given [here](https://github.com/citrix/citrix-helm-charts/blob/master/Helm_Installation_version_3.md) to install Helm in Kubernetes environment.
+-  The [Helm](https://helm.sh/) version is 3.x or later. You can follow instruction given [here](https://github.com/netscaler/netscaler-helm-charts/blob/master/Helm_Installation_version_3.md) to install Helm in Kubernetes environment.
 
    - To enable Tracing, set ns_tracing.enabled to true and ns_tracing.server to the tracer endpoint like `zipkin.default.cluster.svc.local:9411/api/v1/spans`. Default value for Zipkin server is `zipkin:9411/api/v1/spans`. 
 
@@ -53,7 +53,7 @@ This Helm chart deploys NetScaler Observability Exporter in the [Kubernetes](htt
 Add the NetScaler Observability Exporter helm chart repository using command:
 
 ```
-   helm repo add netscaler https://citrix.github.io/citrix-helm-charts/
+   helm repo add netscaler https://netscaler.github.io/netscaler-helm-charts/
 ```
 
 ### For Kubernetes:
@@ -74,7 +74,7 @@ The following table lists the mandatory and optional parameters that you can con
 | --------- | --------------------- | ------------- | ----------- |
 | license.accept | Mandatory | no | Set `yes` to accept the NetScaler end user license agreement. |
 | imageRegistry                   | Mandatory  |  `quay.io`               |  The NSOE image registry             |  
-| imageRepository                 | Mandatory  |  `citrix/citrix-observability-exporter`              |   The NSOE image repository             | 
+| imageRepository                 | Mandatory  |  `netscaler/netscaler-observability-exporter`              |   The NSOE image repository             | 
 | imageTag                  | Mandatory  |  `1.7.001`               |  The NSOE image tag            |
 | pullPolicy | Mandatory | IfNotPresent | The NSOE image pull policy. |
 | nodePortRequired | Optional | false | Set true to create a nodeport NSOE service. |
@@ -118,7 +118,7 @@ For example:
 
 > **Tip:**
 >
-> The [values.yaml](https://github.com/citrix/citrix-helm-charts/blob/master/netscaler-observability-exporter/values.yaml) contains the default values of the parameters.
+> The [values.yaml](https://github.com/netscaler/netscaler-helm-charts/blob/master/netscaler-observability-exporter/values.yaml) contains the default values of the parameters.
 
 ## Uninstalling the Chart
 To uninstall/delete the ```my-release``` deployment:
@@ -130,4 +130,4 @@ The command removes all the Kubernetes components associated with the chart and 
 
 ## Related documentation
 
--  [NetScaler Observability Exporter Documentation](https://github.com/citrix/citrix-observability-exporter)
+-  [NetScaler Observability Exporter Documentation](https://github.com/netscaler/netscaler-observability-exporter)

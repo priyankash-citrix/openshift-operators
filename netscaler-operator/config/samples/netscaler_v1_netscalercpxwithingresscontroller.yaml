@@ -10,7 +10,7 @@ spec:
     bandWidthLicense: false
     cpxCores: 1
     licenseEdition: PLATINUM
-    licenseServerIP: "" 
+    licenseServerIP: ""
     licenseServerPort: 27000
     loginSecret: ""
     vCPULicense: false
@@ -30,7 +30,10 @@ spec:
         enable: false
       metrics:
         enable: false
+        enableNativeScrape: false
+        exportFrequency: 30
         mode: avro
+        schemaFile: schema.json
       port: 5563
     transactions:
       enable: false
@@ -62,7 +65,7 @@ spec:
     image: '{{ .Values.exporter.imageRegistry }}/{{ .Values.exporter.imageRepository
       }}:{{ .Values.exporter.imageTag }}'
     imageRegistry: quay.io
-    imageRepository: citrix/citrix-adc-metrics-exporter
+    imageRepository: netscaler/netscaler-adc-metrics-exporter
     imageTag: 1.4.9
     ports:
       containerPort: 8888
@@ -75,8 +78,8 @@ spec:
     }}'
   imagePullSecrets: []
   imageRegistry: quay.io
-  imageRepository: citrix/citrix-k8s-cpx-ingress
-  imageTag: 13.1-49.13
+  imageRepository: netscaler/netscaler-cpx
+  imageTag: 13.1-49.15
   ingressClass: []
   ingressIP: ""
   ipam: false
@@ -110,8 +113,9 @@ spec:
     image: '{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag
       }}'
     imageRegistry: quay.io
-    imageRepository: citrix/citrix-k8s-ingress-controller
-    imageTag: 1.35.6
+    imageRepository: netscaler/netscaler-k8s-ingress-controller
+    imageTag: 1.36.5
+    prometheusCredentialSecret: ""
     pullPolicy: IfNotPresent
     required: true
     resources:

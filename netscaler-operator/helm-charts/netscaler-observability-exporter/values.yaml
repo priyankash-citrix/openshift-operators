@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 imageRegistry: quay.io
-imageRepository: citrix/citrix-observability-exporter
+imageRepository: netscaler/netscaler-observability-exporter
 imageTag: 1.7.001
 image: "{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag }}"
 pullPolicy: IfNotPresent

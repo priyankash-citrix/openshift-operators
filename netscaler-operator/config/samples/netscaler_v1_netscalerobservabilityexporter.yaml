@@ -13,7 +13,7 @@ spec:
   image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
     }}'
   imageRegistry: quay.io
-  imageRepository: citrix/citrix-observability-exporter
+  imageRepository: netscaler/netscaler-observability-exporter
   imageTag: 1.7.001
   json_trans_rate_limiting:
     enabled: false
