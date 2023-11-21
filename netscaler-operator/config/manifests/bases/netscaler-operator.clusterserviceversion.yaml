@@ -9,7 +9,8 @@ metadata:
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions: {}
-  description: abcd
+  description: NetScaler provides various products to empower Developer/DevOps managing
+    your applications in OpenShift Cluster.
   displayName: NetScaler Operator
   icon:
   - base64data: ""
@@ -28,7 +29,15 @@ spec:
   - supported: true
     type: AllNamespaces
   keywords:
-  - ingress
+  - Ingress
+  - NetScaler
+  - ADC
+  - Kubernetes
+  - OpenShift
+  - Citrix
+  - Controller
+  - Observability
+  - Metrices
   links:
   - name: Netscaler Operator
     url: https://netscaler-operator.domain

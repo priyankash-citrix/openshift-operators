@@ -14,7 +14,7 @@ spec:
     }}'
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-observability-exporter
-  imageTag: 1.7.001
+  imageTag: 1.8.001
   json_trans_rate_limiting:
     enabled: false
     limit: 100
@@ -31,6 +31,7 @@ spec:
   ns_tracing:
     enabled: false
     server: zipkin:9411/api/v1/spans
+  nsoeLogLevel: INFO
   podAnnotations: {}
   pullPolicy: IfNotPresent
   replicas: 1

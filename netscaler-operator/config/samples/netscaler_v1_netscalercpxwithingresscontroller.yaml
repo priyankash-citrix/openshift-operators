@@ -114,7 +114,7 @@ spec:
       }}'
     imageRegistry: quay.io
     imageRepository: netscaler/netscaler-k8s-ingress-controller
-    imageTag: 1.36.5
+    imageTag: 1.37.5
     prometheusCredentialSecret: ""
     pullPolicy: IfNotPresent
     required: true
@@ -157,5 +157,3 @@ spec:
   sslCertManagedByAWS: false
   tolerations: []
   updateIngressStatus: false
-  
-  
