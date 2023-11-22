@@ -59,7 +59,7 @@ spec:
   imagePullSecrets: []
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-k8s-ingress-controller
-  imageTag: 1.36.5
+  imageTag: 1.37.5
   ingressClass: []
   ipam: false
   jsonLog: false
@@ -80,7 +80,7 @@ spec:
   nsDnsNameserver: ""
   nsEnableLabel: true
   nsHTTP2ServerSide: "OFF"
-  nsIP: x.x.x.x
+  nsIP: ""
   nsLbHashAlgo:
     hashAlgorithm: DEFAULT
     hashFingers: 256
@@ -116,5 +116,3 @@ spec:
   setAsDefaultIngressClass: false
   tolerations: []
   updateIngressStatus: true
-  
-  

@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 1.36.5
+appVersion: 1.37.5
 description: A Helm chart for NetScaler Ingress Controller configuring MPX/VPX.
 home: https://www.netscaler.com
 icon: https://raw.githubusercontent.com/netscaler/netscaler-helm-charts/gh-pages/netscaler.png
@@ -12,4 +12,4 @@ maintainers:
 name: netscaler-ingress-controller
 sources:
 - https://github.com/netscaler/netscaler-k8s-ingress-controller
-version: 1.36.5
+version: 1.37.5

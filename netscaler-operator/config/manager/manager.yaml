@@ -82,12 +82,16 @@ spec:
             port: 8081
           initialDelaySeconds: 15
           periodSeconds: 20
+          successThreshold: 1
+          failureThreshold: 5
         readinessProbe:
           httpGet:
             path: /readyz
             port: 8081
           initialDelaySeconds: 5
           periodSeconds: 10
+          successThreshold: 1
+          failureThreshold: 5
         # TODO(user): Configure the resources accordingly based on the project requirements.
         # More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
         resources:
@@ -101,11 +105,11 @@ spec:
           - name: RELATED_IMAGE_CPX
             value: quay.io/netscaler/netscaler-cpx@sha256:fb83509f2e699ee72517727b26492d4195e7fe0b82438052f528224af78cb833
           - name: RELATED_IMAGE_NSIC
-            value: quay.io/netscaler/netscaler-k8s-ingress-controller@sha256:aa282c432b72a55455ac3b876e61e3bc7f9d26386a7707bfb954e95c59d283f8
+            value: quay.io/netscaler/netscaler-k8s-ingress-controller@sha256:7d6a83ac72676e45e4d9812cfa0e2a4222c9ff82252b06d1b918b00bdb64dc17
           - name: RELATED_IMAGE_EXPORTER
             value: quay.io/netscaler/netscaler-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
           - name: RELATED_IMAGE_NSOE
-            value: quay.io/netscaler/netscaler-observability-exporter@sha256:6eea1ff7f6cc984e87dc2f0d1b98703cba8107c0cfdf278b08c5b01d98c43d41
+            value: quay.io/netscaler/netscaler-observability-exporter@sha256:a16ecb9673861ef24ba76adf2fa9728bdbabea3be0cdf8dcbeda11d247dba5dc
           - name: OPENSHIFT
             value: "True"
       serviceAccountName: controller-manager

@@ -103,14 +103,14 @@ rules:
   - watch
 
 ##
-## Rules for netscaler.com/v1, Kind: NetscalerObservabilityExporter
+## Rules for netscaler.com/v1, Kind: NetscalerCpxWithIngressController
 ##
 - apiGroups:
   - netscaler.com
   resources:
-  - netscalerobservabilityexporters
-  - netscalerobservabilityexporters/status
-  - netscalerobservabilityexporters/finalizers
+  - netscalercpxwithingresscontrollers
+  - netscalercpxwithingresscontrollers/status
+  - netscalercpxwithingresscontrollers/finalizers
   verbs:
   - create
   - delete
@@ -121,14 +121,14 @@ rules:
   - watch
 
 ##
-## Rules for netscaler.com/v1, Kind: NetscalerCpxWithIngressController
+## Rules for netscaler.com/v1, Kind: NetscalerObservabilityExporter
 ##
 - apiGroups:
   - netscaler.com
   resources:
-  - netscalercpxwithingresscontrollers
-  - netscalercpxwithingresscontrollers/status
-  - netscalercpxwithingresscontrollers/finalizers
+  - netscalerobservabilityexporters
+  - netscalerobservabilityexporters/status
+  - netscalerobservabilityexporters/finalizers
   verbs:
   - create
   - delete

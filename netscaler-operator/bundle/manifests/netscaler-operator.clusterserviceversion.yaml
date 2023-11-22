@@ -141,7 +141,7 @@ metadata:
               "image": "{{ .Values.nsic.imageRegistry }}/{{ .Values.nsic.imageRepository }}:{{ .Values.nsic.imageTag }}",
               "imageRegistry": "quay.io",
               "imageRepository": "netscaler/netscaler-k8s-ingress-controller",
-              "imageTag": "1.36.5",
+              "imageTag": "1.37.5",
               "prometheusCredentialSecret": "",
               "pullPolicy": "IfNotPresent",
               "required": true,
@@ -267,7 +267,7 @@ metadata:
             "imagePullSecrets": [],
             "imageRegistry": "quay.io",
             "imageRepository": "netscaler/netscaler-k8s-ingress-controller",
-            "imageTag": "1.36.5",
+            "imageTag": "1.37.5",
             "ingressClass": [],
             "ipam": false,
             "jsonLog": false,
@@ -350,7 +350,7 @@ metadata:
             "image": "{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag }}",
             "imageRegistry": "quay.io",
             "imageRepository": "netscaler/netscaler-observability-exporter",
-            "imageTag": "1.7.001",
+            "imageTag": "1.8.001",
             "json_trans_rate_limiting": {
               "enabled": false,
               "limit": 100,
@@ -371,6 +371,7 @@ metadata:
               "enabled": false,
               "server": "zipkin:9411/api/v1/spans"
             },
+            "nsoeLogLevel": "INFO",
             "podAnnotations": {},
             "pullPolicy": "IfNotPresent",
             "replicas": 1,
@@ -396,13 +397,13 @@ metadata:
     operators.openshift.io/infrastructure-features: '["disconnected"]'
     categories: Networking
     description: "This is an operator to install Cloud Native portfolio provided by NetScaler"
-    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:028a880ce8a82b038fd145aa7bb0b1f70565af5ba15c24b45c47e190feec9287
+    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:e773a0870e2f9a52cba367a32e9e2db087ea2ac5f2649bc6cc743ad058ef1296
     support: NetScaler
     repository: https://github.com/netscaler/netscaler-k8s-ingress-controller
-    createdAt: "2023-10-12T08:46:51Z"
+    createdAt: "2023-11-20T08:36:13Z"
     operators.operatorframework.io/builder: operator-sdk-v1.32.0
     operators.operatorframework.io/project_layout: helm.sdk.operatorframework.io/v1
-  name: netscaler-operator.v2.0.0
+  name: netscaler-operator.v2.1.0
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -423,7 +424,7 @@ spec:
       version: v1
       displayName: NetScaler Observability Exporter
       description: To install NetScaler Observability Exporter for NetScaler CPX, VPX and/or MPX.
-  minKubeVersion: v1.16.0-0
+  minKubeVersion: 1.24.0
   description: |-
     NetScaler provides various products to empower Developer/DevOps managing your applications in OpenShift Cluster. Using this operator you can deploy below controllers for NetScaler appliance:
     1. [NetScaler Ingress Controller](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller.html)
@@ -434,9 +435,9 @@ spec:
     Refer [installation instructions](https://github.com/netscaler/netscaler-k8s-ingress-controller/blob/master/docs/deploy/deploy-ns-operator.md).
 
     This operator version contains:
-    1. NetScaler Ingress Controller version [1.36.5](https://github.com/netscaler/netscaler-helm-charts/releases/tag/nsic-v1.36.5)
+    1. NetScaler Ingress Controller version [1.37.5](https://github.com/netscaler/netscaler-helm-charts/releases/tag/nsic-v1.37.5)
     2. NetScaler CPX version [13.1-49.15](https://docs.netscaler.com/en-us/citrix-adc/13-1/citrix-adc-release-notes/release-notes-13-1-49-15)
-    3. NetScaler Observability Exporter version [1.7.001](https://github.com/citrix/citrix-helm-charts/releases/tag/coe-v1.7.001)
+    3. NetScaler Observability Exporter version [1.8.001](https://github.com/citrix/citrix-helm-charts/releases/tag/nsoe-v1.8.001)
     4. NetScaler Metrics Exporter [1.4.9](https://github.com/citrix/citrix-adc-metrics-exporter/releases/tag/1.4.9)
 
     ### Support
@@ -541,9 +542,9 @@ spec:
         - apiGroups:
           - netscaler.com
           resources:
-          - netscalerobservabilityexporters
-          - netscalerobservabilityexporters/status
-          - netscalerobservabilityexporters/finalizers
+          - netscalercpxwithingresscontrollers
+          - netscalercpxwithingresscontrollers/status
+          - netscalercpxwithingresscontrollers/finalizers
           verbs:
           - create
           - delete
@@ -555,9 +556,9 @@ spec:
         - apiGroups:
           - netscaler.com
           resources:
-          - netscalercpxwithingresscontrollers
-          - netscalercpxwithingresscontrollers/status
-          - netscalercpxwithingresscontrollers/finalizers
+          - netscalerobservabilityexporters
+          - netscalerobservabilityexporters/status
+          - netscalerobservabilityexporters/finalizers
           verbs:
           - create
           - delete
@@ -624,7 +625,7 @@ spec:
                 - --upstream=http://127.0.0.1:8080/
                 - --logtostderr=true
                 - --v=0
-                image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:fe26a5604ebbbf7b8b577e648639d6c1552055e5e0149dfe728443d49413dafa
+                image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:2978537b01d76522943d72ea45b99bb13a83c405e8a9f7d96fc2ff25f8690787
                 name: kube-rbac-proxy
                 ports:
                 - containerPort: 8443
@@ -651,14 +652,14 @@ spec:
                 - name: RELATED_IMAGE_CPX
                   value: quay.io/netscaler/netscaler-cpx@sha256:fb83509f2e699ee72517727b26492d4195e7fe0b82438052f528224af78cb833
                 - name: RELATED_IMAGE_NSIC
-                  value: quay.io/netscaler/netscaler-k8s-ingress-controller@sha256:aa282c432b72a55455ac3b876e61e3bc7f9d26386a7707bfb954e95c59d283f8
+                  value: quay.io/netscaler/netscaler-k8s-ingress-controller@sha256:7d6a83ac72676e45e4d9812cfa0e2a4222c9ff82252b06d1b918b00bdb64dc17
                 - name: RELATED_IMAGE_EXPORTER
                   value: quay.io/netscaler/netscaler-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
                 - name: RELATED_IMAGE_NSOE
-                  value: quay.io/netscaler/netscaler-observability-exporter@sha256:6eea1ff7f6cc984e87dc2f0d1b98703cba8107c0cfdf278b08c5b01d98c43d41
+                  value: quay.io/netscaler/netscaler-observability-exporter@sha256:a16ecb9673861ef24ba76adf2fa9728bdbabea3be0cdf8dcbeda11d247dba5dc
                 - name: OPENSHIFT
                   value: "True"
-                image: quay.io/arijitr/netscaler-operator:v2.0.0
+                image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:e773a0870e2f9a52cba367a32e9e2db087ea2ac5f2649bc6cc743ad058ef1296
                 livenessProbe:
                   failureThreshold: 5
                   httpGet:
@@ -761,17 +762,15 @@ spec:
   relatedImages:
   - image: quay.io/netscaler/netscaler-cpx@sha256:fb83509f2e699ee72517727b26492d4195e7fe0b82438052f528224af78cb833
     name: cpx
-  - image: quay.io/netscaler/netscaler-k8s-ingress-controller@sha256:aa282c432b72a55455ac3b876e61e3bc7f9d26386a7707bfb954e95c59d283f8
+  - image: quay.io/netscaler/netscaler-k8s-ingress-controller@sha256:7d6a83ac72676e45e4d9812cfa0e2a4222c9ff82252b06d1b918b00bdb64dc17
     name: nsic
   - image: quay.io/netscaler/netscaler-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
     name: exporter
-  - image: quay.io/netscaler/netscaler-observability-exporter@sha256:6eea1ff7f6cc984e87dc2f0d1b98703cba8107c0cfdf278b08c5b01d98c43d41
+  - image: quay.io/netscaler/netscaler-observability-exporter@sha256:a16ecb9673861ef24ba76adf2fa9728bdbabea3be0cdf8dcbeda11d247dba5dc
     name: nsoe
   - name: ns-operator
-    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:028a880ce8a82b038fd145aa7bb0b1f70565af5ba15c24b45c47e190feec9287
+    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:e773a0870e2f9a52cba367a32e9e2db087ea2ac5f2649bc6cc743ad058ef1296
   - name: ose-kube-rbac-proxy
-    image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:fe26a5604ebbbf7b8b577e648639d6c1552055e5e0149dfe728443d49413dafa
-  replaces: netscaler-operator.v1.1.0
-  skips: 
-  - netscaler-operator.v1.1.2
-  version: 2.0.0
+    image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:2978537b01d76522943d72ea45b99bb13a83c405e8a9f7d96fc2ff25f8690787
+  replaces: netscaler-operator.v2.0.0
+  version: 2.1.0
