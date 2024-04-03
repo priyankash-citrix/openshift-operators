@@ -109,7 +109,7 @@ spec:
           - name: RELATED_IMAGE_EXPORTER
             value: quay.io/netscaler/netscaler-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
           - name: RELATED_IMAGE_NSOE
-            value: quay.io/netscaler/netscaler-observability-exporter@sha256:a16ecb9673861ef24ba76adf2fa9728bdbabea3be0cdf8dcbeda11d247dba5dc
+            value: quay.io/netscaler/netscaler-observability-exporter@sha256:7fbb0203274692d497a0319d7a58627385764d3fbca30bb9b2b8e67dae5560ef
           - name: OPENSHIFT
             value: "True"
       serviceAccountName: controller-manager

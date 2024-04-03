@@ -14,7 +14,7 @@ spec:
     }}'
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-observability-exporter
-  imageTag: 1.8.001
+  imageTag: 1.9.001
   json_trans_rate_limiting:
     enabled: false
     limit: 100
@@ -25,6 +25,8 @@ spec:
     dataFormat: AVRO
     enabled: false
     topic: "HTTP"
+    events: "no"
+    auditlogs: "no"
   license:
     accept: "no"
   nodePortRequired: false
