@@ -79,7 +79,7 @@ spec:
   imagePullSecrets: []
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-cpx
-  imageTag: 13.1-49.15
+  imageTag: 14.1-17.38
   ingressClass: []
   ingressIP: ""
   ipam: false
@@ -114,7 +114,7 @@ spec:
       }}'
     imageRegistry: quay.io
     imageRepository: netscaler/netscaler-k8s-ingress-controller
-    imageTag: 1.37.5
+    imageTag: 1.40.12
     prometheusCredentialSecret: ""
     pullPolicy: IfNotPresent
     required: true

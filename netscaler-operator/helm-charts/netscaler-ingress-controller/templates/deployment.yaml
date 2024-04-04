@@ -54,6 +54,10 @@ spec:
           - --default-ssl-certificate
             {{ .Release.Namespace }}/{{ .Values.defaultSSLCertSecret }}
 {{- end }}
+{{- if .Values.defaultSSLSNICertSecret }}
+          - --default-ssl-sni-certificate
+            {{ .Release.Namespace }}/{{ .Values.defaultSSLSNICertSecret }}
+{{- end }}
 {{- if .Values.ingressClass }}
           - --ingress-classes
 {{- range .Values.ingressClass}}
@@ -120,6 +124,9 @@ spec:
 {{- if and .Values.openshift .Values.routeLabels }}
         - name: "ROUTE_LABELS"
           value: {{ .Values.routeLabels | quote}}
+{{- else if .Values.openshift }}
+        - name: "ROUTE_LABELS"
+          value: {{ include "netscaler-ingress-controller.route_label" . | quote }}
 {{- end }}
 {{- if and .Values.openshift .Values.namespaceLabels }}
         - name: "NAMESPACE_LABELS"
