@@ -20,7 +20,7 @@ metadata:
               "licenseServerIP": "",
               "licenseServerPort": 27000,
               "loginSecret": "",
-              "platform": false
+              "platform": false,
               "vCPULicense": false
             },
             "affinity": {},
@@ -351,8 +351,8 @@ metadata:
               "server": ""
             },
             "headless": false,
-            "fullnameOverride": ""
-            "nameOverride": ""
+            "fullnameOverride": "",
+            "nameOverride": "",
             "image": "{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag }}",
             "imageRegistry": "quay.io",
             "imageRepository": "netscaler/netscaler-observability-exporter",
