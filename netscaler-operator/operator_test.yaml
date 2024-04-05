@@ -5,9 +5,10 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: quay.io/arijitr/netscaler-operator-index:2.0.0
+  image: quay.io/palankarravi/netscaler-operator-index:2.2.0
   displayName: Test Operators
   publisher: Red Hat Partner
   updateStrategy:
     registryPoll:
       interval: 5m
+
