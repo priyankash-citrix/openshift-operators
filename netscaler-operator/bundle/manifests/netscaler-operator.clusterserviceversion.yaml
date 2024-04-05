@@ -406,7 +406,7 @@ metadata:
     operators.openshift.io/infrastructure-features: '["disconnected"]'
     categories: Networking
     description: "This is an operator to install Cloud Native portfolio provided by NetScaler"
-    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:e773a0870e2f9a52cba367a32e9e2db087ea2ac5f2649bc6cc743ad058ef1296
+    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:daf5ad2cddc21e213ea98c5264a64b2f8ad977a9a458876be6fc5f54cee53105
     support: NetScaler
     repository: https://github.com/netscaler/netscaler-k8s-ingress-controller
     createdAt: "2023-11-20T08:36:13Z"
@@ -445,8 +445,8 @@ spec:
 
     This operator version contains:
     1. NetScaler Ingress Controller version [1.40.12](https://github.com/netscaler/netscaler-helm-charts/releases/tag/nsic-v1.40.12)
-    2. NetScaler CPX version [14.1-17.38](https://docs.netscaler.com/en-us/citrix-adc/13-1/citrix-adc-release-notes/release-notes-13-1-49-15)
-    3. NetScaler Observability Exporter version [1.8.001](https://github.com/citrix/citrix-helm-charts/releases/tag/nsoe-v1.8.001)
+    2. NetScaler CPX version [14.1-17.38](https://docs.netscaler.com/en-us/citrix-adc/14-1/citrix-adc-release-notes/release-notes-14-1-17-38)
+    3. NetScaler Observability Exporter version [1.9.001](https://github.com/citrix/citrix-helm-charts/releases/tag/nsoe-v1.9.001)
     4. NetScaler Metrics Exporter [1.4.9](https://github.com/citrix/citrix-adc-metrics-exporter/releases/tag/1.4.9)
 
     ### Support
@@ -668,7 +668,7 @@ spec:
                   value: quay.io/netscaler/netscaler-observability-exporter@sha256:7fbb0203274692d497a0319d7a58627385764d3fbca30bb9b2b8e67dae5560ef
                 - name: OPENSHIFT
                   value: "True"
-                image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:e773a0870e2f9a52cba367a32e9e2db087ea2ac5f2649bc6cc743ad058ef1296
+                image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:daf5ad2cddc21e213ea98c5264a64b2f8ad977a9a458876be6fc5f54cee53105
                 livenessProbe:
                   failureThreshold: 5
                   httpGet:
@@ -778,7 +778,7 @@ spec:
   - image: quay.io/netscaler/netscaler-adc-metrics-exporter@sha256:3d54b9151c742c00117be74e1ffd54430358e4cf628fe1f02d503088583f678a
     name: nsoe
   - name: ns-operator
-    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:e773a0870e2f9a52cba367a32e9e2db087ea2ac5f2649bc6cc743ad058ef1296
+    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:daf5ad2cddc21e213ea98c5264a64b2f8ad977a9a458876be6fc5f54cee53105
   - name: ose-kube-rbac-proxy
     image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:2814fb7b263d40cc800bca79e8d2508790b0075e20cce282d8a50b1274e8f5af
   replaces: netscaler-operator.v2.1.0
