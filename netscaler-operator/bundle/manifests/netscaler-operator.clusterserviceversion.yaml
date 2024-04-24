@@ -432,7 +432,7 @@ spec:
       displayName: NetScaler Observability Exporter
       description: To install NetScaler Observability Exporter for NetScaler CPX, VPX and/or MPX.
   minKubeVersion: 1.24.0
-  description:|-
+  description: |-
     NetScaler provides various products to empower Developer/DevOps managing your applications in OpenShift Cluster. Using this operator you can deploy below controllers for NetScaler appliance:
     1. [NetScaler Ingress Controller](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller.html)
     2. [NetScaler CPX with Ingress Controller](https://docs.netscaler.com/en-us/citrix-k8s-ingress-controller/deployment-topologies.html#dual-tier-topology)
