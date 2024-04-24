@@ -397,7 +397,7 @@ metadata:
     operators.openshift.io/infrastructure-features: '["disconnected"]'
     categories: Networking
     description: "This is an operator to install Cloud Native portfolio provided by NetScaler"
-    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:daf5ad2cddc21e213ea98c5264a64b2f8ad977a9a458876be6fc5f54cee53105
+    containerImage: registry.connect.redhat.com/citrix/netscaler-operator@sha256:c25ab8aec8034e57f6158a831a393e87b216f87648e2a4922f8ddb4d1f9e403d
     support: NetScaler
     repository: https://github.com/netscaler/netscaler-k8s-ingress-controller
     createdAt: "2024-04-24T08:36:13Z"
@@ -651,7 +651,7 @@ spec:
                   value: quay.io/netscaler/netscaler-observability-exporter@sha256:7fbb0203274692d497a0319d7a58627385764d3fbca30bb9b2b8e67dae5560ef
                 - name: OPENSHIFT
                   value: "True"
-                image: controller:latest
+                image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:c25ab8aec8034e57f6158a831a393e87b216f87648e2a4922f8ddb4d1f9e403d
                 livenessProbe:
                   failureThreshold: 5
                   httpGet:
@@ -761,7 +761,7 @@ spec:
   - image: quay.io/netscaler/netscaler-observability-exporter@sha256:7fbb0203274692d497a0319d7a58627385764d3fbca30bb9b2b8e67dae5560ef
     name: nsoe
   - name: ns-operator
-    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:daf5ad2cddc21e213ea98c5264a64b2f8ad977a9a458876be6fc5f54cee53105
+    image: registry.connect.redhat.com/citrix/netscaler-operator@sha256:c25ab8aec8034e57f6158a831a393e87b216f87648e2a4922f8ddb4d1f9e403d
   - name: ose-kube-rbac-proxy
     image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:fe54e0fd550746460d2ae61432aac192106ea495bcadca7377ea6a8141834c2f
   replaces: netscaler-operator.v2.2.0
