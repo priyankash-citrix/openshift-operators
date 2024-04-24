@@ -384,11 +384,11 @@ metadata:
             },
             "timeseries": {
               "enabled": false,
-              "nodePort": 30002
+              "nodePort": ""
             },
             "tolerations": [],
             "transaction": {
-              "nodePort": 30001
+              "nodePort": ""
             }
           }
         }
