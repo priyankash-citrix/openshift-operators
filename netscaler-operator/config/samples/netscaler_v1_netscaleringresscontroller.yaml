@@ -30,10 +30,8 @@ spec:
       enable: false
       port: 30001
   clusterName: ""
-  crds:
-    install: false
-    retainOnDelete: false
   defaultSSLCertSecret: ""
+  defaultSSLSNICertSecret: ""
   disableAPIServerCertVerify: false
   disableOpenshiftRoutes: false
   entityPrefix: ""
@@ -59,7 +57,7 @@ spec:
   imagePullSecrets: []
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-k8s-ingress-controller
-  imageTag: 1.40.12
+  imageTag: 1.41.5
   ingressClass: []
   ipam: false
   jsonLog: false
@@ -116,3 +114,5 @@ spec:
   setAsDefaultIngressClass: false
   tolerations: []
   updateIngressStatus: true
+  
+  
