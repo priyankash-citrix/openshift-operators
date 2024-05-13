@@ -1,12 +1,15 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: manager-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: netscaler-operator
+    app.kubernetes.io/part-of: netscaler-operator
+    app.kubernetes.io/managed-by: kustomize
   name: manager-role
 rules:
-##
-## Base operator rules
-##
-# We need to get namespaces so the operator can read namespaces to ensure they exist
 - apiGroups:
   - ""
   resources:
@@ -60,6 +63,7 @@ rules:
   resources:
   - "pods"
   - "services"
+  - "nodes"
   - "services/finalizers"
   - "endpoints"
   - "persistentvolumeclaims"
@@ -137,5 +141,3 @@ rules:
   - patch
   - update
   - watch
-
-#+kubebuilder:scaffold:rules

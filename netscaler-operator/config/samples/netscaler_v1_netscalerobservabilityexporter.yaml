@@ -9,24 +9,28 @@ spec:
     enabled: false
     indexprefix: ""
     server: ""
+  fullnameOverride: ""
   headless: false
   image: '{{ .Values.imageRegistry }}/{{ .Values.imageRepository }}:{{ .Values.imageTag
     }}'
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-observability-exporter
-  imageTag: 1.8.001
+  imageTag: 1.9.001
   json_trans_rate_limiting:
     enabled: false
     limit: 100
     queuelimit: 1000
     window: 5
   kafka:
+    auditlogs: "no"
     broker: ""
     dataFormat: AVRO
     enabled: false
-    topic: "HTTP"
+    events: "no"
+    topic: HTTP
   license:
     accept: "no"
+  nameOverride: ""
   nodePortRequired: false
   ns_tracing:
     enabled: false

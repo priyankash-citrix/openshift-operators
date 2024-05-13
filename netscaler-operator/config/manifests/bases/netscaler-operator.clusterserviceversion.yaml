@@ -4,13 +4,12 @@ metadata:
   annotations:
     alm-examples: '[]'
     capabilities: Basic Install
-  name: netscaler-operator.v0.0.0
+  name: netscaler-operator.v2.3.0
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
   customresourcedefinitions: {}
-  description: NetScaler provides various products to empower Developer/DevOps managing
-    your applications in OpenShift Cluster.
+  description: NetScaler provides various products to empower Developer/DevOps managing your applications in OpenShift Cluster.
   displayName: NetScaler Operator
   icon:
   - base64data: ""
@@ -50,4 +49,4 @@ spec:
   provider:
     name: NetScaler
     url: https://netscaler.com
-  version: 0.0.0
+  version: 2.3.0

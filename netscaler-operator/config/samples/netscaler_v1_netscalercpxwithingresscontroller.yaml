@@ -13,6 +13,7 @@ spec:
     licenseServerIP: ""
     licenseServerPort: 27000
     loginSecret: ""
+    platform: false
     vCPULicense: false
   affinity: {}
   analyticsConfig:
@@ -53,11 +54,9 @@ spec:
   cpxCommands: ""
   cpxLicenseAggregator: ""
   cpxShellCommands: ""
-  crds:
-    install: false
-    retainOnDelete: false
   daemonSet: false
   defaultSSLCertSecret: ""
+  defaultSSLSNICertSecret: ""
   disableAPIServerCertVerify: false
   disableOpenshiftRoutes: false
   entityPrefix: ""
@@ -79,7 +78,7 @@ spec:
   imagePullSecrets: []
   imageRegistry: quay.io
   imageRepository: netscaler/netscaler-cpx
-  imageTag: 14.1-17.38
+  imageTag: 14.1-17.101
   ingressClass: []
   ingressIP: ""
   ipam: false
@@ -100,6 +99,7 @@ spec:
   nsConfigDnsRec: false
   nsCookieVersion: "0"
   nsDnsNameserver: ""
+  nsEnableLabel: true
   nsGateway: 192.168.1.1
   nsHTTP2ServerSide: "OFF"
   nsIP: 192.168.1.2
@@ -114,7 +114,7 @@ spec:
       }}'
     imageRegistry: quay.io
     imageRepository: netscaler/netscaler-k8s-ingress-controller
-    imageTag: 1.40.12
+    imageTag: 1.41.5
     prometheusCredentialSecret: ""
     pullPolicy: IfNotPresent
     required: true
@@ -157,3 +157,5 @@ spec:
   sslCertManagedByAWS: false
   tolerations: []
   updateIngressStatus: false
+  
+  

@@ -8,30 +8,14 @@ metadata:
 spec:
   template:
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-              - matchExpressions:
-                - key: kubernetes.io/arch
-                  operator: In
-                  values:
-                    - amd64
-                    - arm64
-                    - ppc64le
-                    - s390x
-                - key: kubernetes.io/os
-                  operator: In
-                  values:
-                    - linux
       containers:
       - name: kube-rbac-proxy
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
-              - "ALL"
-        image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:2978537b01d76522943d72ea45b99bb13a83c405e8a9f7d96fc2ff25f8690787
+            - "ALL"
+        image: registry.redhat.io/openshift4/ose-kube-rbac-proxy@sha256:20ed327b89dd0c1713419c451ff6f1bb00fd4ea25c137baf828fae824b10c72b
         args:
         - "--secure-listen-address=0.0.0.0:8443"
         - "--upstream=http://127.0.0.1:8080/"
